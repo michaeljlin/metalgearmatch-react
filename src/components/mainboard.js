@@ -12,6 +12,11 @@ class Main extends Component{
         };
 
         this.dealcards = this.dealcards.bind(this);
+        this.shufflecards = this.shufflecards.bind(this);
+    }
+
+    shufflecards(){
+
     }
 
     dealcards() {
