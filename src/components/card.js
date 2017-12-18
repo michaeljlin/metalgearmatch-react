@@ -23,9 +23,22 @@ class Card extends Component{
 
     componentWillReceiveProps(nextProps){
         console.log('got message');
-        if(nextProps.display){
+        // if(nextProps.display){
+        //     this.setState({
+        //         frontStyle: {
+        //             'backgroundColor': 'blue',
+        //             display: 'none'
+        //         },
+        //         backStyle: {
+        //             'backgroundColor': 'red',
+        //             display: 'block'
+        //         }
+        //     });
+        // }
+        if(nextProps.reset === true){
+            console.log('received reset notification');
             this.setState({
-                frontStyle: {
+                frontStyle:{
                     'backgroundColor': 'blue',
                     display: 'none'
                 },
@@ -40,6 +53,8 @@ class Card extends Component{
 
     handleClick(){
         console.log(`you got ${this.state.num}!`);
+
+        this.props.handleMatch(this.props.id, this.props.num);
 
         if(this.state.frontStyle.display === 'none'){
             this.setState({
@@ -71,11 +86,11 @@ class Card extends Component{
         const {frontStyle, backStyle} = this.state;
 
         return(
-            <div>
-                <div className={"card"} style={frontStyle} onClick={this.handleClick}>
+            <div onClick={this.handleClick}>
+                <div className={"card"} style={frontStyle} >
                     <img src={backImg}/>
                 </div>
-                <div className={"card"} style={backStyle} onClick={this.handleClick}>
+                <div className={"card"} style={backStyle} >
                     <img src={backImg}/>
                 </div>
                 {this.props.num}
