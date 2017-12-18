@@ -23,6 +23,8 @@ class Main extends Component{
         this.handleMatch = this.handleMatch.bind(this);
     }
 
+
+
     shufflecards(){
 
     }
@@ -40,17 +42,27 @@ class Main extends Component{
 
         if(tempState.firstCard === null){
             console.log(`storing first card click from card ID: ${cardID}, card num: ${num}`);
-            tempState.firstCard = {num: num, flipped: true};
+            tempState.firstCard = {num: num, flipped: true, id: cardID};
+            tempState.cards[cardID] = {num: num, flipped: true};
         }
         else if(tempState.secondCard === null){
             console.log(`storing second card click from card ID: ${cardID}, card num: ${num}`);
-            tempState.secondCard = {num: num, flipped: true};
+            tempState.secondCard = {num: num, flipped: true, id: cardID};
+            tempState.cards[cardID] = {num: num, flipped: true};
         }
 
         if(tempState.secondCard !== null){
 
             if(tempState.firstCard.num === tempState.secondCard.num){
                 console.log(`A match has been made!`);
+            }
+            else{
+                console.log(`Not a match, resetting cards!`);
+                tempState.cards[tempState.firstCard.id] = {num: tempState.firstCard.num, flipped: false};
+                tempState.cards[tempState.secondCard.id] = {num: tempState.secondCard.num, flipped: false};
+
+                tempState.firstCard = null;
+                tempState.secondCard = null;
             }
         }
 
@@ -74,7 +86,6 @@ class Main extends Component{
             <div>Main Board
                 <div>{}</div>
                 <Player />
-                {/*<Deck cards={this.state.cards} reset={this.state.reset}/>*/}
                 <div>
                     {this.dealcards()}
                 </div>

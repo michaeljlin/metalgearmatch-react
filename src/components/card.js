@@ -35,8 +35,20 @@ class Card extends Component{
         //         }
         //     });
         // }
-        if(nextProps.reset === true){
+        if(nextProps.flipped === true){
             console.log('received reset notification');
+            this.setState({
+                frontStyle:{
+                    'backgroundColor': 'blue',
+                    display: 'block'
+                },
+                backStyle: {
+                    'backgroundColor': 'red',
+                    display: 'none'
+                }
+            });
+        }
+        else if(nextProps.flipped === false){
             this.setState({
                 frontStyle:{
                     'backgroundColor': 'blue',
@@ -53,33 +65,7 @@ class Card extends Component{
 
     handleClick(){
         console.log(`you got ${this.state.num}!`);
-
         this.props.handleMatch(this.props.id, this.props.num);
-
-        if(this.state.frontStyle.display === 'none'){
-            this.setState({
-                frontStyle:{
-                    'backgroundColor': 'blue',
-                    display: 'block'
-                },
-                backStyle: {
-                    'backgroundColor': 'red',
-                    display: 'none'
-                }
-            });
-        }
-        else{
-            this.setState({
-                frontStyle:{
-                    'backgroundColor': 'blue',
-                    display: 'none'
-                },
-                backStyle: {
-                    'backgroundColor': 'red',
-                    display: 'block'
-                }
-            });
-        }
     }
 
     render(){
