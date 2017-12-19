@@ -1,1 +1,6 @@
-
+.card{
+    border: 1px black solid;
+    box-sizing: border-box;
+    width: 16.66666666666667%;
+    height: 33.33333333333333%;
+}
