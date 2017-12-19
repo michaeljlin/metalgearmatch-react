@@ -10,7 +10,7 @@ class Main extends Component{
         super(props);
 
         this.state = {
-            cards: [{num:1, flipped:false},{num:2, flipped: false},{num:1, flipped: false}],
+            cards: this.shufflecards(),
             firstCard: null,
             secondCard: null,
             message: ""
@@ -23,8 +23,29 @@ class Main extends Component{
     }
 
     shufflecards(){
+        const deck = [
+            {num:1, flipped:false},
+            {num:2, flipped:false},
+            {num:3, flipped:false},
+            {num:4, flipped:false},
+            {num:5, flipped:false},
+            {num:6, flipped:false},
+            {num:7, flipped:false},
+            {num:8, flipped:false},
+            {num:9, flipped:false},
+            {num:1, flipped:false},
+            {num:2, flipped:false},
+            {num:3, flipped:false},
+            {num:4, flipped:false},
+            {num:5, flipped:false},
+            {num:6, flipped:false},
+            {num:7, flipped:false},
+            {num:8, flipped:false},
+            {num:9, flipped:false}
+        ];
 
-    }
+        return deck;
+    };
 
     dealcards() {
         return this.state.cards.map((cards, index) => {
@@ -60,13 +81,26 @@ class Main extends Component{
             }
             else{
                 console.log(`Not a match, resetting cards!`);
-                tempState.cards[tempState.firstCard.id] = {num: tempState.firstCard.num, flipped: false};
-                tempState.cards[tempState.secondCard.id] = {num: tempState.secondCard.num, flipped: false};
 
-                tempState.firstCard = null;
-                tempState.secondCard = null;
+                setTimeout(function(){
+                    console.log('timeout executed');
+                    tempState.cards[tempState.firstCard.id] = {num: tempState.firstCard.num, flipped: false};
+                    tempState.cards[tempState.secondCard.id] = {num: tempState.secondCard.num, flipped: false};
 
-                tempState.message = 'Not a match!';
+                    tempState.firstCard = null;
+                    tempState.secondCard = null;
+
+                    tempState.message = 'Not a match!';
+
+                    this.setState({...tempState});
+                }.bind(this),2500);
+                // tempState.cards[tempState.firstCard.id] = {num: tempState.firstCard.num, flipped: false};
+                // tempState.cards[tempState.secondCard.id] = {num: tempState.secondCard.num, flipped: false};
+                //
+                // tempState.firstCard = null;
+                // tempState.secondCard = null;
+                //
+                // tempState.message = 'Not a match!';
             }
         }
 
@@ -78,7 +112,7 @@ class Main extends Component{
     reset(){
         console.log('resetting');
         this.setState({
-            cards: [{num:1, flipped:false},{num:2, flipped: false},{num:1, flipped: false}],
+            cards: this.shufflecards(),
             firstCard: null,
             secondCard: null,
             message: ""
@@ -90,7 +124,7 @@ class Main extends Component{
 
         return(
             <div className="mainBoard">
-                <div>{message}</div>
+                <div className="message">{message}</div>
                 <Player reset={this.reset} />
                 <div className="cardDisplay">
                     {this.dealcards()}
