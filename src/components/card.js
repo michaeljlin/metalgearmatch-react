@@ -23,18 +23,6 @@ class Card extends Component{
 
     componentWillReceiveProps(nextProps){
         console.log('got message');
-        // if(nextProps.display){
-        //     this.setState({
-        //         frontStyle: {
-        //             'backgroundColor': 'blue',
-        //             display: 'none'
-        //         },
-        //         backStyle: {
-        //             'backgroundColor': 'red',
-        //             display: 'block'
-        //         }
-        //     });
-        // }
         if(nextProps.flipped === true){
             console.log('received reset notification');
             this.setState({

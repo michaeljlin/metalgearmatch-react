@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Player from "./player";
 import Boss from "./boss";
 import Card from './card';
-import Deck from './deck';
 
 import backImg from '../assets/images/mgscard.svg';
 
@@ -14,7 +13,7 @@ class Main extends Component{
             cards: [{num:1, flipped:false},{num:2, flipped: false},{num:1, flipped: false}],
             firstCard: null,
             secondCard: null,
-            reset: false
+            message: ""
         };
 
         this.dealcards = this.dealcards.bind(this);
@@ -31,9 +30,7 @@ class Main extends Component{
 
     dealcards() {
         return this.state.cards.map((cards, index) => {
-            // const num = cards.num;
-            // const flipped = cards.flipped;
-            return (<Card key={index} id={index} handleMatch={this.handleMatch} num={this.state.cards[index].num} flipped={this.state.cards[index].flipped} display={this.state.display} reset={this.state.reset}/>);
+            return (<Card key={index} id={index} handleMatch={this.handleMatch} num={this.state.cards[index].num} flipped={this.state.cards[index].flipped}/>);
         });
     }
 
@@ -55,6 +52,7 @@ class Main extends Component{
 
             if(tempState.firstCard.num === tempState.secondCard.num){
                 console.log(`A match has been made!`);
+                tempState.message = 'Made a match!';
             }
             else{
                 console.log(`Not a match, resetting cards!`);
@@ -63,6 +61,8 @@ class Main extends Component{
 
                 tempState.firstCard = null;
                 tempState.secondCard = null;
+
+                tempState.message = 'Not a match!';
             }
         }
 
@@ -77,14 +77,16 @@ class Main extends Component{
             cards: [{num:1, flipped:false},{num:2, flipped: false},{num:1, flipped: false}],
             firstCard: null,
             secondCard: null,
-            reset: true
+            message: ""
         });
     }
 
     render(){
+        const {message} = this.state;
+
         return(
             <div>Main Board
-                <div>{}</div>
+                <div>{message}</div>
                 <Player />
                 <div>
                     {this.dealcards()}
