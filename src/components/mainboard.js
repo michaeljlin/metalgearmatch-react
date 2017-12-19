@@ -14,7 +14,8 @@ class Main extends Component{
             firstCard: null,
             secondCard: null,
             message: "",
-            clickable: true
+            clickable: true,
+            counter: 0
         };
 
         this.dealcards = this.dealcards.bind(this);
@@ -82,7 +83,14 @@ class Main extends Component{
 
             if(tempState.firstCard.num === tempState.secondCard.num){
                 console.log(`A match has been made!`);
-                tempState.message = 'Made a match!';
+                tempState.counter++;
+
+                if(tempState.counter < 9){
+                    tempState.message = 'Made a match!';
+                }
+                else{
+                    tempState.message = 'You won!';
+                }
 
                 tempState.cards[tempState.firstCard.id] = {num: tempState.firstCard.num, flipped: true};
                 tempState.cards[tempState.secondCard.id] = {num: tempState.secondCard.num, flipped: true};
@@ -94,6 +102,7 @@ class Main extends Component{
                 console.log(`Not a match, resetting cards!`);
 
                 tempState.clickable = false;
+                tempState.message = 'Not a match!';
 
                 setTimeout(function(){
                     console.log('timeout executed');
@@ -102,8 +111,6 @@ class Main extends Component{
 
                     tempState.firstCard = null;
                     tempState.secondCard = null;
-
-                    tempState.message = 'Not a match!';
 
                     tempState.clickable = true;
 
@@ -130,7 +137,9 @@ class Main extends Component{
             cards: this.shufflecards(),
             firstCard: null,
             secondCard: null,
-            message: ""
+            message: "",
+            clickable: true,
+            counter: 0
         });
     }
 
