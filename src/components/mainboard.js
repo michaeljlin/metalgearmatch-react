@@ -57,7 +57,7 @@ class Main extends Component{
     handleMatch(cardID, num){
         const tempState = {...this.state};
 
-        if(this.state.clickable === false){
+        if(this.state.clickable === false || this.state.cards[cardID].flipped){
             return;
         }
 
@@ -83,6 +83,12 @@ class Main extends Component{
             if(tempState.firstCard.num === tempState.secondCard.num){
                 console.log(`A match has been made!`);
                 tempState.message = 'Made a match!';
+
+                tempState.cards[tempState.firstCard.id] = {num: tempState.firstCard.num, flipped: true};
+                tempState.cards[tempState.secondCard.id] = {num: tempState.secondCard.num, flipped: true};
+
+                tempState.firstCard = null;
+                tempState.secondCard = null;
             }
             else{
                 console.log(`Not a match, resetting cards!`);
