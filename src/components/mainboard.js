@@ -22,8 +22,6 @@ class Main extends Component{
         this.handleMatch = this.handleMatch.bind(this);
     }
 
-
-
     shufflecards(){
 
     }
@@ -43,6 +41,12 @@ class Main extends Component{
             tempState.cards[cardID] = {num: num, flipped: true};
         }
         else if(tempState.secondCard === null){
+
+            if(tempState.firstCard.id === cardID){
+                console.log(`cannot match own card! returning!`);
+                return;
+            }
+
             console.log(`storing second card click from card ID: ${cardID}, card num: ${num}`);
             tempState.secondCard = {num: num, flipped: true, id: cardID};
             tempState.cards[cardID] = {num: num, flipped: true};
