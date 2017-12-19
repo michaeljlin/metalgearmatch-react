@@ -61,7 +61,6 @@ class Card extends Component{
         return(
             <div className="container" onClick={this.handleClick}>
                 <div className="card" style={{...flipStyle}}>
-
                     <img src={backImg} style={{...frontStyle}}/>
                     <img src={backImg} style={{...backStyle}}/>
 
