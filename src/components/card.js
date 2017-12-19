@@ -25,21 +25,23 @@ class Card extends Component{
         console.log('got message');
         const tempState = {...this.state};
 
-        if(nextProps.flipped === true){
-            console.log(`flipping card ${this.state.num} up!`);
-            tempState.frontStyle.display = 'block';
-            tempState.backStyle.display = 'none';
+        if(this.props.flipped !== nextProps.flipped) {
+            if (nextProps.flipped === true) {
+                console.log(`flipping card ${this.state.num} up!`);
+                tempState.frontStyle.display = 'block';
+                tempState.backStyle.display = 'none';
 
-            this.setState(tempState);
-        }
-        else if(nextProps.flipped === false){
-            console.log(`flipping card ${this.state.num} down!`);
-            tempState.frontStyle.display = 'none';
-            tempState.backStyle.display = 'block';
+                this.setState(tempState);
+            }
+            else if (nextProps.flipped === false) {
+                console.log(`flipping card ${this.state.num} down!`);
+                tempState.frontStyle.display = 'none';
+                tempState.backStyle.display = 'block';
 
-            this.setState(tempState);
+                this.setState(tempState);
+            }
+            // console.log(this.state);
         }
-        // console.log(this.state);
     }
 
     handleClick(){
