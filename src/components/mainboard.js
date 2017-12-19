@@ -85,14 +85,14 @@ class Main extends Component{
         const {message} = this.state;
 
         return(
-            <div>Main Board
+            <div className="mainBoard">
                 <div>{message}</div>
-                <Player />
-                <div>
+                <Player reset={this.reset} />
+                <div className="cardDisplay">
                     {this.dealcards()}
                 </div>
                 <Boss />
-                <button onClick={this.reset}>Reset</button>
+                {/*<button onClick={this.reset}>Reset</button>*/}
             </div>
         );
     }

@@ -23,30 +23,21 @@ class Card extends Component{
 
     componentWillReceiveProps(nextProps){
         console.log('got message');
+        const tempState = {...this.state};
+
         if(nextProps.flipped === true){
-            console.log('received reset notification');
-            this.setState({
-                frontStyle:{
-                    'backgroundColor': 'blue',
-                    display: 'block'
-                },
-                backStyle: {
-                    'backgroundColor': 'red',
-                    display: 'none'
-                }
-            });
+            console.log(`flipping card ${this.state.num} up!`);
+            tempState.frontStyle.display = 'block';
+            tempState.backStyle.display = 'none';
+
+            this.setState(tempState);
         }
         else if(nextProps.flipped === false){
-            this.setState({
-                frontStyle:{
-                    'backgroundColor': 'blue',
-                    display: 'none'
-                },
-                backStyle: {
-                    'backgroundColor': 'red',
-                    display: 'block'
-                }
-            });
+            console.log(`flipping card ${this.state.num} down!`);
+            tempState.frontStyle.display = 'none';
+            tempState.backStyle.display = 'block';
+
+            this.setState(tempState);
         }
         // console.log(this.state);
     }
@@ -60,14 +51,13 @@ class Card extends Component{
         const {frontStyle, backStyle} = this.state;
 
         return(
-            <div onClick={this.handleClick}>
-                <div className={"card"} style={frontStyle} >
+            <div className="card" onClick={this.handleClick}>
+                <div style={{...frontStyle}} >
                     <img src={backImg}/>
                 </div>
-                <div className={"card"} style={backStyle} >
+                <div style={{...backStyle}} >
                     <img src={backImg}/>
                 </div>
-                {this.props.num}
             </div>
         );
     }
