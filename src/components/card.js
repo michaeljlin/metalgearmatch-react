@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import backImg from '../assets/images/mgscard.svg';
 import './app.css';
 
+/*
+*   3D card flip animation adapted from article by David DeSandro:
+*   https://desandro.github.io/3dtransforms/docs/card-flip.html
+*/
+
 class Card extends Component{
     constructor(props) {
         super(props);
@@ -10,11 +15,14 @@ class Card extends Component{
             num: this.props.num,
             frontStyle: {
                 'backgroundColor': 'blue',
-                display: 'none'
+                transform: 'rotateY(180deg)'
             },
             backStyle: {
                 'backgroundColor': 'red',
-                display: 'block'
+                top: '-101%'
+            },
+            flipStyle:{
+                transform: "inherit"
             }
         };
 
@@ -23,32 +31,23 @@ class Card extends Component{
 
     componentWillReceiveProps(nextProps){
         console.log('got message');
-        if(nextProps.flipped === true){
-            console.log('received reset notification');
-            this.setState({
-                frontStyle:{
-                    'backgroundColor': 'blue',
-                    display: 'block'
-                },
-                backStyle: {
-                    'backgroundColor': 'red',
-                    display: 'none'
-                }
-            });
+        const tempState = {...this.state};
+
+        if(this.props.flipped !== nextProps.flipped) {
+            if (nextProps.flipped === true) {
+                console.log(`flipping card ${this.state.num} up!`);
+                tempState.flipStyle.transform = 'rotateY(180deg)';
+
+                this.setState(tempState);
+            }
+            else if (nextProps.flipped === false) {
+                console.log(`flipping card ${this.state.num} down!`);
+                tempState.flipStyle.transform = "inherit";
+
+                this.setState(tempState);
+            }
+            // console.log(this.state);
         }
-        else if(nextProps.flipped === false){
-            this.setState({
-                frontStyle:{
-                    'backgroundColor': 'blue',
-                    display: 'none'
-                },
-                backStyle: {
-                    'backgroundColor': 'red',
-                    display: 'block'
-                }
-            });
-        }
-        // console.log(this.state);
     }
 
     handleClick(){
@@ -57,17 +56,16 @@ class Card extends Component{
     }
 
     render(){
-        const {frontStyle, backStyle} = this.state;
+        const {frontStyle, backStyle, flipStyle} = this.state;
 
         return(
-            <div onClick={this.handleClick}>
-                <div className={"card"} style={frontStyle} >
-                    <img src={backImg}/>
+            <div className="container" onClick={this.handleClick}>
+                <div className="card" style={{...flipStyle}}>
+
+                    <img src={backImg} style={{...frontStyle}}/>
+                    <img src={backImg} style={{...backStyle}}/>
+
                 </div>
-                <div className={"card"} style={backStyle} >
-                    <img src={backImg}/>
-                </div>
-                {this.props.num}
             </div>
         );
     }

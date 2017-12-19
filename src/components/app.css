@@ -1,6 +1,63 @@
-.card{
-    border: 1px black solid;
+/*.app{*/
+    /*width: 100%;*/
+    /*height: 100%;*/
+/*}*/
+
+.title{
+    width: 100%;
+    height: 12vh;
+}
+
+.container{
+
     box-sizing: border-box;
     width: 16.66666666666667%;
     height: 33.33333333333333%;
+    display: flex;
+    position: relative;
+    perspective: 800px;
+}
+
+.card{
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+}
+
+.card img{
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    backface-visibility: hidden;
+    position: relative;
+    border-radius: 8px;
+    border: 1px black solid;
+
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+}
+
+.mainBoard{
+    display: flex;
+}
+
+.cardDisplay, .player, .boss{
+    border: 1px solid black;
+}
+
+.cardDisplay{
+    width: 60%;
+    height: 85vh;
+    display: flex;
+}
+
+.player{
+    width: 20%;
+}
+
+.boss{
+    width: 20%;
 }

@@ -7,7 +7,7 @@ class Boss extends Component{
 
     render(){
         return(
-            <div>Boss Profile</div>
+            <div className="boss">Boss Profile</div>
         );
     }
 }

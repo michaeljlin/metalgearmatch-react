@@ -7,7 +7,11 @@ class Player extends Component{
 
     render(){
         return(
-            <div>Player Profile</div>
+            <div className="player">
+                <p>Player Profile</p>
+
+                <button onClick={this.props.reset}>Reset</button>
+            </div>
         );
     }
 }
