@@ -35,6 +35,7 @@
     height: 100%;
     vertical-align: middle;
     backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
     position: relative;
     border-radius: 8px;
     border: 1px black solid;
@@ -50,27 +51,39 @@
     -moz-user-select: none;
     -webkit-user-select: none;
     user-select: none;
+
+}
+
+.card img:hover{
+    /*border: 5px gold solid;*/
+    /*box-sizing: border-box;*/
 }
 
 .mainBoard{
     display: flex;
 }
 
-.cardDisplay, .player, .boss{
+.cardDisplay{
     border: 1px solid black;
 }
 
 .cardDisplay{
-    width: 60%;
+    width: 70%;
     height: 85vh;
     display: flex;
     flex-flow: row wrap;
 }
 
 .player{
-    width: 20%;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    width: 15%;
 }
 
 .boss{
-    width: 20%;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    width: 15%;
 }

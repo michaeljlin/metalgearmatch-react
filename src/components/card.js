@@ -13,11 +13,11 @@ class Card extends Component{
 
         this.state = {
             num: this.props.num,
-            frontStyle: {
+            backStyle: {
                 'backgroundColor': 'blue',
                 transform: 'rotateY(180deg)'
             },
-            backStyle: {
+            frontStyle: {
                 'backgroundColor': 'red',
                 top: '-101%'
             },
@@ -33,15 +33,20 @@ class Card extends Component{
         console.log('got message');
         const tempState = {...this.state};
 
+        if(this.props.num !== nextProps.num){
+            tempState.num = nextProps.num;
+            this.setState(tempState);
+        }
+
         if(this.props.flipped !== nextProps.flipped) {
             if (nextProps.flipped === true) {
-                console.log(`flipping card ${this.state.num} up!`);
+                console.log(`flipping card ${tempState.num} up!`);
                 tempState.flipStyle.transform = 'rotateY(180deg)';
 
                 this.setState(tempState);
             }
             else if (nextProps.flipped === false) {
-                console.log(`flipping card ${this.state.num} down!`);
+                console.log(`flipping card ${tempState.num} down!`);
                 tempState.flipStyle.transform = "inherit";
 
                 this.setState(tempState);
@@ -61,8 +66,8 @@ class Card extends Component{
         return(
             <div className="container" onClick={this.handleClick}>
                 <div className="card" style={{...flipStyle}}>
-                    <img src={backImg} style={{...frontStyle}}/>
                     <img src={backImg} style={{...backStyle}}/>
+                    <img src={backImg} style={{...frontStyle}}/>
 
                 </div>
             </div>

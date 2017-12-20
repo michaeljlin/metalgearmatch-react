@@ -9,8 +9,10 @@ class Main extends Component{
     constructor(props){
         super(props);
 
+        const deck = this.shufflecards();
+
         this.state = {
-            cards: this.shufflecards(),
+            cards: deck,
             firstCard: null,
             secondCard: null,
             message: "",
@@ -45,6 +47,15 @@ class Main extends Component{
             {num:8, flipped:false},
             {num:9, flipped:false}
         ];
+
+        for(let count  = 0; count < deck.length; count++){
+            let random = Math.floor(Math.random()*deck.length);
+            let temp = deck[count];
+            deck[count] = deck[random];
+            deck[random] = temp;
+        }
+
+        console.log(`deck: `,deck);
 
         return deck;
     };
@@ -133,8 +144,10 @@ class Main extends Component{
 
     reset(){
         console.log('resetting');
+        const deck = this.shufflecards();
+
         this.setState({
-            cards: this.shufflecards(),
+            cards: deck,
             firstCard: null,
             secondCard: null,
             message: "",
