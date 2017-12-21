@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Player from "./player";
 import Boss from "./boss";
 import Card from './card';
+import Message from './messages';
 
 import backImg from '../assets/images/mgscard.svg';
 
@@ -9,13 +10,19 @@ class Main extends Component{
     constructor(props){
         super(props);
 
+        const deck = this.shufflecards();
+
         this.state = {
-            cards: this.shufflecards(),
+            cards: deck,
             firstCard: null,
             secondCard: null,
             message: "",
             clickable: true,
-            counter: 0
+            counter: 0,
+            playerStats: {
+                health: 100,
+                accuracy: 0
+            }
         };
 
         this.dealcards = this.dealcards.bind(this);
@@ -45,6 +52,15 @@ class Main extends Component{
             {num:8, flipped:false},
             {num:9, flipped:false}
         ];
+
+        for(let count  = 0; count < deck.length; count++){
+            let random = Math.floor(Math.random()*deck.length);
+            let temp = deck[count];
+            deck[count] = deck[random];
+            deck[random] = temp;
+        }
+
+        console.log(`deck: `,deck);
 
         return deck;
     };
@@ -105,7 +121,7 @@ class Main extends Component{
                 tempState.message = 'Not a match!';
 
                 setTimeout(function(){
-                    console.log('timeout executed');
+                    // console.log('timeout executed');
                     tempState.cards[tempState.firstCard.id] = {num: tempState.firstCard.num, flipped: false};
                     tempState.cards[tempState.secondCard.id] = {num: tempState.secondCard.num, flipped: false};
 
@@ -113,6 +129,8 @@ class Main extends Component{
                     tempState.secondCard = null;
 
                     tempState.clickable = true;
+
+                    tempState.message = "";
 
                     this.setState({...tempState});
                 }.bind(this),2500);
@@ -133,13 +151,19 @@ class Main extends Component{
 
     reset(){
         console.log('resetting');
+        const deck = this.shufflecards();
+
         this.setState({
-            cards: this.shufflecards(),
+            cards: deck,
             firstCard: null,
             secondCard: null,
             message: "",
             clickable: true,
-            counter: 0
+            counter: 0,
+            playerStats: {
+                health: 100,
+                accuracy: 0
+            }
         });
     }
 
@@ -148,8 +172,9 @@ class Main extends Component{
 
         return(
             <div className="mainBoard">
-                <div className="message">{message}</div>
-                <Player reset={this.reset} />
+                {/*<div className="message">{message}</div>*/}
+                <Message message={message}/>
+                <Player stats={this.playerStats} reset={this.reset} />
                 <div className="cardDisplay">
                     {this.dealcards()}
                 </div>
