@@ -18,8 +18,7 @@ class Card extends Component{
                 transform: 'rotateY(180deg)'
             },
             frontStyle: {
-                'backgroundColor': 'red',
-                top: '-101%'
+                'backgroundColor': 'red'
             },
             flipStyle:{
                 transform: "inherit"

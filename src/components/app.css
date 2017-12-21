@@ -42,7 +42,6 @@
     vertical-align: middle;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    position: relative;
     border-radius: 8px;
     border: 2px solid #00f2ff;
 
@@ -60,10 +59,19 @@
 
 }
 
-.card img:hover{
+/*.card img:hover{*/
     /*border: 5px gold solid;*/
     /*box-sizing: border-box;*/
-    animation: pulse 2s ease infinite;
+    /*animation: pulse 2s ease infinite;*/
+/*}*/
+
+.card img:nth-child(1){
+    position: relative;
+}
+
+.card img:nth-child(2){
+    top: 0;
+    position: absolute;
 }
 
 .mainBoard{
