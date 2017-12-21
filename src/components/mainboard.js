@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Player from "./player";
 import Boss from "./boss";
 import Card from './card';
+import Message from './messages';
 
 import backImg from '../assets/images/mgscard.svg';
 
@@ -17,7 +18,11 @@ class Main extends Component{
             secondCard: null,
             message: "",
             clickable: true,
-            counter: 0
+            counter: 0,
+            playerStats: {
+                health: 100,
+                accuracy: 0
+            }
         };
 
         this.dealcards = this.dealcards.bind(this);
@@ -116,7 +121,7 @@ class Main extends Component{
                 tempState.message = 'Not a match!';
 
                 setTimeout(function(){
-                    console.log('timeout executed');
+                    // console.log('timeout executed');
                     tempState.cards[tempState.firstCard.id] = {num: tempState.firstCard.num, flipped: false};
                     tempState.cards[tempState.secondCard.id] = {num: tempState.secondCard.num, flipped: false};
 
@@ -124,6 +129,8 @@ class Main extends Component{
                     tempState.secondCard = null;
 
                     tempState.clickable = true;
+
+                    tempState.message = "";
 
                     this.setState({...tempState});
                 }.bind(this),2500);
@@ -152,7 +159,11 @@ class Main extends Component{
             secondCard: null,
             message: "",
             clickable: true,
-            counter: 0
+            counter: 0,
+            playerStats: {
+                health: 100,
+                accuracy: 0
+            }
         });
     }
 
@@ -161,8 +172,9 @@ class Main extends Component{
 
         return(
             <div className="mainBoard">
-                <div className="message">{message}</div>
-                <Player reset={this.reset} />
+                {/*<div className="message">{message}</div>*/}
+                <Message message={message}/>
+                <Player stats={this.playerStats} reset={this.reset} />
                 <div className="cardDisplay">
                     {this.dealcards()}
                 </div>

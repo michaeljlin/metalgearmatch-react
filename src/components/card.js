@@ -30,7 +30,7 @@ class Card extends Component{
     }
 
     componentWillReceiveProps(nextProps){
-        console.log('got message');
+        // console.log('got message');
         const tempState = {...this.state};
 
         if(this.props.num !== nextProps.num){
@@ -40,13 +40,13 @@ class Card extends Component{
 
         if(this.props.flipped !== nextProps.flipped) {
             if (nextProps.flipped === true) {
-                console.log(`flipping card ${tempState.num} up!`);
+                // console.log(`flipping card ${tempState.num} up!`);
                 tempState.flipStyle.transform = 'rotateY(180deg)';
 
                 this.setState(tempState);
             }
             else if (nextProps.flipped === false) {
-                console.log(`flipping card ${tempState.num} down!`);
+                // console.log(`flipping card ${tempState.num} down!`);
                 tempState.flipStyle.transform = "inherit";
 
                 this.setState(tempState);
