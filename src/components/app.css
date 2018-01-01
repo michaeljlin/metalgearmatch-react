@@ -45,6 +45,9 @@
     border-radius: 8px;
     border: 2px solid #00f2ff;
 
+    transition: .2s ease-in-out;
+    transform: scale(0.95);
+
     -webkit-user-drag: none;
     -khtml-user-drag: none;
     -moz-user-drag: none;
@@ -59,11 +62,13 @@
 
 }
 
-/*.card img:hover{*/
+.card img:hover{
     /*border: 5px gold solid;*/
     /*box-sizing: border-box;*/
     /*animation: pulse 2s ease infinite;*/
-/*}*/
+    transform: scale(1);
+    cursor: pointer;
+}
 
 .card img:nth-child(1){
     position: relative;
@@ -98,7 +103,8 @@
     border-width: thick;
     width: 15%;
     text-align: center;
-    background-color: #575757;
+    /*background-color: #575757;*/
+    background-color: #cccdd0;
     font-family: "Istok";
 }
 
@@ -107,7 +113,8 @@
     border-width: thick;
     width: 15%;
     text-align: center;
-    background-color: #575757;
+    /*background-color: #575757;*/
+    background-color: #cccdd0;
     font-family: "Istok";
 }
 
