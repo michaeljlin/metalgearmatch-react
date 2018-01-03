@@ -3,6 +3,7 @@ import Player from "./player";
 import Boss from "./boss";
 import Card from './card';
 import Message from './messages';
+import Menu from './menu';
 
 import backImg from '../assets/images/mgscard.svg';
 
@@ -183,9 +184,10 @@ class Main extends Component{
                     <div className="cardDisplay">
                         {this.dealcards()}
                     </div>
+                    <Menu />
                     <div className="right_front"></div>
                     <div className="right"></div>
-                <Boss />
+                    <Boss />
                 </div>
                 {/*<button onClick={this.reset}>Reset</button>*/}
             </div>
