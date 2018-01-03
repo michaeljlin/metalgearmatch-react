@@ -5,9 +5,9 @@ import Main from './mainboard';
 const App = () => (
     <div>
         <div className="app">
-            <div className="title">
-                Metal Gear Memory Match
-            </div>
+            {/*<div className="title">*/}
+                {/*Metal Gear Memory Match*/}
+            {/*</div>*/}
             <Main/>
         </div>
     </div>

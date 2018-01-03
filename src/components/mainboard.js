@@ -174,11 +174,19 @@ class Main extends Component{
             <div className="mainBoard">
                 {/*<div className="message">{message}</div>*/}
                 <Message message={message}/>
-                <Player stats={this.playerStats} reset={this.reset} />
-                <div className="cardDisplay">
-                    {this.dealcards()}
-                </div>
+
+                <div className="console">
+                    <div className="left_front"></div>
+                    <div className="left"></div>
+                    <Player stats={this.playerStats} reset={this.reset} />
+                    <div className="front"></div>
+                    <div className="cardDisplay">
+                        {this.dealcards()}
+                    </div>
+                    <div className="right_front"></div>
+                    <div className="right"></div>
                 <Boss />
+                </div>
                 {/*<button onClick={this.reset}>Reset</button>*/}
             </div>
         );
