@@ -91,11 +91,24 @@
     height: 200px;
 }
 
+.front{
+    background-color: blue;
+    width: 100%;
+    position: absolute;
+    height: 15%;
+
+    transform: rotateX(-48deg) translateZ(141px) translateY(131px);
+}
+
 @media screen and (min-width: 1601px){
 
     .mainBoard{
         width: 1600px;
         height: 750px;
+    }
+
+    .front{
+        transform: rotateX(-48deg) translateZ(525px) translateY(530px);
     }
 
 }
@@ -107,6 +120,10 @@
         height: 500px;
     }
 
+    .front{
+        transform: rotateX(-48deg) translateZ(396px) translateY(399px);
+    }
+
 }
 
 @media screen and (max-width: 800px) and (min-width: 480px){
@@ -116,11 +133,16 @@
         height: 300px;
     }
 
+    .front{
+        transform: rotateX(-48deg) translateZ(200px) translateY(201px);
+    }
+
 }
 
 .console{
     display: flex;
     transform: rotateX(10deg);
+    transform-style: preserve-3d;
 }
 
 .cardDisplay{
