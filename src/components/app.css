@@ -43,7 +43,7 @@
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     border-radius: 8px;
-    border: 2px solid #00f2ff;
+    border: 2px solid black;
 
     transition: .2s ease-in-out;
     transform: scale(0.95);
@@ -70,6 +70,26 @@
     cursor: pointer;
 }
 
+.card img:after{
+    content: '';
+    width: inherit;
+    height: inherit;
+    display: block;
+    position: absolute;
+    border-radius: 8px;
+}
+
+.card img:hover:after{
+    border: 1px solid red;
+    animation: ripple 2s linear infinite;
+}
+
+@keyframes ripple {
+    0%{ transform: scale(1); }
+    75%{ transform: scale(1.75); opacity: 1; }
+    100%{ transform: scale(2); opacity: 0; }
+}
+
 .card img:nth-child(1){
     position: relative;
 }
@@ -78,6 +98,7 @@
     top: 0;
     position: absolute;
 }
+
 
 .mainBoard{
     perspective: 1000px;
