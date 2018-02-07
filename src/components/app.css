@@ -16,7 +16,7 @@
 
 .title{
     width: 100%;
-    height: 10vh;
+    height: 5vh;
 }
 
 .container{
@@ -28,6 +28,13 @@
     display: flex;
     position: relative;
     perspective: 800px;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+}
+
+.cardDisplay{
+    perspective: 800px;
+    transform-style: preserve-3d;
 }
 
 .card{
@@ -42,9 +49,11 @@
     vertical-align: middle;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    position: relative;
     border-radius: 8px;
-    border: 2px solid #00f2ff;
+    border: 2px solid black;
+
+    transition: .2s ease-in-out;
+    transform: scale(0.95);
 
     -webkit-user-drag: none;
     -khtml-user-drag: none;
@@ -63,14 +72,171 @@
 .card img:hover{
     /*border: 5px gold solid;*/
     /*box-sizing: border-box;*/
-    animation: pulse 2s ease infinite;
+    /*animation: pulse 2s ease infinite;*/
+    transform: scale(1);
+    cursor: pointer;
 }
 
-.mainBoard{
-    display: flex;
+/*.card img:after{*/
+    /*content: '';*/
+    /*width: inherit;*/
+    /*height: inherit;*/
+    /*display: block;*/
+    /*position: absolute;*/
+    /*border-radius: 8px;*/
+/*}*/
+
+/*.card img:hover:after{*/
+    /*border: 1px solid red;*/
+    /*animation: ripple 2s linear infinite;*/
+/*}*/
+
+.floater:after{
+    width: inherit;
+    height: inherit;
+    content: '';
+    display: block;
+    position: absolute;
     border-radius: 8px;
-    border: solid;
-    border-width: thick;
+}
+
+.floater:before{
+    width: inherit;
+    height: inherit;
+    content: '';
+    display: block;
+    position: absolute;
+    border-radius: 8px;
+}
+
+.floater:hover:after, .floater:hover:before{
+    border: 1px solid red;
+}
+
+.floater:hover:after{
+    animation: ripple 2s linear infinite;
+}
+
+.floater:hover:before{
+    animation: ripple 2s linear 1s infinite;
+}
+
+@keyframes ripple {
+    0%{ transform: scale(1); }
+    75%{ transform: scale(1.75); opacity: 1; }
+    100%{ transform: scale(2); opacity: 0; }
+}
+
+.card img:nth-child(1){
+    position: relative;
+}
+
+.card img:nth-child(2){
+    top: 0;
+    position: absolute;
+}
+
+
+.mainBoard{
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    position: relative;
+    margin: auto;
+    width: 400px;
+    height: 200px;
+}
+
+.front{
+    background-color: #9f9fab;
+    width: 100%;
+    position: absolute;
+    height: 15%;
+
+    border-left: thick solid black;
+    border-right: thick solid black;
+    border-bottom: thick solid black;
+    box-sizing: border-box;
+
+    transform: rotateX(-48deg) translateZ(155px) translateY(116px);
+}
+
+@media screen and (min-width: 1601px){
+
+    .mainBoard{
+        width: 1600px;
+        height: 750px;
+    }
+
+    .front{
+        /*transform: rotateX(-48deg) translateZ(528px) translateY(523px);*/
+        transform: rotateX(-90deg) translateZ(706px) translateY(57px);
+    }
+
+}
+
+@media screen and (max-width: 1600px) and (min-width: 801px){
+
+    .mainBoard{
+        width: 1200px;
+        height: 500px;
+    }
+
+    .front{
+        /*transform: rotateX(-48deg) translateZ(399px) translateY(389px);*/
+        transform: rotateX(-90deg) translateZ(530px) translateY(43px);
+    }
+
+}
+
+@media screen and (max-width: 800px) and (min-width: 480px){
+
+    .mainBoard{
+        width: 600px;
+        height: 300px;
+    }
+
+    .front{
+        /*transform: rotateX(-48deg) translateZ(210px) translateY(187px);*/
+        transform: rotateX(-90deg) translateZ(268px) translateY(21px);
+    }
+
+}
+
+.menu, .front{
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+    -khtml-user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+
+    pointer-events:none;
+}
+
+.menu{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.select{
+
+}
+
+.console{
+    display: flex;
+    transform: rotateX(10deg);
+    transform-style: preserve-3d;
+
+    border: thick solid black;
+    box-sizing: border-box;
 }
 
 .cardDisplay{
@@ -80,26 +246,31 @@
 
 .cardDisplay{
     width: 70%;
-    height: 85vh;
+    height: 85%;
     display: flex;
     flex-flow: row wrap;
+
+    border-left: thick solid;
+    border-radius: 5px;
+    border-right: thick solid;
+    box-sizing: border-box;
+
+    transform-style: preserve-3d;
 }
 
 .player{
-    border-right: solid;
-    border-width: thick;
     width: 15%;
     text-align: center;
-    background-color: #575757;
+    /*background-color: #575757;*/
+    background-color: #cccdd0;
     font-family: "Istok";
 }
 
 .boss{
-    border-left: solid;
-    border-width: thick;
     width: 15%;
     text-align: center;
-    background-color: #575757;
+    /*background-color: #575757;*/
+    background-color: #cccdd0;
     font-family: "Istok";
 }
 

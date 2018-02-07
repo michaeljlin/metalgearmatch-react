@@ -18,8 +18,7 @@ class Card extends Component{
                 transform: 'rotateY(180deg)'
             },
             frontStyle: {
-                'backgroundColor': 'red',
-                top: '-101%'
+                'backgroundColor': 'red'
             },
             flipStyle:{
                 transform: "inherit"
@@ -64,8 +63,8 @@ class Card extends Component{
         const {frontStyle, backStyle, flipStyle} = this.state;
 
         return(
-            <div className="container" onClick={this.handleClick}>
-                <div className="card" style={{...flipStyle}}>
+            <div className="container" style={{...flipStyle}} onClick={this.handleClick}>
+                <div className="card"  >
                     <img src={backImg} style={{...backStyle}}/>
                     <img src={backImg} style={{...frontStyle}}/>
 
