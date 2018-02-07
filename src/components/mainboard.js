@@ -34,24 +34,24 @@ class Main extends Component{
 
     shufflecards(){
         const deck = [
-            {num:1, flipped:false},
-            {num:2, flipped:false},
-            {num:3, flipped:false},
-            {num:4, flipped:false},
-            {num:5, flipped:false},
-            {num:6, flipped:false},
-            {num:7, flipped:false},
-            {num:8, flipped:false},
-            {num:9, flipped:false},
-            {num:1, flipped:false},
-            {num:2, flipped:false},
-            {num:3, flipped:false},
-            {num:4, flipped:false},
-            {num:5, flipped:false},
-            {num:6, flipped:false},
-            {num:7, flipped:false},
-            {num:8, flipped:false},
-            {num:9, flipped:false}
+            {num:1, flipped:false, fade: false},
+            {num:2, flipped:false, fade: false},
+            {num:3, flipped:false, fade: false},
+            {num:4, flipped:false, fade: false},
+            {num:5, flipped:false, fade: false},
+            {num:6, flipped:false, fade: false},
+            {num:7, flipped:false, fade: false},
+            {num:8, flipped:false, fade: false},
+            {num:9, flipped:false, fade: false},
+            {num:1, flipped:false, fade: false},
+            {num:2, flipped:false, fade: false},
+            {num:3, flipped:false, fade: false},
+            {num:4, flipped:false, fade: false},
+            {num:5, flipped:false, fade: false},
+            {num:6, flipped:false, fade: false},
+            {num:7, flipped:false, fade: false},
+            {num:8, flipped:false, fade: false},
+            {num:9, flipped:false, fade: false}
         ];
 
         for(let count  = 0; count < deck.length; count++){
@@ -68,7 +68,7 @@ class Main extends Component{
 
     dealcards() {
         return this.state.cards.map((cards, index) => {
-            return (<Card key={index} id={index} handleMatch={this.handleMatch} num={this.state.cards[index].num} flipped={this.state.cards[index].flipped}/>);
+            return (<Card key={index} id={index} handleMatch={this.handleMatch} num={this.state.cards[index].num} flipped={this.state.cards[index].flipped} fade={this.state.cards[index].fade}/>);
         });
     }
 
@@ -82,7 +82,7 @@ class Main extends Component{
         if(tempState.firstCard === null){
             console.log(`storing first card click from card ID: ${cardID}, card num: ${num}`);
             tempState.firstCard = {num: num, flipped: true, id: cardID};
-            tempState.cards[cardID] = {num: num, flipped: true};
+            tempState.cards[cardID] = {num: num, flipped: true, fade: false};
         }
         else if(tempState.secondCard === null){
 
@@ -93,7 +93,7 @@ class Main extends Component{
 
             console.log(`storing second card click from card ID: ${cardID}, card num: ${num}`);
             tempState.secondCard = {num: num, flipped: true, id: cardID};
-            tempState.cards[cardID] = {num: num, flipped: true};
+            tempState.cards[cardID] = {num: num, flipped: true, fade: false};
         }
 
         if(tempState.secondCard !== null){
@@ -109,11 +109,12 @@ class Main extends Component{
                     tempState.message = 'You won!';
                 }
 
-                tempState.cards[tempState.firstCard.id] = {num: tempState.firstCard.num, flipped: true};
-                tempState.cards[tempState.secondCard.id] = {num: tempState.secondCard.num, flipped: true};
+                tempState.cards[tempState.firstCard.id] = {num: tempState.firstCard.num, flipped: true, fade: true};
+                tempState.cards[tempState.secondCard.id] = {num: tempState.secondCard.num, flipped: true, fade: true};
 
                 tempState.firstCard = null;
                 tempState.secondCard = null;
+
             }
             else{
                 console.log(`Not a match, resetting cards!`);
@@ -123,8 +124,8 @@ class Main extends Component{
 
                 setTimeout(function(){
                     // console.log('timeout executed');
-                    tempState.cards[tempState.firstCard.id] = {num: tempState.firstCard.num, flipped: false};
-                    tempState.cards[tempState.secondCard.id] = {num: tempState.secondCard.num, flipped: false};
+                    tempState.cards[tempState.firstCard.id] = {num: tempState.firstCard.num, flipped: false, fade: false};
+                    tempState.cards[tempState.secondCard.id] = {num: tempState.secondCard.num, flipped: false, fade: false};
 
                     tempState.firstCard = null;
                     tempState.secondCard = null;
