@@ -97,7 +97,7 @@ class Main extends Component{
             tempState.firstCard = {num: num, flipped: true, id: cardID};
             tempState.cards[cardID] = {num: num, flipped: true, fade: false, type: tempState.cards[cardID].type};
 
-            if(tempState.cards[cardID].type === 'enemy'){
+            if(tempState.cards[cardID].type === 'enemy' && !alertTracker.searchForSameID(cardID)){
                 alertTracker.add(cardID, num, ()=>{
                     console.log(`triggering alert on cardID: ${cardID} and number: ${num}!`);
                     alertTracker.remove(cardID);
@@ -123,6 +123,10 @@ class Main extends Component{
                 console.log(`A match has been made!`);
                 tempState.counter++;
 
+                if(tempState.cards[cardID].type === 'enemy'){
+                    alertTracker.stop();
+                }
+
                 if(tempState.counter < 9){
                     tempState.message = 'Made a match!';
                 }
@@ -142,6 +146,14 @@ class Main extends Component{
 
                 tempState.clickable = false;
                 tempState.message = 'Not a match!';
+
+                if(tempState.cards[cardID].type === 'enemy' && !alertTracker.searchForSameID(cardID)){
+                    alertTracker.add(cardID, num, ()=>{
+                        console.log(`triggering alert on cardID: ${cardID} and number: ${num}!`);
+                        alertTracker.remove(cardID);
+                        this.handleDamage();
+                    });
+                }
 
                 setTimeout(function(){
                     // console.log('timeout executed');
