@@ -25,13 +25,17 @@ class Main extends Component{
             playerStats: {
                 health: 100,
                 accuracy: 0
-            }
+            },
+            alerts: []
         };
 
         this.dealcards = this.dealcards.bind(this);
         this.shufflecards = this.shufflecards.bind(this);
         this.reset = this.reset.bind(this);
         this.handleMatch = this.handleMatch.bind(this);
+        this.handleAlly = this.handleAlly.bind(this);
+        this.handleDamage = this.handleDamage.bind(this);
+        this.handleItem = this.handleItem.bind(this);
     }
 
     shufflecards(){
@@ -42,7 +46,7 @@ class Main extends Component{
             {num:4, flipped:false, fade: false, type: 'ally'},
             {num:5, flipped:false, fade: false, type: 'ally'},
             {num:6, flipped:false, fade: false, type: 'ally'},
-            {num:7, flipped:false, fade: false, type: 'item'},
+            {num:7, flipped:false, fade: false, type: 'ally'},
             {num:8, flipped:false, fade: false, type: 'item'},
             {num:9, flipped:false, fade: false, type: 'item'},
             {num:1, flipped:false, fade: false, type:'enemy'},
@@ -51,7 +55,7 @@ class Main extends Component{
             {num:4, flipped:false, fade: false, type: 'ally'},
             {num:5, flipped:false, fade: false, type: 'ally'},
             {num:6, flipped:false, fade: false, type: 'ally'},
-            {num:7, flipped:false, fade: false, type: 'item'},
+            {num:7, flipped:false, fade: false, type: 'ally'},
             {num:8, flipped:false, fade: false, type: 'item'},
             {num:9, flipped:false, fade: false, type: 'item'}
         ];
@@ -83,6 +87,19 @@ class Main extends Component{
         tempPlayer.health-=20;
 
         this.setState({playerStats: tempPlayer});
+    }
+
+    handleAlly(){
+        const tempPlayer = {...this.state.playerStats};
+
+        if(tempPlayer.health < 100){
+            tempPlayer.health+=20;
+            this.setState({playerStats: tempPlayer});
+        }
+    }
+
+    handleItem(){
+
     }
 
     handleMatch(cardID, num){
@@ -125,6 +142,12 @@ class Main extends Component{
 
                 if(tempState.cards[cardID].type === 'enemy'){
                     alertTracker.stop();
+                }
+                else if(tempState.cards[cardID].type === 'ally'){
+                    this.handleAlly();
+                }
+                else if(tempState.cards[cardID].type === 'item'){
+                    this.handleItem();
                 }
 
                 if(tempState.counter < 9){
@@ -169,13 +192,6 @@ class Main extends Component{
 
                     this.setState({...tempState});
                 }.bind(this),2500);
-                // tempState.cards[tempState.firstCard.id] = {num: tempState.firstCard.num, flipped: false};
-                // tempState.cards[tempState.secondCard.id] = {num: tempState.secondCard.num, flipped: false};
-                //
-                // tempState.firstCard = null;
-                // tempState.secondCard = null;
-                //
-                // tempState.message = 'Not a match!';
             }
         }
 
@@ -200,7 +216,8 @@ class Main extends Component{
             playerStats: {
                 health: 100,
                 accuracy: 0
-            }
+            },
+            alerts: []
         });
     }
 
