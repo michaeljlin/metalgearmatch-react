@@ -182,10 +182,10 @@ class Main extends Component{
                     <div className="left"></div>
                     <Player stats={this.playerStats} reset={this.reset} />
                     <div className="front"></div>
+                    <Menu />
                     <div className="cardDisplay">
                         {this.dealcards()}
                     </div>
-                    <Menu />
                     <div className="right_front"></div>
                     <div className="right"></div>
                     <Boss />
