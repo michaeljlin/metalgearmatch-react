@@ -21,8 +21,9 @@ class Card extends Component{
                 'backgroundColor': 'red'
             },
             flipStyle:{
-                transform: "inherit"
-            }
+                transform: ""
+            },
+            fadeout: false
         };
 
         this.handleClick = this.handleClick.bind(this);
@@ -37,6 +38,13 @@ class Card extends Component{
             this.setState(tempState);
         }
 
+        if(!nextProps.fade){
+            tempState.backStyle.opacity = 1;
+            tempState.backStyle.cursor = 'pointer';
+            tempState.frontStyle.opacity = 1;
+            tempState.frontStyle.cursor = 'pointer';
+        }
+
         if(this.props.flipped !== nextProps.flipped) {
             if (nextProps.flipped === true) {
                 // console.log(`flipping card ${tempState.num} up!`);
@@ -46,11 +54,25 @@ class Card extends Component{
             }
             else if (nextProps.flipped === false) {
                 // console.log(`flipping card ${tempState.num} down!`);
-                tempState.flipStyle.transform = "inherit";
+                tempState.flipStyle.transform = "";
 
                 this.setState(tempState);
             }
             // console.log(this.state);
+        }
+
+        if(nextProps.fade){
+            console.log('fade is not false!');
+            console.log('fade is: ', nextProps.fade);
+
+            setTimeout(function(){
+                tempState.backStyle.opacity = 0;
+                tempState.backStyle.cursor = 'initial';
+                tempState.frontStyle.opacity = 0;
+                tempState.frontStyle.cursor = 'initial';
+
+                this.setState(tempState);
+            }.bind(this),1500);
         }
     }
 
@@ -60,10 +82,14 @@ class Card extends Component{
     }
 
     render(){
-        const {frontStyle, backStyle, flipStyle} = this.state;
+        const {frontStyle, backStyle, flipStyle, fadeout} = this.state;
+
+        if(fadeout){
+            console.log(`fadeout is: ${fadeout}`);
+        }
 
         return(
-            <div className="container" style={{...flipStyle}} onClick={this.handleClick}>
+            <div className={`container`} style={{...flipStyle}} onClick={this.handleClick}>
                 <div className="card"  >
                     <img src={backImg} style={{...backStyle}}/>
                     <img src={backImg} style={{...frontStyle}}/>
