@@ -38,6 +38,13 @@ class Card extends Component{
             this.setState(tempState);
         }
 
+        if(!nextProps.fade){
+            tempState.backStyle.opacity = 1;
+            tempState.backStyle.cursor = 'pointer';
+            tempState.frontStyle.opacity = 1;
+            tempState.frontStyle.cursor = 'pointer';
+        }
+
         if(this.props.flipped !== nextProps.flipped) {
             if (nextProps.flipped === true) {
                 // console.log(`flipping card ${tempState.num} up!`);
@@ -60,7 +67,10 @@ class Card extends Component{
 
             setTimeout(function(){
                 tempState.backStyle.opacity = 0;
+                tempState.backStyle.cursor = 'initial';
                 tempState.frontStyle.opacity = 0;
+                tempState.frontStyle.cursor = 'initial';
+
                 this.setState(tempState);
             }.bind(this),1500);
         }
