@@ -62,8 +62,8 @@ class Card extends Component{
         }
 
         if(nextProps.fade){
-            console.log('fade is not false!');
-            console.log('fade is: ', nextProps.fade);
+            // console.log('fade is not false!');
+            // console.log('fade is: ', nextProps.fade);
 
             setTimeout(function(){
                 tempState.backStyle.opacity = 0;
@@ -82,11 +82,7 @@ class Card extends Component{
     }
 
     render(){
-        const {frontStyle, backStyle, flipStyle, fadeout} = this.state;
-
-        if(fadeout){
-            console.log(`fadeout is: ${fadeout}`);
-        }
+        const {frontStyle, backStyle, flipStyle} = this.state;
 
         return(
             <div className={`container`} style={{...flipStyle}} onClick={this.handleClick}>

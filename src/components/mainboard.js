@@ -5,6 +5,8 @@ import Card from './card';
 import Message from './messages';
 import Menu from './menu';
 
+import alertTracker from './alerts';
+
 import backImg from '../assets/images/mgscard.svg';
 
 class Main extends Component{
@@ -34,24 +36,24 @@ class Main extends Component{
 
     shufflecards(){
         const deck = [
-            {num:1, flipped:false, fade: false},
-            {num:2, flipped:false, fade: false},
-            {num:3, flipped:false, fade: false},
-            {num:4, flipped:false, fade: false},
-            {num:5, flipped:false, fade: false},
-            {num:6, flipped:false, fade: false},
-            {num:7, flipped:false, fade: false},
-            {num:8, flipped:false, fade: false},
-            {num:9, flipped:false, fade: false},
-            {num:1, flipped:false, fade: false},
-            {num:2, flipped:false, fade: false},
-            {num:3, flipped:false, fade: false},
-            {num:4, flipped:false, fade: false},
-            {num:5, flipped:false, fade: false},
-            {num:6, flipped:false, fade: false},
-            {num:7, flipped:false, fade: false},
-            {num:8, flipped:false, fade: false},
-            {num:9, flipped:false, fade: false}
+            {num:1, flipped:false, fade: false, type:'enemy'},
+            {num:2, flipped:false, fade: false, type:'enemy'},
+            {num:3, flipped:false, fade: false, type:'enemy'},
+            {num:4, flipped:false, fade: false, type: 'ally'},
+            {num:5, flipped:false, fade: false, type: 'ally'},
+            {num:6, flipped:false, fade: false, type: 'ally'},
+            {num:7, flipped:false, fade: false, type: 'item'},
+            {num:8, flipped:false, fade: false, type: 'item'},
+            {num:9, flipped:false, fade: false, type: 'item'},
+            {num:1, flipped:false, fade: false, type:'enemy'},
+            {num:2, flipped:false, fade: false, type:'enemy'},
+            {num:3, flipped:false, fade: false, type:'enemy'},
+            {num:4, flipped:false, fade: false, type: 'ally'},
+            {num:5, flipped:false, fade: false, type: 'ally'},
+            {num:6, flipped:false, fade: false, type: 'ally'},
+            {num:7, flipped:false, fade: false, type: 'item'},
+            {num:8, flipped:false, fade: false, type: 'item'},
+            {num:9, flipped:false, fade: false, type: 'item'}
         ];
 
         for(let count  = 0; count < deck.length; count++){
@@ -72,6 +74,17 @@ class Main extends Component{
         });
     }
 
+    handleAlert(){
+
+    }
+
+    handleDamage(){
+        const tempPlayer = {...this.state.playerStats};
+        tempPlayer.health-=20;
+
+        this.setState({playerStats: tempPlayer});
+    }
+
     handleMatch(cardID, num){
         const tempState = {...this.state};
 
@@ -82,7 +95,15 @@ class Main extends Component{
         if(tempState.firstCard === null){
             console.log(`storing first card click from card ID: ${cardID}, card num: ${num}`);
             tempState.firstCard = {num: num, flipped: true, id: cardID};
-            tempState.cards[cardID] = {num: num, flipped: true, fade: false};
+            tempState.cards[cardID] = {num: num, flipped: true, fade: false, type: tempState.cards[cardID].type};
+
+            if(tempState.cards[cardID].type === 'enemy'){
+                alertTracker.add(cardID, num, ()=>{
+                    console.log(`triggering alert on cardID: ${cardID} and number: ${num}!`);
+                    alertTracker.remove(cardID);
+                    this.handleDamage();
+                });
+            }
         }
         else if(tempState.secondCard === null){
 
@@ -93,7 +114,7 @@ class Main extends Component{
 
             console.log(`storing second card click from card ID: ${cardID}, card num: ${num}`);
             tempState.secondCard = {num: num, flipped: true, id: cardID};
-            tempState.cards[cardID] = {num: num, flipped: true, fade: false};
+            tempState.cards[cardID] = {num: num, flipped: true, fade: false, type: tempState.cards[cardID].type};
         }
 
         if(tempState.secondCard !== null){
@@ -109,8 +130,8 @@ class Main extends Component{
                     tempState.message = 'You won!';
                 }
 
-                tempState.cards[tempState.firstCard.id] = {num: tempState.firstCard.num, flipped: true, fade: true};
-                tempState.cards[tempState.secondCard.id] = {num: tempState.secondCard.num, flipped: true, fade: true};
+                tempState.cards[tempState.firstCard.id] = {num: tempState.firstCard.num, flipped: true, fade: true, type: tempState.cards[tempState.firstCard.id].type};
+                tempState.cards[tempState.secondCard.id] = {num: tempState.secondCard.num, flipped: true, fade: true, type: tempState.cards[tempState.secondCard.id].type};
 
                 tempState.firstCard = null;
                 tempState.secondCard = null;
@@ -124,8 +145,8 @@ class Main extends Component{
 
                 setTimeout(function(){
                     // console.log('timeout executed');
-                    tempState.cards[tempState.firstCard.id] = {num: tempState.firstCard.num, flipped: false, fade: false};
-                    tempState.cards[tempState.secondCard.id] = {num: tempState.secondCard.num, flipped: false, fade: false};
+                    tempState.cards[tempState.firstCard.id] = {num: tempState.firstCard.num, flipped: false, fade: false, type: tempState.cards[tempState.firstCard.id].type};
+                    tempState.cards[tempState.secondCard.id] = {num: tempState.secondCard.num, flipped: false, fade: false, type: tempState.cards[tempState.secondCard.id].type};
 
                     tempState.firstCard = null;
                     tempState.secondCard = null;
@@ -155,6 +176,8 @@ class Main extends Component{
         console.log('resetting');
         const deck = this.shufflecards();
 
+        alertTracker.stop();
+
         this.setState({
             cards: deck,
             firstCard: null,
@@ -170,7 +193,7 @@ class Main extends Component{
     }
 
     render(){
-        const {message} = this.state;
+        const {message, playerStats} = this.state;
 
         return(
             <div className="mainBoard">
@@ -180,12 +203,12 @@ class Main extends Component{
                 <div className="console">
                     <div className="left_front"></div>
                     <div className="left"></div>
-                    <Player stats={this.playerStats} reset={this.reset} />
+                    <Player stats={playerStats} reset={this.reset} />
                     <div className="front"></div>
+                    <Menu />
                     <div className="cardDisplay">
                         {this.dealcards()}
                     </div>
-                    <Menu />
                     <div className="right_front"></div>
                     <div className="right"></div>
                     <Boss />
