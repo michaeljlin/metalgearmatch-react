@@ -14,8 +14,13 @@ class Healthbar extends Component{
     }
 
     componentWillReceiveProps(nextProps){
+        // console.log('healthbar nextprops: ',nextProps);
+
         if(this.state.HP !== nextProps.HP){
             const tempState = {...nextProps};
+            tempState.healthStyle = {
+                width: nextProps.HP+'%'
+            };
 
             this.setState(tempState);
         }

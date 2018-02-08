@@ -78,6 +78,13 @@ class Main extends Component{
 
     }
 
+    handleDamage(){
+        const tempPlayer = {...this.state.playerStats};
+        tempPlayer.health-=20;
+
+        this.setState({playerStats: tempPlayer});
+    }
+
     handleMatch(cardID, num){
         const tempState = {...this.state};
 
@@ -94,6 +101,7 @@ class Main extends Component{
                 alertTracker.add(cardID, num, ()=>{
                     console.log(`triggering alert on cardID: ${cardID} and number: ${num}!`);
                     alertTracker.remove(cardID);
+                    this.handleDamage();
                 });
             }
         }
@@ -185,7 +193,7 @@ class Main extends Component{
     }
 
     render(){
-        const {message} = this.state;
+        const {message, playerStats} = this.state;
 
         return(
             <div className="mainBoard">
@@ -195,7 +203,7 @@ class Main extends Component{
                 <div className="console">
                     <div className="left_front"></div>
                     <div className="left"></div>
-                    <Player stats={this.playerStats} reset={this.reset} />
+                    <Player stats={playerStats} reset={this.reset} />
                     <div className="front"></div>
                     <Menu />
                     <div className="cardDisplay">

@@ -3,6 +3,15 @@
     /*height: 100%;*/
 /*}*/
 
+.alertProgress{
+    animation: alert 5s linear 1;
+}
+
+@keyframes alert {
+    0%{ width: 100% }
+    100%{ width: 0 }
+}
+
 .message{
     position: absolute;
     pointer-events: none;

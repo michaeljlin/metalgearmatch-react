@@ -1,7 +1,7 @@
 function AlertObj(cardID, num, callback){
     this.cardID = cardID;
     this.num = num;
-    this.maxTime = 1000;
+    this.maxTime = 500;
     this.remainingTime = this.maxTime;
     this.drainRate = 100;
 
@@ -85,6 +85,10 @@ function AlertHandler(){
         }
 
         this.alerts = [];
+    };
+
+    this.length = function(){
+        return this.alerts.length;
     }
 }
 
