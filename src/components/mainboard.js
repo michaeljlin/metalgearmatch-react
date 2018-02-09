@@ -195,6 +195,9 @@ class Main extends Component{
 
                 if(tempState.cards[cardID].type === 'enemy'){
                     alertTracker.stop();
+                    this.setState({
+                        alerts: []
+                    });
                 }
                 else if(tempState.cards[cardID].type === 'ally'){
                     this.handleAlly();
