@@ -35,6 +35,13 @@
     height: 33.33333333333333%;
     display: flex;
     position: relative;
+    /*perspective: 800px;*/
+    transition: transform 1s;
+    transform-style: preserve-3d;
+    /*transform: translateZ(25px);*/
+}
+
+.cardContainer{
     perspective: 800px;
     transition: transform 1s;
     transform-style: preserve-3d;
