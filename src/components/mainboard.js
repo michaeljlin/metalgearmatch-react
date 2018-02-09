@@ -25,13 +25,20 @@ class Main extends Component{
             playerStats: {
                 health: 100,
                 accuracy: 0
-            }
+            },
+            alerts: []
         };
 
         this.dealcards = this.dealcards.bind(this);
         this.shufflecards = this.shufflecards.bind(this);
         this.reset = this.reset.bind(this);
         this.handleMatch = this.handleMatch.bind(this);
+        this.handleAlly = this.handleAlly.bind(this);
+        this.handleDamage = this.handleDamage.bind(this);
+        this.handleItem = this.handleItem.bind(this);
+        this.handleNewAlert = this.handleNewAlert.bind(this);
+        this.handleAlertUpdate = this.handleAlertUpdate.bind(this);
+        this.handleAlertTrigger = this.handleAlertTrigger.bind(this);
     }
 
     shufflecards(){
@@ -42,7 +49,7 @@ class Main extends Component{
             {num:4, flipped:false, fade: false, type: 'ally'},
             {num:5, flipped:false, fade: false, type: 'ally'},
             {num:6, flipped:false, fade: false, type: 'ally'},
-            {num:7, flipped:false, fade: false, type: 'item'},
+            {num:7, flipped:false, fade: false, type: 'ally'},
             {num:8, flipped:false, fade: false, type: 'item'},
             {num:9, flipped:false, fade: false, type: 'item'},
             {num:1, flipped:false, fade: false, type:'enemy'},
@@ -51,7 +58,7 @@ class Main extends Component{
             {num:4, flipped:false, fade: false, type: 'ally'},
             {num:5, flipped:false, fade: false, type: 'ally'},
             {num:6, flipped:false, fade: false, type: 'ally'},
-            {num:7, flipped:false, fade: false, type: 'item'},
+            {num:7, flipped:false, fade: false, type: 'ally'},
             {num:8, flipped:false, fade: false, type: 'item'},
             {num:9, flipped:false, fade: false, type: 'item'}
         ];
@@ -78,11 +85,77 @@ class Main extends Component{
 
     }
 
-    handleDamage(){
+    handleDamage(cardID){
         const tempPlayer = {...this.state.playerStats};
         tempPlayer.health-=20;
 
-        this.setState({playerStats: tempPlayer});
+        let alertIndex = this.state.alerts.findIndex((alerts)=>{
+            return alerts.cardID === cardID;
+        });
+
+        console.log('alertIndex is: ',alertIndex);
+
+        let newAlertState = this.state.alerts;
+        newAlertState.splice(alertIndex, 1);
+
+        console.log('new alert state is: ', newAlertState);
+
+        this.setState({
+                playerStats: tempPlayer,
+                alerts: newAlertState
+            });
+    }
+
+    handleAlertUpdate(remainingTime, cardID){
+        let alertIndex = this.state.alerts.findIndex((alerts)=>{
+            return alerts.cardID === cardID;
+        });
+
+        let tempAlert = this.state.alerts;
+        tempAlert[alertIndex].remainingTime = remainingTime;
+
+        this.setState({
+            alerts: tempAlert
+        });
+    }
+
+    handleAlly(){
+        const tempPlayer = {...this.state.playerStats};
+
+        if(tempPlayer.health < 100){
+            tempPlayer.health+=20;
+            this.setState({playerStats: tempPlayer});
+        }
+    }
+
+    handleItem(){
+
+    }
+
+    handleNewAlert(cardID, num){
+        console.log(`adding new alert for ${cardID} and num ${num}`);
+
+        let tempAlerts = this.state.alerts;
+
+        tempAlerts.push({
+            cardID: cardID,
+            num: num,
+            maxTime: 500,
+            remainingTime: 500,
+            drainRate: 100
+        });
+
+        this.setState({
+            alerts: tempAlerts
+        });
+
+        console.log(`state alerts is: `, this.state.alerts);
+    }
+
+    handleAlertTrigger(cardID, num){
+        console.log(`triggering alert on cardID: ${cardID} and number: ${num}!`);
+        alertTracker.remove(cardID);
+        this.handleDamage(cardID);
     }
 
     handleMatch(cardID, num){
@@ -97,12 +170,9 @@ class Main extends Component{
             tempState.firstCard = {num: num, flipped: true, id: cardID};
             tempState.cards[cardID] = {num: num, flipped: true, fade: false, type: tempState.cards[cardID].type};
 
-            if(tempState.cards[cardID].type === 'enemy'){
-                alertTracker.add(cardID, num, ()=>{
-                    console.log(`triggering alert on cardID: ${cardID} and number: ${num}!`);
-                    alertTracker.remove(cardID);
-                    this.handleDamage();
-                });
+            if(tempState.cards[cardID].type === 'enemy' && !alertTracker.searchForSameID(cardID)){
+                this.handleNewAlert(cardID, num);
+                alertTracker.add(cardID, num, this.handleAlertTrigger, this.handleAlertUpdate);
             }
         }
         else if(tempState.secondCard === null){
@@ -122,6 +192,16 @@ class Main extends Component{
             if(tempState.firstCard.num === tempState.secondCard.num){
                 console.log(`A match has been made!`);
                 tempState.counter++;
+
+                if(tempState.cards[cardID].type === 'enemy'){
+                    alertTracker.stop();
+                }
+                else if(tempState.cards[cardID].type === 'ally'){
+                    this.handleAlly();
+                }
+                else if(tempState.cards[cardID].type === 'item'){
+                    this.handleItem();
+                }
 
                 if(tempState.counter < 9){
                     tempState.message = 'Made a match!';
@@ -143,6 +223,16 @@ class Main extends Component{
                 tempState.clickable = false;
                 tempState.message = 'Not a match!';
 
+                if(tempState.cards[cardID].type === 'enemy' && !alertTracker.searchForSameID(cardID)){
+                    // alertTracker.add(cardID, num, ()=>{
+                    //     console.log(`triggering alert on cardID: ${cardID} and number: ${num}!`);
+                    //     alertTracker.remove(cardID);
+                    //     this.handleDamage();
+                    // });
+                    this.handleNewAlert(cardID, num);
+                    alertTracker.add(cardID, num, this.handleAlertTrigger, this.handleAlertUpdate);
+                }
+
                 setTimeout(function(){
                     // console.log('timeout executed');
                     tempState.cards[tempState.firstCard.id] = {num: tempState.firstCard.num, flipped: false, fade: false, type: tempState.cards[tempState.firstCard.id].type};
@@ -155,19 +245,30 @@ class Main extends Component{
 
                     tempState.message = "";
 
-                    this.setState({...tempState});
+                    // this.setState({...tempState});
+
+                    this.setState({
+                        cards: tempState.cards,
+                        firstCard: tempState.firstCard,
+                        secondCard: tempState.secondCard,
+                        message: tempState.message,
+                        clickable: tempState.clickable,
+                        counter: tempState.counter,
+                    });
                 }.bind(this),2500);
-                // tempState.cards[tempState.firstCard.id] = {num: tempState.firstCard.num, flipped: false};
-                // tempState.cards[tempState.secondCard.id] = {num: tempState.secondCard.num, flipped: false};
-                //
-                // tempState.firstCard = null;
-                // tempState.secondCard = null;
-                //
-                // tempState.message = 'Not a match!';
             }
         }
 
-        this.setState({...tempState});
+        this.setState({
+            cards: tempState.cards,
+            firstCard: tempState.firstCard,
+            secondCard: tempState.secondCard,
+            message: tempState.message,
+            clickable: tempState.clickable,
+            counter: tempState.counter,
+        });
+
+        // this.setState({...tempState});
 
         console.log(tempState);
     }
@@ -188,12 +289,13 @@ class Main extends Component{
             playerStats: {
                 health: 100,
                 accuracy: 0
-            }
+            },
+            alerts: []
         });
     }
 
     render(){
-        const {message, playerStats} = this.state;
+        const {message, playerStats, alerts} = this.state;
 
         return(
             <div className="mainBoard">
@@ -211,7 +313,7 @@ class Main extends Component{
                     </div>
                     <div className="right_front"></div>
                     <div className="right"></div>
-                    <Boss />
+                    <Boss alerts={alerts} />
                 </div>
                 {/*<button onClick={this.reset}>Reset</button>*/}
             </div>

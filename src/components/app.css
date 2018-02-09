@@ -29,7 +29,7 @@
 }
 
 .container{
-    padding: 1%;
+    padding: 3%;
     box-sizing: border-box;
     width: 16.66666666666667%;
     height: 33.33333333333333%;
@@ -38,6 +38,7 @@
     perspective: 800px;
     transition: transform 1s;
     transform-style: preserve-3d;
+    transform: translateZ(25px);
 }
 
 .fadeout{
@@ -50,7 +51,7 @@
 }
 
 .container:hover{
-    transform: translateZ(10px);
+    transform: translateZ(50px);
 }
 
 /*@keyframes hover {*/
@@ -62,6 +63,22 @@
 .cardDisplay{
     perspective: 800px;
     transform-style: preserve-3d;
+
+    background-image: url("../assets/images/mgsjungle.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    width: 70%;
+    height: 85%;
+
+    display: flex;
+    flex-flow: row wrap;
+
+    border-left: thick solid;
+    border-radius: 5px;
+    border-right: thick solid;
+    box-sizing: border-box;
+
 }
 
 .card{
@@ -199,7 +216,7 @@
 
     .front{
         /*transform: rotateX(-48deg) translateZ(528px) translateY(523px);*/
-        transform: rotateX(-90deg) translateZ(706px) translateY(57px);
+        transform: rotateX(-90deg) translateZ(656px) translateY(53px);
     }
 
 }
@@ -266,30 +283,11 @@
 
 .console{
     display: flex;
-    transform: rotateX(10deg);
+    transform: rotateX(25deg);
     transform-style: preserve-3d;
 
     border: thick solid black;
     box-sizing: border-box;
-}
-
-.cardDisplay{
-    /*border: solid;*/
-    /*border-width: thick;*/
-}
-
-.cardDisplay{
-    width: 70%;
-    height: 85%;
-    display: flex;
-    flex-flow: row wrap;
-
-    border-left: thick solid;
-    border-radius: 5px;
-    border-right: thick solid;
-    box-sizing: border-box;
-
-    transform-style: preserve-3d;
 }
 
 .player{

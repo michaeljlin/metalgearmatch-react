@@ -43,20 +43,25 @@ class Card extends Component{
             tempState.backStyle.cursor = 'pointer';
             tempState.frontStyle.opacity = 1;
             tempState.frontStyle.cursor = 'pointer';
+
+            this.setState({
+                backStyle: tempState.backStyle,
+                frontStyle: tempState.frontStyle
+            });
         }
 
         if(this.props.flipped !== nextProps.flipped) {
             if (nextProps.flipped === true) {
                 // console.log(`flipping card ${tempState.num} up!`);
-                tempState.flipStyle.transform = 'rotateY(180deg)';
+                tempState.flipStyle.transform = 'translateZ(50px) rotateY(180deg)';
 
-                this.setState(tempState);
+                this.setState({flipStyle: tempState.flipStyle});
             }
             else if (nextProps.flipped === false) {
                 // console.log(`flipping card ${tempState.num} down!`);
                 tempState.flipStyle.transform = "";
 
-                this.setState(tempState);
+                this.setState({flipStyle: tempState.flipStyle});
             }
             // console.log(this.state);
         }
@@ -71,7 +76,10 @@ class Card extends Component{
                 tempState.frontStyle.opacity = 0;
                 tempState.frontStyle.cursor = 'initial';
 
-                this.setState(tempState);
+                this.setState({
+                    backStyle: tempState.backStyle,
+                    frontStyle: tempState.frontStyle
+                });
             }.bind(this),1500);
         }
     }
