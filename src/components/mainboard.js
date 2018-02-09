@@ -37,6 +37,8 @@ class Main extends Component{
         this.handleDamage = this.handleDamage.bind(this);
         this.handleItem = this.handleItem.bind(this);
         this.handleNewAlert = this.handleNewAlert.bind(this);
+        this.handleAlertUpdate = this.handleAlertUpdate.bind(this);
+        this.handleAlertTrigger = this.handleAlertTrigger.bind(this);
     }
 
     shufflecards(){
@@ -104,6 +106,19 @@ class Main extends Component{
             });
     }
 
+    handleAlertUpdate(remainingTime, cardID){
+        let alertIndex = this.state.alerts.findIndex((alerts)=>{
+            return alerts.cardID === cardID;
+        });
+
+        let tempAlert = this.state.alerts;
+        tempAlert[alertIndex].remainingTime = remainingTime;
+
+        this.setState({
+            alerts: tempAlert
+        });
+    }
+
     handleAlly(){
         const tempPlayer = {...this.state.playerStats};
 
@@ -137,6 +152,12 @@ class Main extends Component{
         console.log(`state alerts is: `, this.state.alerts);
     }
 
+    handleAlertTrigger(cardID, num){
+        console.log(`triggering alert on cardID: ${cardID} and number: ${num}!`);
+        alertTracker.remove(cardID);
+        this.handleDamage(cardID);
+    }
+
     handleMatch(cardID, num){
         const tempState = {...this.state};
 
@@ -151,11 +172,7 @@ class Main extends Component{
 
             if(tempState.cards[cardID].type === 'enemy' && !alertTracker.searchForSameID(cardID)){
                 this.handleNewAlert(cardID, num);
-                alertTracker.add(cardID, num, ()=>{
-                    console.log(`triggering alert on cardID: ${cardID} and number: ${num}!`);
-                    alertTracker.remove(cardID);
-                    this.handleDamage(cardID);
-                });
+                alertTracker.add(cardID, num, this.handleAlertTrigger, this.handleAlertUpdate);
             }
         }
         else if(tempState.secondCard === null){
@@ -207,11 +224,13 @@ class Main extends Component{
                 tempState.message = 'Not a match!';
 
                 if(tempState.cards[cardID].type === 'enemy' && !alertTracker.searchForSameID(cardID)){
-                    alertTracker.add(cardID, num, ()=>{
-                        console.log(`triggering alert on cardID: ${cardID} and number: ${num}!`);
-                        alertTracker.remove(cardID);
-                        this.handleDamage();
-                    });
+                    // alertTracker.add(cardID, num, ()=>{
+                    //     console.log(`triggering alert on cardID: ${cardID} and number: ${num}!`);
+                    //     alertTracker.remove(cardID);
+                    //     this.handleDamage();
+                    // });
+                    this.handleNewAlert(cardID, num);
+                    alertTracker.add(cardID, num, this.handleAlertTrigger, this.handleAlertUpdate);
                 }
 
                 setTimeout(function(){
