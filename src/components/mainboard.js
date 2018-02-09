@@ -36,6 +36,7 @@ class Main extends Component{
         this.handleAlly = this.handleAlly.bind(this);
         this.handleDamage = this.handleDamage.bind(this);
         this.handleItem = this.handleItem.bind(this);
+        this.handleNewAlert = this.handleNewAlert.bind(this);
     }
 
     shufflecards(){
@@ -82,11 +83,25 @@ class Main extends Component{
 
     }
 
-    handleDamage(){
+    handleDamage(cardID){
         const tempPlayer = {...this.state.playerStats};
         tempPlayer.health-=20;
 
-        this.setState({playerStats: tempPlayer});
+        let alertIndex = this.state.alerts.findIndex((alerts)=>{
+            return alerts.cardID === cardID;
+        });
+
+        console.log('alertIndex is: ',alertIndex);
+
+        let newAlertState = this.state.alerts;
+        newAlertState.splice(alertIndex, 1);
+
+        console.log('new alert state is: ', newAlertState);
+
+        this.setState({
+                playerStats: tempPlayer,
+                alerts: newAlertState
+            });
     }
 
     handleAlly(){
@@ -102,6 +117,26 @@ class Main extends Component{
 
     }
 
+    handleNewAlert(cardID, num){
+        console.log(`adding new alert for ${cardID} and num ${num}`);
+
+        let tempAlerts = this.state.alerts;
+
+        tempAlerts.push({
+            cardID: cardID,
+            num: num,
+            maxTime: 500,
+            remainingTime: 500,
+            drainRate: 100
+        });
+
+        this.setState({
+            alerts: tempAlerts
+        });
+
+        console.log(`state alerts is: `, this.state.alerts);
+    }
+
     handleMatch(cardID, num){
         const tempState = {...this.state};
 
@@ -115,10 +150,11 @@ class Main extends Component{
             tempState.cards[cardID] = {num: num, flipped: true, fade: false, type: tempState.cards[cardID].type};
 
             if(tempState.cards[cardID].type === 'enemy' && !alertTracker.searchForSameID(cardID)){
+                this.handleNewAlert(cardID, num);
                 alertTracker.add(cardID, num, ()=>{
                     console.log(`triggering alert on cardID: ${cardID} and number: ${num}!`);
                     alertTracker.remove(cardID);
-                    this.handleDamage();
+                    this.handleDamage(cardID);
                 });
             }
         }
@@ -190,12 +226,30 @@ class Main extends Component{
 
                     tempState.message = "";
 
-                    this.setState({...tempState});
+                    // this.setState({...tempState});
+
+                    this.setState({
+                        cards: tempState.cards,
+                        firstCard: tempState.firstCard,
+                        secondCard: tempState.secondCard,
+                        message: tempState.message,
+                        clickable: tempState.clickable,
+                        counter: tempState.counter,
+                    });
                 }.bind(this),2500);
             }
         }
 
-        this.setState({...tempState});
+        this.setState({
+            cards: tempState.cards,
+            firstCard: tempState.firstCard,
+            secondCard: tempState.secondCard,
+            message: tempState.message,
+            clickable: tempState.clickable,
+            counter: tempState.counter,
+        });
+
+        // this.setState({...tempState});
 
         console.log(tempState);
     }
@@ -222,7 +276,7 @@ class Main extends Component{
     }
 
     render(){
-        const {message, playerStats} = this.state;
+        const {message, playerStats, alerts} = this.state;
 
         return(
             <div className="mainBoard">
@@ -240,7 +294,7 @@ class Main extends Component{
                     </div>
                     <div className="right_front"></div>
                     <div className="right"></div>
-                    <Boss />
+                    <Boss alerts={alerts} />
                 </div>
                 {/*<button onClick={this.reset}>Reset</button>*/}
             </div>

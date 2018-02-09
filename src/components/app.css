@@ -216,7 +216,7 @@
 
     .front{
         /*transform: rotateX(-48deg) translateZ(528px) translateY(523px);*/
-        transform: rotateX(-90deg) translateZ(706px) translateY(57px);
+        transform: rotateX(-90deg) translateZ(656px) translateY(53px);
     }
 
 }
@@ -283,7 +283,7 @@
 
 .console{
     display: flex;
-    transform: rotateX(10deg);
+    transform: rotateX(25deg);
     transform-style: preserve-3d;
 
     border: thick solid black;
