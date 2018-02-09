@@ -41,6 +41,15 @@
     /*transform: translateZ(25px);*/
 }
 
+.alertText{
+    position: absolute;
+    font-size: large;
+    font-weight: bold;
+    width: 67%;
+    text-align: center;
+    transform: translateZ(26px);
+}
+
 .cardContainer{
     perspective: 800px;
     transition: transform 1s;

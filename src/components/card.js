@@ -93,13 +93,11 @@ class Card extends Component{
         const {frontStyle, backStyle, flipStyle} = this.state;
 
         return(
-            <div className={`container`}>
             <div className={`cardContainer`} style={{...flipStyle}} onClick={this.handleClick}>
                 <div className="card"  >
                     <img src={backImg} style={{...backStyle}}/>
                     <img src={backImg} style={{...frontStyle}}/>
                 </div>
-            </div>
             </div>
         );
     }

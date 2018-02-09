@@ -4,6 +4,7 @@ import Boss from "./boss";
 import Card from './card';
 import Message from './messages';
 import Menu from './menu';
+import AlertText from './alertText';
 
 import alertTracker from './alerts';
 
@@ -77,7 +78,12 @@ class Main extends Component{
 
     dealcards() {
         return this.state.cards.map((cards, index) => {
-            return (<Card key={index} id={index} handleMatch={this.handleMatch} num={this.state.cards[index].num} flipped={this.state.cards[index].flipped} fade={this.state.cards[index].fade}/>);
+            return (
+                <div className={`container`}>
+                    {/*<div className={'alertText'}>Test</div>*/}
+                        <AlertText cardID={index} />
+                        <Card key={index} id={index} handleMatch={this.handleMatch} num={this.state.cards[index].num} flipped={this.state.cards[index].flipped} fade={this.state.cards[index].fade}/>
+                </div>);
         });
     }
 
