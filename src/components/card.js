@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import backImg from '../assets/images/mgscard.svg';
+import theFear from '../assets/images/thefearcard.png';
+import paramedic from '../assets/images/paramediccard.png';
+import thePain from '../assets/images/thepaincard.png';
+import theFury from '../assets/images/thefurycard.png';
+
 import './app.css';
 
 /*
@@ -10,6 +15,22 @@ import './app.css';
 class Card extends Component{
     constructor(props) {
         super(props);
+
+        let srcImg = null;
+
+        switch(this.props.num){
+            case 1:
+                srcImg = theFury;
+                break;
+            case 2:
+                srcImg = thePain;
+                break;
+            case 3:
+                srcImg = theFear;
+                break;
+            default:
+                srcImg = paramedic;
+        }
 
         this.state = {
             num: this.props.num,
@@ -23,7 +44,8 @@ class Card extends Component{
             flipStyle:{
                 transform: ""
             },
-            fadeout: false
+            fadeout: false,
+            srcImg: srcImg
         };
 
         this.handleClick = this.handleClick.bind(this);
@@ -33,8 +55,27 @@ class Card extends Component{
         // console.log('got message');
         const tempState = {...this.state};
 
-        if(this.props.num !== nextProps.num){
+        if(this.state.num !== nextProps.num){
             tempState.num = nextProps.num;
+
+            let srcImg = null;
+
+            switch(tempState.num){
+                case 1:
+                    srcImg = theFury;
+                    break;
+                case 2:
+                    srcImg = thePain;
+                    break;
+                case 3:
+                    srcImg = theFear;
+                    break;
+                default:
+                    srcImg = paramedic;
+            }
+
+            tempState.srcImg = srcImg;
+
             this.setState(tempState);
         }
 
@@ -90,12 +131,12 @@ class Card extends Component{
     }
 
     render(){
-        const {frontStyle, backStyle, flipStyle} = this.state;
+        const {frontStyle, backStyle, flipStyle, srcImg} = this.state;
 
         return(
             <div className={`cardContainer`} style={{...flipStyle}} onClick={this.handleClick}>
                 <div className="card"  >
-                    <img src={backImg} style={{...backStyle}}/>
+                    <img src={srcImg} style={{...backStyle}}/>
                     <img src={backImg} style={{...frontStyle}}/>
                 </div>
             </div>
