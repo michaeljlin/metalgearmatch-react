@@ -51,8 +51,8 @@ class Main extends Component{
             {num:5, flipped:false, fade: false, type: 'ally'},
             {num:6, flipped:false, fade: false, type: 'ally'},
             {num:7, flipped:false, fade: false, type: 'ally'},
-            {num:8, flipped:false, fade: false, type: 'item'},
-            {num:9, flipped:false, fade: false, type: 'item'},
+            {num:8, flipped:false, fade: false, type: 'enemy'},
+            {num:9, flipped:false, fade: false, type: 'ally'},
             {num:1, flipped:false, fade: false, type:'enemy'},
             {num:2, flipped:false, fade: false, type:'enemy'},
             {num:3, flipped:false, fade: false, type:'enemy'},
@@ -60,8 +60,8 @@ class Main extends Component{
             {num:5, flipped:false, fade: false, type: 'ally'},
             {num:6, flipped:false, fade: false, type: 'ally'},
             {num:7, flipped:false, fade: false, type: 'ally'},
-            {num:8, flipped:false, fade: false, type: 'item'},
-            {num:9, flipped:false, fade: false, type: 'item'}
+            {num:8, flipped:false, fade: false, type: 'enemy'},
+            {num:9, flipped:false, fade: false, type: 'ally'}
         ];
 
         for(let count  = 0; count < deck.length; count++){

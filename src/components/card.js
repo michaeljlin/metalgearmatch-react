@@ -4,6 +4,11 @@ import theFear from '../assets/images/thefearcard.png';
 import paramedic from '../assets/images/paramediccard.png';
 import thePain from '../assets/images/thepaincard.png';
 import theFury from '../assets/images/thefurycard.png';
+import eva from '../assets/images/evacard.png';
+import theSorrow from '../assets/images/thesorrowcard.png';
+import sigint from '../assets/images/sigintcard.png';
+import zero from '../assets/images/zerocard.png';
+import sokolov from '../assets/images/sokolovcard.png';
 
 import './app.css';
 
@@ -27,6 +32,21 @@ class Card extends Component{
                 break;
             case 3:
                 srcImg = theFear;
+                break;
+            case 4:
+                srcImg = eva;
+                break;
+            case 5:
+                srcImg = sigint;
+                break;
+            case 6:
+                srcImg = zero;
+                break;
+            case 7:
+                srcImg = sokolov;
+                break;
+            case 8:
+                srcImg = theSorrow;
                 break;
             default:
                 srcImg = paramedic;
@@ -69,6 +89,21 @@ class Card extends Component{
                     break;
                 case 3:
                     srcImg = theFear;
+                    break;
+                case 4:
+                    srcImg = eva;
+                    break;
+                case 5:
+                    srcImg = sigint;
+                    break;
+                case 6:
+                    srcImg = zero;
+                    break;
+                case 7:
+                    srcImg = sokolov;
+                    break;
+                case 8:
+                    srcImg = theSorrow;
                     break;
                 default:
                     srcImg = paramedic;
