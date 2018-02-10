@@ -4,6 +4,7 @@ import Boss from "./boss";
 import Card from './card';
 import Message from './messages';
 import Menu from './menu';
+import AlertText from './alertText';
 
 import alertTracker from './alerts';
 
@@ -26,7 +27,7 @@ class Main extends Component{
                 health: 100,
                 accuracy: 0
             },
-            alerts: []
+            alerts: [{}]
         };
 
         this.dealcards = this.dealcards.bind(this);
@@ -50,8 +51,8 @@ class Main extends Component{
             {num:5, flipped:false, fade: false, type: 'ally'},
             {num:6, flipped:false, fade: false, type: 'ally'},
             {num:7, flipped:false, fade: false, type: 'ally'},
-            {num:8, flipped:false, fade: false, type: 'item'},
-            {num:9, flipped:false, fade: false, type: 'item'},
+            {num:8, flipped:false, fade: false, type: 'enemy'},
+            {num:9, flipped:false, fade: false, type: 'ally'},
             {num:1, flipped:false, fade: false, type:'enemy'},
             {num:2, flipped:false, fade: false, type:'enemy'},
             {num:3, flipped:false, fade: false, type:'enemy'},
@@ -59,8 +60,8 @@ class Main extends Component{
             {num:5, flipped:false, fade: false, type: 'ally'},
             {num:6, flipped:false, fade: false, type: 'ally'},
             {num:7, flipped:false, fade: false, type: 'ally'},
-            {num:8, flipped:false, fade: false, type: 'item'},
-            {num:9, flipped:false, fade: false, type: 'item'}
+            {num:8, flipped:false, fade: false, type: 'enemy'},
+            {num:9, flipped:false, fade: false, type: 'ally'}
         ];
 
         for(let count  = 0; count < deck.length; count++){
@@ -77,7 +78,12 @@ class Main extends Component{
 
     dealcards() {
         return this.state.cards.map((cards, index) => {
-            return (<Card key={index} id={index} handleMatch={this.handleMatch} num={this.state.cards[index].num} flipped={this.state.cards[index].flipped} fade={this.state.cards[index].fade}/>);
+            return (
+                <div key={'cardContainer'+index} className={`container`}>
+                    {/*<div className={'alertText'}>Test</div>*/}
+                        <AlertText key={'alert'+index} cardID={index} alerts={this.state.alerts} />
+                        <Card key={'card'+index} id={index} handleMatch={this.handleMatch} num={this.state.cards[index].num} flipped={this.state.cards[index].flipped} fade={this.state.cards[index].fade}/>
+                </div>);
         });
     }
 
@@ -97,6 +103,8 @@ class Main extends Component{
 
         let newAlertState = this.state.alerts;
         newAlertState.splice(alertIndex, 1);
+
+        delete newAlertState[0][cardID];
 
         console.log('new alert state is: ', newAlertState);
 
@@ -136,6 +144,8 @@ class Main extends Component{
         console.log(`adding new alert for ${cardID} and num ${num}`);
 
         let tempAlerts = this.state.alerts;
+
+        tempAlerts[0][cardID] = true;
 
         tempAlerts.push({
             cardID: cardID,
@@ -195,6 +205,9 @@ class Main extends Component{
 
                 if(tempState.cards[cardID].type === 'enemy'){
                     alertTracker.stop();
+                    this.setState({
+                        alerts: [{}]
+                    });
                 }
                 else if(tempState.cards[cardID].type === 'ally'){
                     this.handleAlly();
@@ -290,7 +303,7 @@ class Main extends Component{
                 health: 100,
                 accuracy: 0
             },
-            alerts: []
+            alerts: [{}]
         });
     }
 
@@ -313,7 +326,7 @@ class Main extends Component{
                     </div>
                     <div className="right_front"></div>
                     <div className="right"></div>
-                    <Boss alerts={alerts} />
+                    <Boss />
                 </div>
                 {/*<button onClick={this.reset}>Reset</button>*/}
             </div>

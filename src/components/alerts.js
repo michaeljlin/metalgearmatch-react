@@ -1,18 +1,18 @@
 function AlertObj(cardID, num, callback, stateUpdater){
     this.cardID = cardID;
     this.num = num;
-    this.maxTime = 500;
+    this.maxTime = 10000;
     this.remainingTime = this.maxTime;
     this.drainRate = 10;
 
     this.alert = setInterval(function(){
-        console.log(`Remaining time for alert on cardID ${this.cardID}: ${this.remainingTime}`);
+        // console.log(`Remaining time for alert on cardID ${this.cardID}: ${this.remainingTime}`);
         stateUpdater(this.remainingTime, this.cardID);
         this.remainingTime -= this.drainRate;
-        if(this.remainingTime === 0){
+        if(this.remainingTime <= 0){
             callback(this.cardID, this.num);
         }
-    }.bind(this), 100);
+    }.bind(this), 10);
 
     this.getID = function(){
         return this.cardID;

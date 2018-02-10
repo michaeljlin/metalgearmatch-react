@@ -20,7 +20,9 @@ class Alertbox extends Component{
         console.log('objects in alertbox are: ', alertObjects);
 
         let result = alertObjects.map((alerts, index)=>{
-            return (<div key={index}>{`Alert #${index} for position ${alerts.cardID}: ${alerts.remainingTime}`}</div>);
+            if(index > 0){
+                return (<div key={"alerttext"+index}>{`Alert #${index-1} for position ${alerts.cardID}: ${alerts.remainingTime}`}</div>);
+            }
         });
 
         console.log('map results: ', result);
