@@ -27,7 +27,7 @@ class Main extends Component{
                 health: 100,
                 accuracy: 0
             },
-            alerts: []
+            alerts: [{}]
         };
 
         this.dealcards = this.dealcards.bind(this);
@@ -79,10 +79,10 @@ class Main extends Component{
     dealcards() {
         return this.state.cards.map((cards, index) => {
             return (
-                <div className={`container`}>
+                <div key={'cardContainer'+index} className={`container`}>
                     {/*<div className={'alertText'}>Test</div>*/}
-                        <AlertText cardID={index} />
-                        <Card key={index} id={index} handleMatch={this.handleMatch} num={this.state.cards[index].num} flipped={this.state.cards[index].flipped} fade={this.state.cards[index].fade}/>
+                        <AlertText key={'alert'+index} cardID={index} alerts={this.state.alerts} />
+                        <Card key={'card'+index} id={index} handleMatch={this.handleMatch} num={this.state.cards[index].num} flipped={this.state.cards[index].flipped} fade={this.state.cards[index].fade}/>
                 </div>);
         });
     }
@@ -103,6 +103,8 @@ class Main extends Component{
 
         let newAlertState = this.state.alerts;
         newAlertState.splice(alertIndex, 1);
+
+        delete newAlertState[0][cardID];
 
         console.log('new alert state is: ', newAlertState);
 
@@ -142,6 +144,8 @@ class Main extends Component{
         console.log(`adding new alert for ${cardID} and num ${num}`);
 
         let tempAlerts = this.state.alerts;
+
+        tempAlerts[0][cardID] = true;
 
         tempAlerts.push({
             cardID: cardID,
@@ -202,7 +206,7 @@ class Main extends Component{
                 if(tempState.cards[cardID].type === 'enemy'){
                     alertTracker.stop();
                     this.setState({
-                        alerts: []
+                        alerts: [{}]
                     });
                 }
                 else if(tempState.cards[cardID].type === 'ally'){
@@ -299,7 +303,7 @@ class Main extends Component{
                 health: 100,
                 accuracy: 0
             },
-            alerts: []
+            alerts: [{}]
         });
     }
 
@@ -322,7 +326,7 @@ class Main extends Component{
                     </div>
                     <div className="right_front"></div>
                     <div className="right"></div>
-                    <Boss alerts={alerts} />
+                    <Boss />
                 </div>
                 {/*<button onClick={this.reset}>Reset</button>*/}
             </div>

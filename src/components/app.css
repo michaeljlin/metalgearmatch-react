@@ -46,8 +46,12 @@
     font-size: large;
     font-weight: bold;
     width: 67%;
+    top: -20px;
     text-align: center;
-    transform: translateZ(26px);
+    transform: translateZ(50px) rotateX(-25deg);
+    background-color: red;
+    border: 1px solid black;
+    /*transform: translateZ(26px);*/
 }
 
 .cardContainer{
@@ -351,6 +355,10 @@
     text-shadow: 2px 2px 0 black;
 }
 
+.digitalText{
+    font-family: 'Digital-7';
+}
+
 @keyframes pulse {
     0%{
         border-color: #00f2ff;
@@ -373,4 +381,9 @@
 @font-face {
     font-family: 'Istok-Bold';
     src: url("../assets/fonts/IstokWeb-Bold.ttf");
+}
+
+@font-face {
+    font-family: 'Digital-7';
+    src: url("../assets/fonts/digital-7.ttf");
 }

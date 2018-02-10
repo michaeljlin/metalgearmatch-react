@@ -10,17 +10,17 @@ class Boss extends Component{
         }
     }
 
-    componentWillReceiveProps(nextProps){
-        console.log(`boss received new props: `, nextProps);
-        console.log('boss alerts state: ', this.state.alerts);
-
-        if(nextProps.alerts.length !== this.state.alerts.length){
-            this.setState({...nextProps});
-        }
-    }
+    // componentWillReceiveProps(nextProps){
+    //     // console.log(`boss received new props: `, nextProps);
+    //     // console.log('boss alerts state: ', this.state.alerts);
+    //
+    //     if(nextProps.alerts.length !== this.state.alerts.length){
+    //         this.setState({...nextProps});
+    //     }
+    // }
 
     render(){
-        console.log('boss alerts state: ', this.state.alerts);
+        // console.log('boss alerts state: ', this.state.alerts);
         const alerts = this.state.alerts;
 
         return(
