@@ -98,25 +98,26 @@ class Main extends Component{
         const tempPlayer = {...this.state.playerStats};
         if(tempPlayer.health > 0) {
             tempPlayer.health -= 20;
-
-            let alertIndex = this.state.alerts.findIndex((alerts) => {
-                return alerts.cardID === cardID;
-            });
-
-            console.log('alertIndex is: ', alertIndex);
-
-            let newAlertState = this.state.alerts;
-            newAlertState.splice(alertIndex, 1);
-
-            delete newAlertState[0][cardID];
-
-            console.log('new alert state is: ', newAlertState);
-
-            this.setState({
-                playerStats: tempPlayer,
-                alerts: newAlertState
-            });
         }
+
+        let alertIndex = this.state.alerts.findIndex((alerts) => {
+            return alerts.cardID === cardID;
+        });
+
+        console.log('alertIndex is: ', alertIndex);
+
+        let newAlertState = this.state.alerts;
+        newAlertState.splice(alertIndex, 1);
+
+        delete newAlertState[0][cardID];
+
+        console.log('new alert state is: ', newAlertState);
+
+        this.setState({
+            playerStats: tempPlayer,
+            alerts: newAlertState
+        });
+
     }
 
     handleAlertUpdate(remainingTime, cardID){
