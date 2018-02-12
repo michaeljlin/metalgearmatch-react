@@ -45,6 +45,10 @@ class Main extends Component{
         this.handleAlertTrigger = this.handleAlertTrigger.bind(this);
     }
 
+    componentDidMount(){
+        soundHandler.play('sneak');
+    }
+
     shufflecards(){
         const deck = [
             {num:1, flipped:false, fade: false, type:'enemy'},

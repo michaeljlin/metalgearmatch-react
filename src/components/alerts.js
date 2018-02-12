@@ -95,7 +95,7 @@ function AlertHandler(){
         for(let count = 0; count < this.alerts.length; count++){
             this.alerts[count].stop();
         }
-
+        soundHandler.play('safe');
         soundHandler.stop('alert');
         this.alerts = [];
     };
