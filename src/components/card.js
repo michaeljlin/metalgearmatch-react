@@ -65,7 +65,8 @@ class Card extends Component{
                 transform: ""
             },
             fadeout: false,
-            srcImg: srcImg
+            srcImg: srcImg,
+            timeoutTracker: null
         };
 
         this.handleClick = this.handleClick.bind(this);
@@ -76,8 +77,10 @@ class Card extends Component{
         const tempState = {...this.state};
 
         if(this.state.num !== nextProps.num){
-            tempState.num = nextProps.num;
+            clearTimeout(this.state.timeoutTracker);
 
+            tempState.num = nextProps.num;
+            tempState.timeoutTracker = null;
             let srcImg = null;
 
             switch(tempState.num){
@@ -129,6 +132,7 @@ class Card extends Component{
         if(this.props.flipped !== nextProps.flipped) {
             if (nextProps.flipped === true) {
                 // console.log(`flipping card ${tempState.num} up!`);
+                console.log(`state of flipped card: `, this.state);
                 tempState.flipStyle.transform = 'translateZ(50px) rotateY(180deg)';
 
                 this.setState({flipStyle: tempState.flipStyle});
@@ -146,7 +150,7 @@ class Card extends Component{
             // console.log('fade is not false!');
             // console.log('fade is: ', nextProps.fade);
 
-            setTimeout(function(){
+            tempState.timeoutTracker = setTimeout(function(){
                 tempState.backStyle.opacity = 0;
                 tempState.backStyle.cursor = 'initial';
                 tempState.frontStyle.opacity = 0;
@@ -158,6 +162,10 @@ class Card extends Component{
                 });
             }.bind(this),1500);
         }
+
+        this.setState({
+            timeoutTracker: tempState.timeoutTracker
+        });
     }
 
     handleClick(){

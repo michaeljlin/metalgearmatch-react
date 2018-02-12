@@ -14,10 +14,8 @@ class Main extends Component{
     constructor(props){
         super(props);
 
-        const deck = this.shufflecards();
-
         this.state = {
-            cards: deck,
+            cards: this.shufflecards(),
             firstCard: null,
             secondCard: null,
             message: "",
@@ -27,7 +25,8 @@ class Main extends Component{
                 health: 100,
                 accuracy: 0
             },
-            alerts: [{}]
+            alerts: [{}],
+            timeoutTracker: null
         };
 
         this.dealcards = this.dealcards.bind(this);
@@ -93,25 +92,27 @@ class Main extends Component{
 
     handleDamage(cardID){
         const tempPlayer = {...this.state.playerStats};
-        tempPlayer.health-=20;
+        if(tempPlayer.health > 0) {
+            tempPlayer.health -= 20;
 
-        let alertIndex = this.state.alerts.findIndex((alerts)=>{
-            return alerts.cardID === cardID;
-        });
+            let alertIndex = this.state.alerts.findIndex((alerts) => {
+                return alerts.cardID === cardID;
+            });
 
-        console.log('alertIndex is: ',alertIndex);
+            console.log('alertIndex is: ', alertIndex);
 
-        let newAlertState = this.state.alerts;
-        newAlertState.splice(alertIndex, 1);
+            let newAlertState = this.state.alerts;
+            newAlertState.splice(alertIndex, 1);
 
-        delete newAlertState[0][cardID];
+            delete newAlertState[0][cardID];
 
-        console.log('new alert state is: ', newAlertState);
+            console.log('new alert state is: ', newAlertState);
 
-        this.setState({
+            this.setState({
                 playerStats: tempPlayer,
                 alerts: newAlertState
             });
+        }
     }
 
     handleAlertUpdate(remainingTime, cardID){
@@ -169,6 +170,7 @@ class Main extends Component{
     }
 
     handleMatch(cardID, num){
+        console.log('game state before matching: ', this.state);
         const tempState = {...this.state};
 
         if(this.state.clickable === false || this.state.cards[cardID].flipped){
@@ -246,8 +248,8 @@ class Main extends Component{
                     alertTracker.add(cardID, num, this.handleAlertTrigger, this.handleAlertUpdate);
                 }
 
-                setTimeout(function(){
-                    // console.log('timeout executed');
+                tempState.timeoutTracker = setTimeout(function(){
+                    console.log('timeout executed');
                     tempState.cards[tempState.firstCard.id] = {num: tempState.firstCard.num, flipped: false, fade: false, type: tempState.cards[tempState.firstCard.id].type};
                     tempState.cards[tempState.secondCard.id] = {num: tempState.secondCard.num, flipped: false, fade: false, type: tempState.cards[tempState.secondCard.id].type};
 
@@ -279,6 +281,7 @@ class Main extends Component{
             message: tempState.message,
             clickable: tempState.clickable,
             counter: tempState.counter,
+            timeoutTracker: tempState.timeoutTracker
         });
 
         // this.setState({...tempState});
@@ -288,9 +291,12 @@ class Main extends Component{
 
     reset(){
         console.log('resetting');
-        const deck = this.shufflecards();
 
         alertTracker.stop();
+
+        clearTimeout(this.state.timeoutTracker);
+
+        const deck = this.shufflecards();
 
         this.setState({
             cards: deck,
@@ -303,8 +309,12 @@ class Main extends Component{
                 health: 100,
                 accuracy: 0
             },
-            alerts: [{}]
+            alerts: [{}],
+            timeoutTracker: null
+        },()=>{
+            console.log("deck after reset set state: ", this.state.cards);
         });
+
     }
 
     render(){

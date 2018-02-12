@@ -26,7 +26,7 @@ class Boss extends Component{
         return(
             <div className="boss">
                 <p>Boss Profile</p>
-                <Alertbox alerts={alerts} />
+                {/*<Alertbox alerts={alerts} />*/}
             </div>
         );
     }
