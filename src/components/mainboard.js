@@ -30,7 +30,8 @@ class Main extends Component{
                 accuracy: 0
             },
             alerts: [{}],
-            timeoutTracker: null
+            timeoutTracker: null,
+            resetFlag: false
         };
 
         this.dealcards = this.dealcards.bind(this);
@@ -89,7 +90,7 @@ class Main extends Component{
                 <div key={'cardContainer'+index} className={`container`}>
                     {/*<div className={'alertText'}>Test</div>*/}
                         <AlertText key={'alert'+index} cardID={index} alerts={this.state.alerts} />
-                        <Card key={'card'+index} id={index} handleMatch={this.handleMatch} num={this.state.cards[index].num} flipped={this.state.cards[index].flipped} fade={this.state.cards[index].fade}/>
+                        <Card key={'card'+index} id={index} reset={this.state.resetFlag} handleMatch={this.handleMatch} num={this.state.cards[index].num} flipped={this.state.cards[index].flipped} fade={this.state.cards[index].fade}/>
                 </div>);
         });
     }
@@ -335,8 +336,15 @@ class Main extends Component{
                 accuracy: 0
             },
             alerts: [{}],
-            timeoutTracker: null
+            timeoutTracker: null,
+            resetFlag: true
         },()=>{
+
+            setTimeout(()=>{
+                this.setState({
+                    resetFlag: false
+                });
+            });
             console.log("deck after reset set state: ", this.state.cards);
         });
 

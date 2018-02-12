@@ -76,7 +76,7 @@ class Card extends Component{
         // console.log('got message');
         const tempState = {...this.state};
 
-        if(this.state.num !== nextProps.num){
+        if(nextProps.reset){
             clearTimeout(this.state.timeoutTracker);
 
             tempState.num = nextProps.num;
@@ -114,20 +114,46 @@ class Card extends Component{
 
             tempState.srcImg = srcImg;
 
+            tempState.frontStyle.opacity = 0;
+            tempState.backStyle.opacity = 0;
+
+            setTimeout(function(){
+                // tempState.frontStyle.opacity = 1;
+                // tempState.backStyle.opacity = 1;
+                //
+                // this.setState({
+                //     backStyle: tempState.backStyle,
+                //     frontStyle: tempState.frontStyle
+                // });
+
+
+                tempState.backStyle.opacity = 1;
+                tempState.backStyle.cursor = 'pointer';
+                tempState.frontStyle.opacity = 1;
+                tempState.frontStyle.cursor = 'pointer';
+
+                this.setState({
+                    backStyle: tempState.backStyle,
+                    frontStyle: tempState.frontStyle
+                });
+
+
+            }.bind(this), 1000);
+
             this.setState(tempState);
         }
 
-        if(!nextProps.fade){
-            tempState.backStyle.opacity = 1;
-            tempState.backStyle.cursor = 'pointer';
-            tempState.frontStyle.opacity = 1;
-            tempState.frontStyle.cursor = 'pointer';
-
-            this.setState({
-                backStyle: tempState.backStyle,
-                frontStyle: tempState.frontStyle
-            });
-        }
+        // if(!nextProps.fade){
+        //     tempState.backStyle.opacity = 1;
+        //     tempState.backStyle.cursor = 'pointer';
+        //     tempState.frontStyle.opacity = 1;
+        //     tempState.frontStyle.cursor = 'pointer';
+        //
+        //     this.setState({
+        //         backStyle: tempState.backStyle,
+        //         frontStyle: tempState.frontStyle
+        //     });
+        // }
 
         if(this.props.flipped !== nextProps.flipped) {
             if (nextProps.flipped === true) {

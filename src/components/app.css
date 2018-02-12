@@ -331,6 +331,10 @@
     border-color: black;
 }
 
+.hideCards{
+    opacity: 0;
+}
+
 .healthContainer{
     margin: 5%;
     width: 90%;
