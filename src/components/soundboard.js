@@ -40,11 +40,13 @@ function Soundboard(){
                     this.safe.play();
                     break;
                 case 'alert':
+                    this.sneak.pause();
                     if(this.jungle.paused){
                         this.jungle.play();
                     }
                     break;
                 case 'sneak':
+                    this.jungle.pause();
                     if(this.sneak.paused){
                         this.sneak.play();
                     }
@@ -65,12 +67,25 @@ function Soundboard(){
                 break;
             case 'all':
                 this.found.pause();
+                this.found.currentTime = 0;
                 this.gun.pause();
+                this.gun.currentTime = 0;
                 this.safe.pause();
+                this.safe.currentTime = 0;
                 this.jungle.pause();
+                this.jungle.currentTime = 5;
                 this.sneak.pause();
+                this.sneak.currentTime = 0;
                 break;
         }
+    };
+
+    this.soundSwitch = function(){
+        this.soundToggle = !this.soundToggle;
+    };
+
+    this.getSoundState = function(){
+        return this.soundToggle;
     }
 }
 

@@ -39,10 +39,10 @@ class Main extends Component{
         this.handleMatch = this.handleMatch.bind(this);
         this.handleAlly = this.handleAlly.bind(this);
         this.handleDamage = this.handleDamage.bind(this);
-        this.handleItem = this.handleItem.bind(this);
         this.handleNewAlert = this.handleNewAlert.bind(this);
         this.handleAlertUpdate = this.handleAlertUpdate.bind(this);
         this.handleAlertTrigger = this.handleAlertTrigger.bind(this);
+        this.handleSoundToggle = this.handleSoundToggle.bind(this);
     }
 
     componentDidMount(){
@@ -146,8 +146,21 @@ class Main extends Component{
         }
     }
 
-    handleItem(){
+    handleSoundToggle(){
+        soundHandler.soundSwitch();
 
+        if(soundHandler.getSoundState()){
+            console.log('in sound switch state: ', this.state);
+            if(this.state.alerts.length > 1){
+                soundHandler.play('alert');
+            }
+            else{
+                soundHandler.play('sneak');
+            }
+        }
+        else{
+            soundHandler.stop('all');
+        }
     }
 
     handleNewAlert(cardID, num){
@@ -225,9 +238,6 @@ class Main extends Component{
                 }
                 else if(tempState.cards[cardID].type === 'ally'){
                     this.handleAlly();
-                }
-                else if(tempState.cards[cardID].type === 'item'){
-                    this.handleItem();
                 }
 
                 if(tempState.counter < 9){
@@ -310,6 +320,9 @@ class Main extends Component{
 
         const deck = this.shufflecards();
 
+        soundHandler.stop('all');
+        soundHandler.play('sneak');
+
         this.setState({
             cards: deck,
             firstCard: null,
@@ -340,7 +353,7 @@ class Main extends Component{
                 <div className="console">
                     <div className="left_front"></div>
                     <div className="left"></div>
-                    <Player stats={playerStats} reset={this.reset} />
+                    <Player stats={playerStats} reset={this.reset} soundToggle={this.handleSoundToggle} />
                     <div className="front"></div>
                     <Menu />
                     <div className="cardDisplay">

@@ -24,6 +24,8 @@ class Player extends Component{
                 <p>Player Profile</p>
 
                 <button onClick={this.props.reset}>Reset</button>
+
+                <button onClick={this.props.soundToggle}>Toggle Sound</button>
             </div>
         );
     }

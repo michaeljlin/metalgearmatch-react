@@ -96,6 +96,7 @@ function AlertHandler(){
             this.alerts[count].stop();
         }
         soundHandler.play('safe');
+        soundHandler.play('sneak');
         soundHandler.stop('alert');
         this.alerts = [];
     };
