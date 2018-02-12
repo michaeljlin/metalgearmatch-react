@@ -7,12 +7,16 @@ import Menu from './menu';
 import AlertText from './alertText';
 
 import alertTracker from './alerts';
+import soundHandler from './soundboard';
 
 import backImg from '../assets/images/mgscard.svg';
 
 class Main extends Component{
     constructor(props){
         super(props);
+
+        soundHandler.initialize();
+        alertTracker.soundHandler(soundHandler);
 
         this.state = {
             cards: this.shufflecards(),
@@ -143,6 +147,9 @@ class Main extends Component{
 
     handleNewAlert(cardID, num){
         console.log(`adding new alert for ${cardID} and num ${num}`);
+
+        soundHandler.play('found');
+        soundHandler.play('alert');
 
         let tempAlerts = this.state.alerts;
 

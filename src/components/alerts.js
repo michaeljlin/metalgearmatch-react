@@ -1,3 +1,5 @@
+import soundHandler from "./soundboard";
+
 function AlertObj(cardID, num, callback, stateUpdater){
     this.cardID = cardID;
     this.num = num;
@@ -30,6 +32,10 @@ function AlertObj(cardID, num, callback, stateUpdater){
 function AlertHandler(){
 
     this.alerts = [];
+
+    this.soundHandler = function(soundHandler){
+        this.soundHandler = soundHandler;
+    };
 
     this.add = function(cardID, num, callback, stateUpdater){
         this.alerts.push(new AlertObj(cardID, num, callback, stateUpdater));
@@ -76,6 +82,12 @@ function AlertHandler(){
         this.alerts[alertIndex].stop();
 
         this.alerts.splice(alertIndex, 1);
+
+        soundHandler.play('shot');
+
+        if(this.alerts.length === 0){
+            soundHandler.stop('alert');
+        }
     };
 
     // Called when match is made to cancel all alerts
@@ -84,6 +96,7 @@ function AlertHandler(){
             this.alerts[count].stop();
         }
 
+        soundHandler.stop('alert');
         this.alerts = [];
     };
 
