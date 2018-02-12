@@ -93,25 +93,27 @@ class Main extends Component{
 
     handleDamage(cardID){
         const tempPlayer = {...this.state.playerStats};
-        tempPlayer.health-=20;
+        if(tempPlayer.health > 0) {
+            tempPlayer.health -= 20;
 
-        let alertIndex = this.state.alerts.findIndex((alerts)=>{
-            return alerts.cardID === cardID;
-        });
+            let alertIndex = this.state.alerts.findIndex((alerts) => {
+                return alerts.cardID === cardID;
+            });
 
-        console.log('alertIndex is: ',alertIndex);
+            console.log('alertIndex is: ', alertIndex);
 
-        let newAlertState = this.state.alerts;
-        newAlertState.splice(alertIndex, 1);
+            let newAlertState = this.state.alerts;
+            newAlertState.splice(alertIndex, 1);
 
-        delete newAlertState[0][cardID];
+            delete newAlertState[0][cardID];
 
-        console.log('new alert state is: ', newAlertState);
+            console.log('new alert state is: ', newAlertState);
 
-        this.setState({
+            this.setState({
                 playerStats: tempPlayer,
                 alerts: newAlertState
             });
+        }
     }
 
     handleAlertUpdate(remainingTime, cardID){
