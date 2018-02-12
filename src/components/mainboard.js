@@ -7,12 +7,16 @@ import Menu from './menu';
 import AlertText from './alertText';
 
 import alertTracker from './alerts';
+import soundHandler from './soundboard';
 
 import backImg from '../assets/images/mgscard.svg';
 
 class Main extends Component{
     constructor(props){
         super(props);
+
+        soundHandler.initialize();
+        alertTracker.soundHandler(soundHandler);
 
         this.state = {
             cards: this.shufflecards(),
@@ -35,10 +39,14 @@ class Main extends Component{
         this.handleMatch = this.handleMatch.bind(this);
         this.handleAlly = this.handleAlly.bind(this);
         this.handleDamage = this.handleDamage.bind(this);
-        this.handleItem = this.handleItem.bind(this);
         this.handleNewAlert = this.handleNewAlert.bind(this);
         this.handleAlertUpdate = this.handleAlertUpdate.bind(this);
         this.handleAlertTrigger = this.handleAlertTrigger.bind(this);
+        this.handleSoundToggle = this.handleSoundToggle.bind(this);
+    }
+
+    componentDidMount(){
+        soundHandler.play('sneak');
     }
 
     shufflecards(){
@@ -94,25 +102,26 @@ class Main extends Component{
         const tempPlayer = {...this.state.playerStats};
         if(tempPlayer.health > 0) {
             tempPlayer.health -= 20;
-
-            let alertIndex = this.state.alerts.findIndex((alerts) => {
-                return alerts.cardID === cardID;
-            });
-
-            console.log('alertIndex is: ', alertIndex);
-
-            let newAlertState = this.state.alerts;
-            newAlertState.splice(alertIndex, 1);
-
-            delete newAlertState[0][cardID];
-
-            console.log('new alert state is: ', newAlertState);
-
-            this.setState({
-                playerStats: tempPlayer,
-                alerts: newAlertState
-            });
         }
+
+        let alertIndex = this.state.alerts.findIndex((alerts) => {
+            return alerts.cardID === cardID;
+        });
+
+        console.log('alertIndex is: ', alertIndex);
+
+        let newAlertState = this.state.alerts;
+        newAlertState.splice(alertIndex, 1);
+
+        delete newAlertState[0][cardID];
+
+        console.log('new alert state is: ', newAlertState);
+
+        this.setState({
+            playerStats: tempPlayer,
+            alerts: newAlertState
+        });
+
     }
 
     handleAlertUpdate(remainingTime, cardID){
@@ -137,12 +146,28 @@ class Main extends Component{
         }
     }
 
-    handleItem(){
+    handleSoundToggle(){
+        soundHandler.soundSwitch();
 
+        if(soundHandler.getSoundState()){
+            console.log('in sound switch state: ', this.state);
+            if(this.state.alerts.length > 1){
+                soundHandler.play('alert');
+            }
+            else{
+                soundHandler.play('sneak');
+            }
+        }
+        else{
+            soundHandler.stop('all');
+        }
     }
 
     handleNewAlert(cardID, num){
         console.log(`adding new alert for ${cardID} and num ${num}`);
+
+        soundHandler.play('found');
+        soundHandler.play('alert');
 
         let tempAlerts = this.state.alerts;
 
@@ -213,9 +238,6 @@ class Main extends Component{
                 }
                 else if(tempState.cards[cardID].type === 'ally'){
                     this.handleAlly();
-                }
-                else if(tempState.cards[cardID].type === 'item'){
-                    this.handleItem();
                 }
 
                 if(tempState.counter < 9){
@@ -298,6 +320,9 @@ class Main extends Component{
 
         const deck = this.shufflecards();
 
+        soundHandler.stop('all');
+        soundHandler.play('sneak');
+
         this.setState({
             cards: deck,
             firstCard: null,
@@ -328,7 +353,7 @@ class Main extends Component{
                 <div className="console">
                     <div className="left_front"></div>
                     <div className="left"></div>
-                    <Player stats={playerStats} reset={this.reset} />
+                    <Player stats={playerStats} reset={this.reset} soundToggle={this.handleSoundToggle} />
                     <div className="front"></div>
                     <Menu />
                     <div className="cardDisplay">
