@@ -31,7 +31,8 @@ class Main extends Component{
             },
             alerts: [{}],
             timeoutTracker: null,
-            resetFlag: false
+            resetFlag: false,
+            showCards: false
         };
 
         this.dealcards = this.dealcards.bind(this);
@@ -48,6 +49,12 @@ class Main extends Component{
 
     componentDidMount(){
         soundHandler.play('sneak');
+
+        setTimeout(()=>{
+            this.setState({
+                showCards: true
+            });
+        }, 1000);
     }
 
     shufflecards(){
@@ -313,45 +320,61 @@ class Main extends Component{
     }
 
     reset(){
-        console.log('resetting');
 
-        alertTracker.stop();
+        if(!this.state.resetFlag){
+            console.log('resetting');
 
-        clearTimeout(this.state.timeoutTracker);
+            alertTracker.stop();
 
-        const deck = this.shufflecards();
+            clearTimeout(this.state.timeoutTracker);
 
-        soundHandler.stop('all');
-        soundHandler.play('sneak');
+            const deck = this.shufflecards();
 
-        this.setState({
-            cards: deck,
-            firstCard: null,
-            secondCard: null,
-            message: "",
-            clickable: true,
-            counter: 0,
-            playerStats: {
-                health: 100,
-                accuracy: 0
-            },
-            alerts: [{}],
-            timeoutTracker: null,
-            resetFlag: true
-        },()=>{
+            soundHandler.stop('all');
+            soundHandler.play('sneak');
 
-            setTimeout(()=>{
-                this.setState({
-                    resetFlag: false
-                });
+            this.setState({
+                cards: deck,
+                firstCard: null,
+                secondCard: null,
+                message: "",
+                clickable: true,
+                counter: 0,
+                playerStats: {
+                    health: 100,
+                    accuracy: 0
+                },
+                alerts: [{}],
+                timeoutTracker: null,
+                resetFlag: true
+            },()=>{
+
+                setTimeout(()=>{
+                    this.setState({
+                        resetFlag: false
+                    });
+                }, 500);
+                console.log("deck after reset set state: ", this.state.cards);
             });
-            console.log("deck after reset set state: ", this.state.cards);
-        });
 
+        }
     }
 
     render(){
-        const {message, playerStats, alerts} = this.state;
+        const {message, playerStats, alerts, showCards} = this.state;
+
+        let cardStyle = null;
+
+        if(showCards){
+            cardStyle = {
+                transform: ''
+            };
+        }
+        else{
+            cardStyle = {
+                transform: 'translateZ(-50px)'
+            }
+        }
 
         return(
             <div className="mainBoard">
@@ -364,7 +387,7 @@ class Main extends Component{
                     <Player stats={playerStats} reset={this.reset} soundToggle={this.handleSoundToggle} />
                     <div className="front"></div>
                     <Menu />
-                    <div className="cardDisplay">
+                    <div className="cardDisplay" style={{...cardStyle}}>
                         {this.dealcards()}
                     </div>
                     <div className="right_front"></div>

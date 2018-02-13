@@ -84,6 +84,8 @@
     perspective: 800px;
     transform-style: preserve-3d;
 
+    transition: transform 1s;
+
     background-image: url("../assets/images/mgsjungle.jpg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -288,6 +290,7 @@
     position: absolute;
     /*width: 100%;*/
     /*height: 100%;*/
+    background-image: url("../assets/images/mgsjungle.jpg");
     width: 70%;
     height: 100%;
     left: 15%;
@@ -295,6 +298,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
 }
 
 .select{
