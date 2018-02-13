@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import backImg from '../assets/images/mgscard.svg';
 import theFear from '../assets/images/thefearcard.png';
 import paramedic from '../assets/images/paramediccard.png';
-import thePain from '../assets/images/thepaincard.png';
-import theFury from '../assets/images/thefurycard.png';
-import eva from '../assets/images/evacard.png';
-import theSorrow from '../assets/images/thesorrowcard.png';
-import sigint from '../assets/images/sigintcard.png';
+import thePain from '../assets/images/thepaincardfixed.png';
+import theFury from '../assets/images/thefurycardfixed.png';
+import eva from '../assets/images/evacardfixed.png';
+import theSorrow from '../assets/images/thesorrowcardfixed.png';
+import sigint from '../assets/images/sigintcardfixed.png';
 import zero from '../assets/images/zerocard.png';
 import sokolov from '../assets/images/sokolovcard.png';
 
@@ -117,48 +117,25 @@ class Card extends Component{
             tempState.frontStyle.opacity = 0;
             tempState.backStyle.opacity = 0;
 
-            setTimeout(function(){
-                // tempState.frontStyle.opacity = 1;
-                // tempState.backStyle.opacity = 1;
-                //
-                // this.setState({
-                //     backStyle: tempState.backStyle,
-                //     frontStyle: tempState.frontStyle
-                // });
-
-
-                tempState.backStyle.opacity = 1;
-                tempState.backStyle.cursor = 'pointer';
-                tempState.frontStyle.opacity = 1;
-                tempState.frontStyle.cursor = 'pointer';
-
-                this.setState({
-                    backStyle: tempState.backStyle,
-                    frontStyle: tempState.frontStyle
-                });
-
-
-            }.bind(this), 1000);
-
             this.setState(tempState);
         }
+        else if(!nextProps.reset && !nextProps.fade){
+            tempState.backStyle.opacity = 1;
+            tempState.backStyle.cursor = 'pointer';
+            tempState.frontStyle.opacity = 1;
+            tempState.frontStyle.cursor = 'pointer';
 
-        // if(!nextProps.fade){
-        //     tempState.backStyle.opacity = 1;
-        //     tempState.backStyle.cursor = 'pointer';
-        //     tempState.frontStyle.opacity = 1;
-        //     tempState.frontStyle.cursor = 'pointer';
-        //
-        //     this.setState({
-        //         backStyle: tempState.backStyle,
-        //         frontStyle: tempState.frontStyle
-        //     });
-        // }
+            this.setState({
+                backStyle: tempState.backStyle,
+                frontStyle: tempState.frontStyle
+            });
+            this.setState(tempState);
+        }
 
         if(this.props.flipped !== nextProps.flipped) {
             if (nextProps.flipped === true) {
                 // console.log(`flipping card ${tempState.num} up!`);
-                console.log(`state of flipped card: `, this.state);
+                // console.log(`state of flipped card: `, this.state);
                 tempState.flipStyle.transform = 'translateZ(50px) rotateY(180deg)';
 
                 this.setState({flipStyle: tempState.flipStyle});
@@ -173,8 +150,6 @@ class Card extends Component{
         }
 
         if(nextProps.fade){
-            // console.log('fade is not false!');
-            // console.log('fade is: ', nextProps.fade);
 
             tempState.timeoutTracker = setTimeout(function(){
                 tempState.backStyle.opacity = 0;

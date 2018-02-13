@@ -8,19 +8,36 @@ class Menu extends Component{
         }
     }
 
+    componentWillReceiveProps(nextProps){
+        if(this.state.showCards !== nextProps.showCards){
+            this.setState({
+                showCards: nextProps.showCards
+            });
+        }
+    }
+
     render(){
         const showCards = this.state.showCards;
 
         let pointerStyle = null;
+        let clearStyle = null;
 
         if(showCards){
             pointerStyle = {
                 'pointer-events': 'none'
+            };
+
+            clearStyle = {
+                opacity: 0
             }
         }
         else{
             pointerStyle = {
                 'pointer-events': 'auto'
+            };
+
+            clearStyle = {
+                opacity: 1
             }
         }
 
@@ -29,6 +46,8 @@ class Menu extends Component{
                 <div className="select">
                     This will be the Menu component
                 </div>
+                <div className="backgroundMenu" style={clearStyle}></div>
+                <div className="transitionMenu"></div>
             </div>
         );
     }

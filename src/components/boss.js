@@ -1,32 +1,41 @@
 import React, { Component } from 'react';
-import Alertbox from './alertbox';
 
 class Boss extends Component{
     constructor(props) {
         super(props);
 
         this.state = {
-            alerts: []
+            attack: this.props.attack,
+            attempts: this.props.attempts,
+            maxAttempts: 10
         }
     }
 
-    // componentWillReceiveProps(nextProps){
-    //     // console.log(`boss received new props: `, nextProps);
-    //     // console.log('boss alerts state: ', this.state.alerts);
-    //
-    //     if(nextProps.alerts.length !== this.state.alerts.length){
-    //         this.setState({...nextProps});
-    //     }
-    // }
+    componentWillReceiveProps(nextProps){
+        // console.log(`boss received new props: `, nextProps);
+
+        if(nextProps.attempts!== this.state.attempts){
+
+            if(nextProps.attempts === this.state.maxAttempts){
+                console.log('triggering boss attack');
+                this.state.attack();
+                return;
+            }
+
+            this.setState({
+                attempts: nextProps.attempts
+            });
+        }
+    }
 
     render(){
         // console.log('boss alerts state: ', this.state.alerts);
-        const alerts = this.state.alerts;
+        const attempts = this.state.attempts;
 
         return(
             <div className="boss">
                 <p>Boss Profile</p>
-                {/*<Alertbox alerts={alerts} />*/}
+                <p>Turns until attack: {this.state.maxAttempts-attempts}</p>
             </div>
         );
     }
