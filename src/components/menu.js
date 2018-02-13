@@ -46,6 +46,7 @@ class Menu extends Component{
                 <div className="select">
                     <h1 style={clearStyle}>$ METAL GEAR SO$LID MEMORY MATCH</h1>
                 </div>
+                <div className="scanlines"></div>
                 <div className="backgroundMenu" style={clearStyle}></div>
                 <div className="transitionMenu"></div>
             </div>

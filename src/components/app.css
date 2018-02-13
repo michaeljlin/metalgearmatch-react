@@ -309,6 +309,15 @@
 
 }
 
+.scanlines{
+    z-index: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("../assets/images/scan_lines.png");
+    opacity: 0.05;
+}
+
 .transitionMenu{
     position: absolute;
     width: 100%;
