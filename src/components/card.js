@@ -52,10 +52,19 @@ class Card extends Component{
                 srcImg = paramedic;
         }
 
+        let backgroundColor = null;
+
+        if(this.props.num >= 5){
+            backgroundColor = 'blue';
+        }
+        else{
+            backgroundColor = 'red'
+        }
+
         this.state = {
             num: this.props.num,
             backStyle: {
-                'backgroundColor': 'blue',
+                'backgroundColor': backgroundColor,
                 transform: 'rotateY(180deg)'
             },
             frontStyle: {
@@ -111,6 +120,17 @@ class Card extends Component{
                 default:
                     srcImg = paramedic;
             }
+
+            let backgroundColor = null;
+
+            if(tempState.num >= 5){
+                backgroundColor = 'blue';
+            }
+            else{
+                backgroundColor = 'red'
+            }
+
+            tempState.backStyle.backgroundColor = backgroundColor;
 
             tempState.srcImg = srcImg;
 

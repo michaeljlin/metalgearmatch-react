@@ -72,6 +72,7 @@ function Soundboard(){
                     break;
                 case 'start':
                     this.menuStart.play();
+                    this.menuStart.currentTime = 0.3;
                     break;
                 case 'select':
                     this.menuSelect.play();
