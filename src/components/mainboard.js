@@ -383,7 +383,7 @@ class Main extends Component{
 
     reset(tempPlayer){
 
-        console.log('reset tempPlayer: ', tempPlayer);
+        // console.log('reset tempPlayer: ', tempPlayer);
 
         if(!this.state.resetFlag){
             console.log('resetting');
@@ -416,7 +416,7 @@ class Main extends Component{
                         resetFlag: false
                     });
                 }, 1500);
-                console.log("deck after reset set state: ", this.state.cards);
+                // console.log("deck after reset set state: ", this.state.cards);
             });
 
         }

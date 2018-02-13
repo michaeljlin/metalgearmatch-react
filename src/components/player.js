@@ -14,7 +14,7 @@ class Player extends Component{
     componentWillReceiveProps(nextProps){
 
         if(this.state.health !== nextProps.stats.health){
-            console.log('changing player health to: ',nextProps);
+            // console.log('changing player health to: ',nextProps);
             const tempState = {
                 health: nextProps.stats.health,
                 maxHealth: nextProps.stats.maxHealth

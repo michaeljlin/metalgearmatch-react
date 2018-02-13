@@ -18,7 +18,7 @@ class Healthbar extends Component{
         // console.log('healthbar nextprops: ',nextProps);
 
         if(this.state.HP !== nextProps.HP){
-            console.log('updating healthbar: ', nextProps);
+            // console.log('updating healthbar: ', nextProps);
 
             const tempState = {...nextProps};
             tempState.healthStyle = {
