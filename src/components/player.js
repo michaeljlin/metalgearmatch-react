@@ -30,7 +30,7 @@ class Player extends Component{
                 <Health HP={health} maxHP={maxHealth}/>
                 <p>Player Profile</p>
 
-                <button onClick={this.props.start}>Start Game</button>
+                {/*<button onClick={this.props.start}>Start Game</button>*/}
 
                 <button onClick={this.props.reset}>Reset</button>
 

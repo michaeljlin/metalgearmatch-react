@@ -36,7 +36,7 @@
     display: flex;
     position: relative;
     /*perspective: 800px;*/
-    transition: transform 1s;
+    transition: transform .65s;
     transform-style: preserve-3d;
     /*transform: translateZ(25px);*/
 }
@@ -279,7 +279,7 @@
 
 }
 
-.menu, .front{
+.menu, .front, .scanlines{
     -webkit-user-drag: none;
     -khtml-user-drag: none;
     -moz-user-drag: none;
@@ -337,13 +337,60 @@
 }
 
 h1{
-    font-size: 70px;
+    font-size: 80px;
+    /*text-shadow: -3px -3px #777777bd;*/
+    animation: wave 4s ease-in-out infinite;
     transition: opacity 1s;
+}
+
+@keyframes wave {
+    0%{
+        text-shadow: 0 0 #777777bd;
+    }
+
+    50%{
+        text-shadow: -4px -4px #777777bd;
+    }
+
+    100%{
+        text-shadow: 0 0 #777777bd;
+    }
+}
+
+@keyframes wave-mini {
+    0%{
+        text-shadow: 0 0 #777777bd;
+    }
+
+    50%{
+        text-shadow: -2px -2px #777777bd;
+    }
+
+    100%{
+        text-shadow: 0 0 #777777bd;
+    }
 }
 
 .select{
     font-family: MGS2;
     color: white;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+}
+
+.startClick{
+    display: inline-block;
+    width: 30%;
+    font-size: 40px;
+    text-align: center;
+    transition: opacity 1s;
+}
+
+.startClick:hover{
+    /*text-shadow: -3px -3px #777777bd;*/
+    animation: wave 4s ease-in-out infinite;
+    cursor: pointer;
 }
 
 .console{
