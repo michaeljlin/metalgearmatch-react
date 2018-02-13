@@ -17,6 +17,7 @@ class Boss extends Component{
         if(nextProps.attempts!== this.state.attempts){
 
             if(nextProps.attempts === this.state.maxAttempts){
+                console.log('triggering boss attack');
                 this.state.attack();
                 return;
             }

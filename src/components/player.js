@@ -6,8 +6,8 @@ class Player extends Component{
         super(props);
         // console.log('player props is: ',props.stats);
         this.state = {
-            health: props.health,
-            maxHealth: props.maxHealth
+            health: props.stats.health,
+            maxHealth: props.stats.maxHealth
         };
     }
 

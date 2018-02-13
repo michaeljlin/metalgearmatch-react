@@ -228,10 +228,38 @@ class Main extends Component{
 
     handleBossAttack(){
 
-        soundHandler.play('shot');
-        this.reset();
+        let tempPlayer = this.state.playerStats;
 
+        if(tempPlayer.health === 1){
 
+            tempPlayer.health = 0;
+
+            alertTracker.stop();
+
+            this.setState({
+                playerStats: {health: tempPlayer.health, maxHealth: tempPlayer.maxHealth, accuracy: 0},
+                message: "GAME OVER",
+                clickable: false,
+                showCards: false,
+                alerts: [{}]
+            });
+
+        }
+        else if(tempPlayer.health > 1){
+            tempPlayer.maxHealth -= 1;
+            tempPlayer.health = 1;
+            soundHandler.play('shot');
+            this.reset(tempPlayer);
+        }
+
+        console.log(`new player stats: `, tempPlayer);
+
+        // this.setState({
+        //     playerStats: tempPlayer
+        // });
+
+        // soundHandler.play('shot');
+        // this.reset(tempPlayer);
     }
 
     handleMatch(cardID, num){
@@ -353,7 +381,9 @@ class Main extends Component{
         console.log(tempState);
     }
 
-    reset(){
+    reset(tempPlayer){
+
+        console.log('reset tempPlayer: ', tempPlayer);
 
         if(!this.state.resetFlag){
             console.log('resetting');
@@ -375,11 +405,7 @@ class Main extends Component{
                 clickable: true,
                 counter: 0,
                 failedAttempts: 0,
-                playerStats: {
-                    health: 5,
-                    accuracy: 0,
-                    maxHealth: 5
-                },
+                playerStats: tempPlayer.hasOwnProperty('health') ? tempPlayer : {health: 5, accuracy: 0, maxHealth: 5} ,
                 alerts: [{}],
                 timeoutTracker: null,
                 resetFlag: true
@@ -389,7 +415,7 @@ class Main extends Component{
                     this.setState({
                         resetFlag: false
                     });
-                }, 500);
+                }, 1500);
                 console.log("deck after reset set state: ", this.state.cards);
             });
 
