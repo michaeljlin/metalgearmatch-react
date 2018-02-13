@@ -124,11 +124,13 @@ class Main extends Component{
             alertTracker.stop();
 
             this.setState({
+                playerStats: tempPlayer,
                 message: "GAME OVER",
                 clickable: false,
                 showCards: false,
                 alerts: [{}]
             });
+            return;
         }
 
         let alertIndex = this.state.alerts.findIndex((alerts) => {
@@ -319,7 +321,7 @@ class Main extends Component{
                         clickable: tempState.clickable,
                         counter: tempState.counter,
                     });
-                }.bind(this),2500);
+                }.bind(this),1500);
             }
         }
 
@@ -391,7 +393,7 @@ class Main extends Component{
         }
         else{
             cardStyle = {
-                transform: 'translateZ(-50px)'
+                transform: 'translateZ(-55px)'
             }
         }
 

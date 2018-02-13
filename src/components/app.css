@@ -56,7 +56,7 @@
 
 .cardContainer{
     perspective: 800px;
-    transition: transform 1s;
+    transition: transform .75s;
     transform-style: preserve-3d;
     transform: translateZ(25px);
 }
