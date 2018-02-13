@@ -4,7 +4,8 @@ class Menu extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            showCards: this.props.showCards
+            showCards: this.props.showCards,
+            start: this.props.start
         }
     }
 
@@ -46,7 +47,7 @@ class Menu extends Component{
                 <div className="scanlines"></div>
                 <div className="select">
                     <h1 style={clearStyle}>$ METAL GEAR SO$LID MEMORY MATCH</h1>
-                    <p style={clearStyle} className="startClick">Click Here to Start</p>
+                    <p style={clearStyle} className="startClick" onClick={this.props.start}>Click Here to Start</p>
                 </div>
                 <div className="backgroundMenu" style={clearStyle}></div>
                 <div className="transitionMenu"></div>

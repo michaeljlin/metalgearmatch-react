@@ -8,6 +8,7 @@ import fail from '../assets/sounds/allyfailmatch.wav';
 import menuStart from '../assets/sounds/menustart.mp3';
 import menuSelect from '../assets/sounds/menuselect.mp3';
 import menuOption from '../assets/sounds/menuoption.mp3';
+import bossShot from '../assets/sounds/pistol.wav';
 
 function Soundboard(){
 
@@ -21,6 +22,7 @@ function Soundboard(){
     this.menuStart = new Audio(menuStart);
     this.menuSelect = new Audio(menuSelect);
     this.menuOption = new Audio(menuOption);
+    this.bossShot = new Audio(bossShot);
 
     this.soundToggle = true;
 
@@ -30,6 +32,7 @@ function Soundboard(){
         this.safe.loop = false;
         this.allyheal.loop = false;
         this.fail.loop = false;
+        this.bossShot.loop = false;
 
         this.menuStart.loop = false;
         this.menuStart.currentTime = 0.3;
@@ -62,6 +65,9 @@ function Soundboard(){
                     break;
                 case 'fail':
                     this.fail.play();
+                    break;
+                case 'boss':
+                    this.bossShot.play();
                     break;
                 case 'start':
                     this.menuStart.play();
@@ -106,6 +112,8 @@ function Soundboard(){
                 this.gun.currentTime = 0;
                 this.safe.pause();
                 this.safe.currentTime = 0;
+                this.bossShot.pause();
+                this.bossShot.currentTime = 0;
                 this.jungle.pause();
                 this.jungle.currentTime = 5;
                 this.sneak.pause();

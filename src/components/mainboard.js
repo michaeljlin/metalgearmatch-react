@@ -402,7 +402,7 @@ class Main extends Component{
             soundHandler.stop('all');
 
             if(tempPlayer.hasOwnProperty('health')){
-                soundHandler.play('shot');
+                soundHandler.play('boss');
             }
 
             soundHandler.play('sneak');
@@ -458,7 +458,7 @@ class Main extends Component{
                     <div className="left"></div>
                     <Player stats={playerStats} start={this.handleStartClicked} reset={this.reset} soundToggle={this.handleSoundToggle} />
                     <div className="front"></div>
-                    <Menu showCards={showCards} />
+                    <Menu showCards={showCards} start={this.handleStartClicked} />
                     <div className="cardDisplay" style={{...cardStyle}}>
                         {this.dealcards()}
                     </div>
