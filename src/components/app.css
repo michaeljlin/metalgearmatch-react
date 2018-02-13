@@ -319,8 +319,14 @@
     transition: opacity 1s;
 }
 
-.select{
+h1{
+    font-size: 70px;
+    transition: opacity 1s;
+}
 
+.select{
+    font-family: MGS2;
+    color: white;
 }
 
 .console{
@@ -412,4 +418,9 @@
 @font-face {
     font-family: 'Digital-7';
     src: url("../assets/fonts/digital-7.ttf");
+}
+
+@font-face {
+    font-family: 'MGS2';
+    src: url("../assets/fonts/MGS2.ttf");
 }
