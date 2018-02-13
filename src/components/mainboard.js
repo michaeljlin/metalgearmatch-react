@@ -119,6 +119,18 @@ class Main extends Component{
             tempPlayer.health -= 20;
         }
 
+        if(tempPlayer.health === 0){
+
+            alertTracker.stop();
+
+            this.setState({
+                message: "GAME OVER",
+                clickable: false,
+                showCards: false,
+                alerts: [{}]
+            });
+        }
+
         let alertIndex = this.state.alerts.findIndex((alerts) => {
             return alerts.cardID === cardID;
         });
