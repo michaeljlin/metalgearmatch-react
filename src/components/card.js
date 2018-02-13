@@ -34,7 +34,7 @@ class Card extends Component{
                 srcImg = theFear;
                 break;
             case 4:
-                srcImg = eva;
+                srcImg = theSorrow;
                 break;
             case 5:
                 srcImg = sigint;
@@ -46,7 +46,7 @@ class Card extends Component{
                 srcImg = sokolov;
                 break;
             case 8:
-                srcImg = theSorrow;
+                srcImg = eva;
                 break;
             default:
                 srcImg = paramedic;
@@ -94,7 +94,7 @@ class Card extends Component{
                     srcImg = theFear;
                     break;
                 case 4:
-                    srcImg = eva;
+                    srcImg = theSorrow;
                     break;
                 case 5:
                     srcImg = sigint;
@@ -106,7 +106,7 @@ class Card extends Component{
                     srcImg = sokolov;
                     break;
                 case 8:
-                    srcImg = theSorrow;
+                    srcImg = eva;
                     break;
                 default:
                     srcImg = paramedic;

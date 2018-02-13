@@ -242,6 +242,7 @@
     .mainBoard{
         width: 1600px;
         height: 750px;
+        top: 30px;
     }
 
     .front{
