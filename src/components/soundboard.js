@@ -38,6 +38,7 @@ function Soundboard(){
         this.menuStart.currentTime = 0.3;
         this.menuSelect.loop = false;
         this.menuOption.loop = false;
+        this.menuOption.currentTime = 0.9;
 
         this.jungle.loop = true;
         this.jungle.currentTime = 5;
@@ -77,6 +78,7 @@ function Soundboard(){
                     break;
                 case 'option':
                     this.menuOption.play();
+                    this.menuOption.currentTime = 0.9;
                     break;
                 case 'alert':
                     this.sneak.pause();

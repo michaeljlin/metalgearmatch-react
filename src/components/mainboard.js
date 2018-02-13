@@ -49,6 +49,7 @@ class Main extends Component{
         this.handleSoundToggle = this.handleSoundToggle.bind(this);
         this.handleStartClicked = this.handleStartClicked.bind(this);
         this.handleBossAttack = this.handleBossAttack.bind(this);
+        this.handlemouseover = this.handlemouseover.bind(this);
     }
 
     componentDidMount(){
@@ -179,6 +180,10 @@ class Main extends Component{
             tempPlayer.health+=1;
             this.setState({playerStats: tempPlayer});
         }
+    }
+
+    handlemouseover() {
+        soundHandler.play('option');
     }
 
     handleSoundToggle(){
@@ -458,7 +463,7 @@ class Main extends Component{
                     <div className="left"></div>
                     <Player stats={playerStats} start={this.handleStartClicked} reset={this.reset} soundToggle={this.handleSoundToggle} />
                     <div className="front"></div>
-                    <Menu showCards={showCards} start={this.handleStartClicked} />
+                    <Menu showCards={showCards} start={this.handleStartClicked} mouseover={this.handlemouseover} />
                     <div className="cardDisplay" style={{...cardStyle}}>
                         {this.dealcards()}
                     </div>
