@@ -5,22 +5,29 @@ class Player extends Component{
     constructor(props) {
         super(props);
         // console.log('player props is: ',props.stats);
-        this.state = {...props.stats};
+        this.state = {
+            health: props.health,
+            maxHealth: props.maxHealth
+        };
     }
 
     componentWillReceiveProps(nextProps){
-        // console.log('changing player health to: ',nextProps);
+
         if(this.state.health !== nextProps.stats.health){
-            const tempState = {...nextProps.stats};
+            console.log('changing player health to: ',nextProps);
+            const tempState = {
+                health: nextProps.stats.health,
+                maxHealth: nextProps.stats.maxHealth
+            };
             this.setState(tempState);
         }
     }
 
     render(){
-        const health = this.state.health;
+        const {health, maxHealth} = this.state;
         return(
             <div className="player">
-                <Health HP={health}/>
+                <Health HP={health} maxHP={maxHealth}/>
                 <p>Player Profile</p>
 
                 <button onClick={this.props.start}>Start Game</button>

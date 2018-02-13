@@ -7,8 +7,9 @@ class Healthbar extends Component{
 
         this.state = {
             HP: props.HP,
+            maxHP: props.maxHP,
             healthStyle:{
-                width: props.HP+'%'
+                width: (props.HP/props.maxHP)*100+'%'
             }
         }
     }
@@ -17,9 +18,11 @@ class Healthbar extends Component{
         // console.log('healthbar nextprops: ',nextProps);
 
         if(this.state.HP !== nextProps.HP){
+            console.log('updating healthbar: ', nextProps);
+
             const tempState = {...nextProps};
             tempState.healthStyle = {
-                width: nextProps.HP+'%'
+                width: (nextProps.HP/nextProps.maxHP)*100+'%'
             };
 
             this.setState(tempState);

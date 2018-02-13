@@ -25,9 +25,11 @@ class Main extends Component{
             message: "",
             clickable: true,
             counter: 0,
+            failedAttempts: 0,
             playerStats: {
-                health: 100,
-                accuracy: 0
+                health: 5,
+                accuracy: 0,
+                maxHealth: 5
             },
             alerts: [{}],
             timeoutTracker: null,
@@ -46,6 +48,7 @@ class Main extends Component{
         this.handleAlertTrigger = this.handleAlertTrigger.bind(this);
         this.handleSoundToggle = this.handleSoundToggle.bind(this);
         this.handleStartClicked = this.handleStartClicked.bind(this);
+        this.handleBossAttack = this.handleBossAttack.bind(this);
     }
 
     componentDidMount(){
@@ -116,7 +119,7 @@ class Main extends Component{
     handleDamage(cardID){
         const tempPlayer = {...this.state.playerStats};
         if(tempPlayer.health > 0) {
-            tempPlayer.health -= 20;
+            tempPlayer.health -= 1;
         }
 
         if(tempPlayer.health === 0){
@@ -169,8 +172,8 @@ class Main extends Component{
     handleAlly(){
         const tempPlayer = {...this.state.playerStats};
 
-        if(tempPlayer.health < 100){
-            tempPlayer.health+=20;
+        if(tempPlayer.health < tempPlayer.maxHealth){
+            tempPlayer.health+=1;
             this.setState({playerStats: tempPlayer});
         }
     }
@@ -221,6 +224,14 @@ class Main extends Component{
         console.log(`triggering alert on cardID: ${cardID} and number: ${num}!`);
         alertTracker.remove(cardID);
         this.handleDamage(cardID);
+    }
+
+    handleBossAttack(){
+
+        soundHandler.play('shot');
+        this.reset();
+
+
     }
 
     handleMatch(cardID, num){
@@ -286,6 +297,7 @@ class Main extends Component{
             else{
                 console.log(`Not a match, resetting cards!`);
 
+                tempState.failedAttempts++;
                 tempState.clickable = false;
                 tempState.message = 'Not a match!';
 
@@ -332,7 +344,8 @@ class Main extends Component{
             message: tempState.message,
             clickable: tempState.clickable,
             counter: tempState.counter,
-            timeoutTracker: tempState.timeoutTracker
+            timeoutTracker: tempState.timeoutTracker,
+            failedAttempts: tempState.failedAttempts
         });
 
         // this.setState({...tempState});
@@ -361,9 +374,11 @@ class Main extends Component{
                 message: "",
                 clickable: true,
                 counter: 0,
+                failedAttempts: 0,
                 playerStats: {
-                    health: 100,
-                    accuracy: 0
+                    health: 5,
+                    accuracy: 0,
+                    maxHealth: 5
                 },
                 alerts: [{}],
                 timeoutTracker: null,
@@ -382,7 +397,7 @@ class Main extends Component{
     }
 
     render(){
-        const {message, playerStats, alerts, showCards} = this.state;
+        const {message, playerStats, failedAttempts, showCards} = this.state;
 
         let cardStyle = null;
 
@@ -413,7 +428,7 @@ class Main extends Component{
                     </div>
                     <div className="right_front"></div>
                     <div className="right"></div>
-                    <Boss />
+                    <Boss attempts={failedAttempts} attack={this.handleBossAttack} />
                 </div>
                 {/*<button onClick={this.reset}>Reset</button>*/}
             </div>
