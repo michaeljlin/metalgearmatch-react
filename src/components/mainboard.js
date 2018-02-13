@@ -248,7 +248,7 @@ class Main extends Component{
         else if(tempPlayer.health > 1){
             tempPlayer.maxHealth -= 1;
             tempPlayer.health = 1;
-            soundHandler.play('shot');
+            // soundHandler.play('shot');
             this.reset(tempPlayer);
         }
 
@@ -395,6 +395,11 @@ class Main extends Component{
             const deck = this.shufflecards();
 
             soundHandler.stop('all');
+
+            if(tempPlayer.hasOwnProperty('health')){
+                soundHandler.play('shot');
+            }
+
             soundHandler.play('sneak');
 
             this.setState({
