@@ -62,6 +62,7 @@ class Main extends Component{
     }
 
     handleStartClicked(){
+        soundHandler.play('start');
         this.setState({
             showCards: true
         });
@@ -172,6 +173,8 @@ class Main extends Component{
     handleAlly(){
         const tempPlayer = {...this.state.playerStats};
 
+        soundHandler.play('ally');
+
         if(tempPlayer.health < tempPlayer.maxHealth){
             tempPlayer.health+=1;
             this.setState({playerStats: tempPlayer});
@@ -248,7 +251,7 @@ class Main extends Component{
         else if(tempPlayer.health > 1){
             tempPlayer.maxHealth -= 1;
             tempPlayer.health = 1;
-            soundHandler.play('shot');
+            // soundHandler.play('shot');
             this.reset(tempPlayer);
         }
 
@@ -325,6 +328,8 @@ class Main extends Component{
             else{
                 console.log(`Not a match, resetting cards!`);
 
+                soundHandler.play('fail');
+
                 tempState.failedAttempts++;
                 tempState.clickable = false;
                 tempState.message = 'Not a match!';
@@ -395,6 +400,11 @@ class Main extends Component{
             const deck = this.shufflecards();
 
             soundHandler.stop('all');
+
+            if(tempPlayer.hasOwnProperty('health')){
+                soundHandler.play('shot');
+            }
+
             soundHandler.play('sneak');
 
             this.setState({

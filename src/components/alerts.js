@@ -87,6 +87,7 @@ function AlertHandler(){
 
         if(this.alerts.length === 0){
             soundHandler.stop('alert');
+            soundHandler.play('sneak');
         }
     };
 
