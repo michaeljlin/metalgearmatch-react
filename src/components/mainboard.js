@@ -62,6 +62,7 @@ class Main extends Component{
     }
 
     handleStartClicked(){
+        soundHandler.play('start');
         this.setState({
             showCards: true
         });

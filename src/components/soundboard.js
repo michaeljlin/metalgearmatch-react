@@ -5,6 +5,9 @@ import safe from '../assets/sounds/bullet4.wav';
 import sneak from '../assets/sounds/sneak.mp3';
 import allyheal from '../assets/sounds/allyheal.wav';
 import fail from '../assets/sounds/allyfailmatch.wav';
+import menuStart from '../assets/sounds/menustart.mp3';
+import menuSelect from '../assets/sounds/menuselect.mp3';
+import menuOption from '../assets/sounds/menuoption.mp3';
 
 function Soundboard(){
 
@@ -15,6 +18,9 @@ function Soundboard(){
     this.sneak = new Audio(sneak);
     this.allyheal = new Audio(allyheal);
     this.fail = new Audio(fail);
+    this.menuStart = new Audio(menuStart);
+    this.menuSelect = new Audio(menuSelect);
+    this.menuOption = new Audio(menuOption);
 
     this.soundToggle = true;
 
@@ -24,6 +30,12 @@ function Soundboard(){
         this.safe.loop = false;
         this.allyheal.loop = false;
         this.fail.loop = false;
+
+        this.menuStart.loop = false;
+        this.menuStart.currentTime = 0.3;
+        this.menuSelect.loop = false;
+        this.menuOption.loop = false;
+
         this.jungle.loop = true;
         this.jungle.currentTime = 5;
         this.jungle.volume = 0.75;
@@ -51,6 +63,15 @@ function Soundboard(){
                 case 'fail':
                     this.fail.play();
                     break;
+                case 'start':
+                    this.menuStart.play();
+                    break;
+                case 'select':
+                    this.menuSelect.play();
+                    break;
+                case 'option':
+                    this.menuOption.play();
+                    break;
                 case 'alert':
                     this.sneak.pause();
                     if(this.jungle.paused){
@@ -76,6 +97,7 @@ function Soundboard(){
                 break;
             case 'sneak':
                 this.sneak.pause();
+                this.sneak.currentTime = 0;
                 break;
             case 'all':
                 this.found.pause();
@@ -92,6 +114,12 @@ function Soundboard(){
                 this.allyheal.currentTime = 0;
                 this.fail.pause();
                 this.fail.currentTime = 0;
+                this.menuStart.pause();
+                this.menuStart.currentTime = 0.3;
+                this.menuSelect.pause();
+                this.menuSelect.currentTime = 0;
+                this.menuOption.pause();
+                this.menuOption.currentTime = 0;
                 break;
         }
     };
