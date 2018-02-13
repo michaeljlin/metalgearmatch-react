@@ -3,6 +3,8 @@ import found from '../assets/sounds/found.wav';
 import gun from '../assets/sounds/gun1.wav';
 import safe from '../assets/sounds/bullet4.wav';
 import sneak from '../assets/sounds/sneak.mp3';
+import allyheal from '../assets/sounds/allyheal.wav';
+import fail from '../assets/sounds/allyfailmatch.wav';
 
 function Soundboard(){
 
@@ -11,6 +13,8 @@ function Soundboard(){
     this.gun = new Audio(gun);
     this.safe = new Audio(safe);
     this.sneak = new Audio(sneak);
+    this.allyheal = new Audio(allyheal);
+    this.fail = new Audio(fail);
 
     this.soundToggle = true;
 
@@ -18,6 +22,8 @@ function Soundboard(){
         this.found.loop = false;
         this.gun.loop = false;
         this.safe.loop = false;
+        this.allyheal.loop = false;
+        this.fail.loop = false;
         this.jungle.loop = true;
         this.jungle.currentTime = 5;
         this.jungle.volume = 0.75;
@@ -38,6 +44,12 @@ function Soundboard(){
                     break;
                 case 'safe':
                     this.safe.play();
+                    break;
+                case 'ally':
+                    this.allyheal.play();
+                    break;
+                case 'fail':
+                    this.fail.play();
                     break;
                 case 'alert':
                     this.sneak.pause();
@@ -76,6 +88,10 @@ function Soundboard(){
                 this.jungle.currentTime = 5;
                 this.sneak.pause();
                 this.sneak.currentTime = 0;
+                this.allyheal.pause();
+                this.allyheal.currentTime = 0;
+                this.fail.pause();
+                this.fail.currentTime = 0;
                 break;
         }
     };

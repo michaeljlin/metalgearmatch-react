@@ -172,6 +172,8 @@ class Main extends Component{
     handleAlly(){
         const tempPlayer = {...this.state.playerStats};
 
+        soundHandler.play('ally');
+
         if(tempPlayer.health < tempPlayer.maxHealth){
             tempPlayer.health+=1;
             this.setState({playerStats: tempPlayer});
@@ -324,6 +326,8 @@ class Main extends Component{
             }
             else{
                 console.log(`Not a match, resetting cards!`);
+
+                soundHandler.play('fail');
 
                 tempState.failedAttempts++;
                 tempState.clickable = false;
