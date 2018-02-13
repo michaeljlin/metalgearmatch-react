@@ -45,16 +45,23 @@ class Main extends Component{
         this.handleAlertUpdate = this.handleAlertUpdate.bind(this);
         this.handleAlertTrigger = this.handleAlertTrigger.bind(this);
         this.handleSoundToggle = this.handleSoundToggle.bind(this);
+        this.handleStartClicked = this.handleStartClicked.bind(this);
     }
 
     componentDidMount(){
         soundHandler.play('sneak');
 
-        setTimeout(()=>{
-            this.setState({
-                showCards: true
-            });
-        }, 1000);
+        // setTimeout(()=>{
+        //     this.setState({
+        //         showCards: true
+        //     });
+        // }, 1000);
+    }
+
+    handleStartClicked(){
+        this.setState({
+            showCards: true
+        });
     }
 
     shufflecards(){
@@ -384,9 +391,9 @@ class Main extends Component{
                 <div className="console">
                     <div className="left_front"></div>
                     <div className="left"></div>
-                    <Player stats={playerStats} reset={this.reset} soundToggle={this.handleSoundToggle} />
+                    <Player stats={playerStats} start={this.handleStartClicked} reset={this.reset} soundToggle={this.handleSoundToggle} />
                     <div className="front"></div>
-                    <Menu />
+                    <Menu showCards={showCards} />
                     <div className="cardDisplay" style={{...cardStyle}}>
                         {this.dealcards()}
                     </div>

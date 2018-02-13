@@ -23,6 +23,8 @@ class Player extends Component{
                 <Health HP={health}/>
                 <p>Player Profile</p>
 
+                <button onClick={this.props.start}>Start Game</button>
+
                 <button onClick={this.props.reset}>Reset</button>
 
                 <button onClick={this.props.soundToggle}>Toggle Sound</button>
