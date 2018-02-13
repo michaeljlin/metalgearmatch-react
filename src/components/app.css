@@ -279,7 +279,7 @@
 
 }
 
-.menu, .front{
+.menu, .front, .scanlines{
     -webkit-user-drag: none;
     -khtml-user-drag: none;
     -moz-user-drag: none;
@@ -338,6 +338,7 @@
 
 h1{
     font-size: 70px;
+    text-shadow: -3px -3px #777777bd;
     transition: opacity 1s;
 }
 
