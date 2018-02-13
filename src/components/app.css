@@ -290,7 +290,7 @@
     position: absolute;
     /*width: 100%;*/
     /*height: 100%;*/
-    background-image: url("../assets/images/mgsjungle.jpg");
+    /*background-image: url("../assets/images/mgsjungle.jpg");*/
     width: 70%;
     height: 100%;
     left: 15%;
@@ -299,6 +299,24 @@
     align-items: center;
     justify-content: center;
 
+}
+
+.transitionMenu{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("../assets/images/mgsjungle.jpg");
+    z-index: -2;
+
+}
+
+.backgroundMenu{
+    position: absolute;
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    transition: opacity 1s;
 }
 
 .select{
