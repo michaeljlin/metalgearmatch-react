@@ -56,7 +56,7 @@ class Menu extends Component{
                 <div className="scanlines"></div>
                 <div className="select">
                     <h1 className="titleWords" style={clearStyle}>{message !== "" ? message : '$ METAL GEAR SO$LID MEMORY MATCH'}</h1>
-                    <p style={clearStyle} className="startClick" onMouseOver={this.props.mouseover} onClick={this.props.start}>Click Here to Start</p>
+                    <p style={clearStyle} className="startClick" onMouseOver={this.props.mouseover} onClick={this.props.start}>{message !== "" && message !== "GAME OVER" ? "" : 'Click Here to Start'}</p>
                 </div>
                 <div className="backgroundMenu" style={clearStyle}></div>
                 <div className="transitionMenu"></div>

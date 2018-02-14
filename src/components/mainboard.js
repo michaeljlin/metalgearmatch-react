@@ -293,27 +293,35 @@ class Main extends Component{
     handleBoardClear(){
         console.log('Board successfully cleared on boss stage: ', this.state.bossState);
 
-        this.setState({
-            showCards: false,
-            message: "Loading Next Stage"
-        });
-
-        setTimeout(()=>{
-
-            let currentBossState = this.state.bossState;
-
+        if(this.state.bossState !== 3){
             this.setState({
-                bossState: currentBossState+1
-            },()=>{
-                this.reset();
-                this.setState({
-                    showCards: true
-                },()=>{
-                    console.log('finished reset of state: ', this.state);
-                });
+                showCards: false,
+                message: "Loading Next Stage"
             });
 
-        }, 1000);
+            setTimeout(()=>{
+
+                let currentBossState = this.state.bossState;
+
+                this.setState({
+                    bossState: currentBossState+1
+                },()=>{
+                    this.reset();
+                    this.setState({
+                        showCards: true
+                    },()=>{
+                        console.log('finished reset of state: ', this.state);
+                    });
+                });
+
+            }, 1000);
+        }
+        else{
+            this.setState({
+                showCards: false,
+                message: "Mission Complete!"
+            });
+        }
     }
 
     handleMatch(cardID, num){
@@ -366,6 +374,12 @@ class Main extends Component{
                     // tempState.message = 'Made a match!';
                 }
                 else{
+
+                    // if(this.state.bossState === 3){
+                    //     this.setState({
+                    //         message: "Mission Accomplished!"
+                    //     });
+                    // }
                     // tempState.message = 'You won!';
                     this.handleBoardClear();
                 }
@@ -464,7 +478,7 @@ class Main extends Component{
                 cards: deck,
                 firstCard: null,
                 secondCard: null,
-                message: "Now Loading",
+                message: "Loading Next Stage",
                 clickable: true,
                 counter: 0,
                 failedAttempts: 0,
