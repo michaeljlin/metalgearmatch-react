@@ -28,6 +28,12 @@
     height: 5vh;
 }
 
+.bossImage{
+    width: 100%;
+    border: 1px solid black;
+    background-color: ghostwhite;
+}
+
 .container{
     padding: 3%;
     box-sizing: border-box;
@@ -310,6 +316,15 @@
 
 }
 
+.bossScanlines{
+    z-index: 0;
+    position: absolute;
+    width: 15%;
+    height: 41%;
+    background-image: url("../assets/images/scan_lines.png");
+    opacity: 0.05;
+}
+
 .scanlines{
     z-index: 0;
     position: absolute;
@@ -372,6 +387,11 @@ h1{
     }
 }
 
+.mgsfont{
+    font-family: MGS2;
+    font-size: 30px;
+}
+
 .select{
     font-family: MGS2;
     color: white;
@@ -409,6 +429,11 @@ h1{
     /*background-color: #575757;*/
     background-color: #cccdd0;
     font-family: "Istok";
+    transiation: opacity 1s;
+}
+
+.playerBox, .bossBox{
+    transition: opacity 1s;
 }
 
 .boss{
@@ -439,6 +464,7 @@ h1{
 .health{
     height: 100%;
     background: linear-gradient(to bottom right, dodgerblue, mediumspringgreen);
+    transition: width 1s;
 }
 
 .lifeText{

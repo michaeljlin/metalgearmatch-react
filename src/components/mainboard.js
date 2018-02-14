@@ -34,7 +34,8 @@ class Main extends Component{
             alerts: [{}],
             timeoutTracker: null,
             resetFlag: false,
-            showCards: false
+            showCards: false,
+            bossState: null
         };
 
         this.dealcards = this.dealcards.bind(this);
@@ -65,7 +66,8 @@ class Main extends Component{
     handleStartClicked(){
         soundHandler.play('start');
         this.setState({
-            showCards: true
+            showCards: true,
+            bossState: 1
         });
     }
 
@@ -133,6 +135,7 @@ class Main extends Component{
                 message: "GAME OVER",
                 clickable: false,
                 showCards: false,
+                bossState: null,
                 alerts: [{}]
             });
             return;
@@ -249,6 +252,7 @@ class Main extends Component{
                 message: "GAME OVER",
                 clickable: false,
                 showCards: false,
+                bossState: null,
                 alerts: [{}]
             });
 
@@ -438,7 +442,7 @@ class Main extends Component{
     }
 
     render(){
-        const {message, playerStats, failedAttempts, showCards} = this.state;
+        const {message, playerStats, failedAttempts, showCards, bossState} = this.state;
 
         let cardStyle = null;
 
@@ -455,21 +459,20 @@ class Main extends Component{
 
         return(
             <div className="mainBoard">
-                {/*<div className="message">{message}</div>*/}
-                <Message message={message}/>
+                {/*<Message message={message}/>*/}
 
                 <div className="console">
                     <div className="left_front"></div>
                     <div className="left"></div>
-                    <Player stats={playerStats} start={this.handleStartClicked} reset={this.reset} soundToggle={this.handleSoundToggle} />
+                    <Player stats={playerStats} start={this.handleStartClicked} reset={this.reset} soundToggle={this.handleSoundToggle} cardState={showCards} />
                     <div className="front"></div>
                     <Menu showCards={showCards} start={this.handleStartClicked} mouseover={this.handlemouseover} />
-                    <div className="cardDisplay" style={{...cardStyle}}>
+                    <div draggable="false" className="cardDisplay" style={{...cardStyle}}>
                         {this.dealcards()}
                     </div>
                     <div className="right_front"></div>
                     <div className="right"></div>
-                    <Boss attempts={failedAttempts} attack={this.handleBossAttack} />
+                    <Boss attempts={failedAttempts} attack={this.handleBossAttack} bossState={bossState} />
                 </div>
                 {/*<button onClick={this.reset}>Reset</button>*/}
             </div>
