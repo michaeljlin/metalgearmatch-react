@@ -60,11 +60,11 @@ class Player extends Component{
 
                     {/*<button onClick={this.props.start}>Start Game</button>*/}
 
-                    <button onClick={this.props.reset}>Reset</button>
+                    {/*<button onClick={this.props.reset}>Reset</button>*/}
 
-                    <button onClick={this.props.soundToggle}>Toggle Sound</button>
+                    {/*<button onClick={this.props.soundToggle}>Toggle Sound</button>*/}
 
-                    <button onClick={this.props.info}>Toggle Instructions</button>
+                    {/*<button onClick={this.props.info}>Toggle Instructions</button>*/}
                 </div>
             </div>
         );

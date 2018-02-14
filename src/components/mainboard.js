@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import faPlayCircle from '@fortawesome/fontawesome-free-solid/faPlayCircle';
+import faQuestionCircle from '@fortawesome/fontawesome-free-solid/faQuestionCircle';
+
 import Player from "./player";
 import Boss from "./boss";
 import Card from './card';
@@ -137,6 +141,8 @@ class Main extends Component{
     handleInfoClicked(){
         console.log('info button clicked!');
 
+        soundHandler.play('select');
+
         let currentInfoState = this.state.showInfo;
         let currentCardState = this.state.showCards;
 
@@ -217,6 +223,8 @@ class Main extends Component{
     }
 
     handleSoundToggle(){
+        soundHandler.play('select');
+
         soundHandler.soundSwitch();
 
         if(soundHandler.getSoundState()){
@@ -548,7 +556,14 @@ class Main extends Component{
                     <Menu message={message} showCards={showCards} showInfo={showInfo} start={this.handleStartClicked} mouseover={this.handlemouseover} info={this.handleInfoClicked} />
                     <div draggable="false" className="cardDisplay" style={{...cardStyle}}>
                         {this.dealcards()}
-                        <div style={uiStyle} className="uiBar">Test</div>
+                        <div style={uiStyle} className="uiBar">
+                            <div onClick={this.handleInfoClicked} className="icon">
+                                <FontAwesomeIcon icon={faQuestionCircle} size='2x'/>
+                            </div>
+                            <div onClick={this.handleSoundToggle} className="icon">
+                                <FontAwesomeIcon icon={faPlayCircle} size='2x'/>
+                            </div>
+                        </div>
                     </div>
                     <div className="right_front"></div>
                     <div className="right"></div>

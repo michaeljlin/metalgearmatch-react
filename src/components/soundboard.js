@@ -37,6 +37,7 @@ function Soundboard(){
         this.menuStart.loop = false;
         this.menuStart.currentTime = 0.3;
         this.menuSelect.loop = false;
+        this.menuSelect.currentTime = 0.3;
         this.menuOption.loop = false;
         this.menuOption.currentTime = 0.95;
 
@@ -76,6 +77,7 @@ function Soundboard(){
                     break;
                 case 'select':
                     this.menuSelect.play();
+                    this.menuSelect.currentTime = 0.3;
                     break;
                 case 'option':
                     this.menuOption.play();
