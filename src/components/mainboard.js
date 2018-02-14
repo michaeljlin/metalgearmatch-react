@@ -35,7 +35,8 @@ class Main extends Component{
             timeoutTracker: null,
             resetFlag: false,
             showCards: false,
-            bossState: null
+            bossState: null,
+            showInfo: false
         };
 
         this.dealcards = this.dealcards.bind(this);
@@ -52,6 +53,7 @@ class Main extends Component{
         this.handleBossAttack = this.handleBossAttack.bind(this);
         this.handlemouseover = this.handlemouseover.bind(this);
         this.handleBoardClear = this.handleBoardClear.bind(this);
+        this.handleInfoClicked = this.handleInfoClicked.bind(this);
     }
 
     componentDidMount(){
@@ -66,10 +68,25 @@ class Main extends Component{
 
     handleStartClicked(){
         soundHandler.play('start');
-        this.setState({
-            showCards: true,
-            bossState: 1
-        });
+
+        if(this.state.bossState === null){
+            this.setState({
+                showCards: true,
+                bossState: 1
+            });
+        }
+        else {
+            this.reset({health: 5, accuracy: 0, maxHealth: 5}, ()=>{
+
+                console.log('state at reset before showCards: ', this.state);
+
+                this.setState({
+                    showCards: true,
+                    bossState: 1,
+                    clickable: true
+                });
+            });
+        }
     }
 
     shufflecards(){
@@ -117,7 +134,16 @@ class Main extends Component{
         });
     }
 
-    handleAlert(){
+    handleInfoClicked(){
+        console.log('info button clicked!');
+
+        let currentInfoState = this.state.showInfo;
+        let currentCardState = this.state.showCards;
+
+        this.setState({
+            showInfo: !currentInfoState,
+            showCards: !currentCardState
+        });
 
     }
 
@@ -136,7 +162,7 @@ class Main extends Component{
                 message: "GAME OVER",
                 clickable: false,
                 showCards: false,
-                bossState: null,
+                bossState: 0,
                 alerts: [{}]
             });
             return;
@@ -253,7 +279,7 @@ class Main extends Component{
                 message: "GAME OVER",
                 clickable: false,
                 showCards: false,
-                bossState: null,
+                bossState: 0,
                 alerts: [{}]
             });
 
@@ -278,26 +304,35 @@ class Main extends Component{
     handleBoardClear(){
         console.log('Board successfully cleared on boss stage: ', this.state.bossState);
 
-        this.setState({
-            showCards: false
-        });
-
-        setTimeout(()=>{
-
-            let currentBossState = this.state.bossState;
-
+        if(this.state.bossState !== 3){
             this.setState({
-                bossState: currentBossState+1
-            },()=>{
-                this.reset();
-                this.setState({
-                    showCards: true
-                },()=>{
-                    console.log('finished reset of state: ', this.state);
-                });
+                showCards: false,
+                message: "Loading Next Stage"
             });
 
-        }, 1000);
+            setTimeout(()=>{
+
+                let currentBossState = this.state.bossState;
+
+                this.setState({
+                    bossState: currentBossState+1
+                },()=>{
+                    this.reset();
+                    this.setState({
+                        showCards: true
+                    },()=>{
+                        console.log('finished reset of state: ', this.state);
+                    });
+                });
+
+            }, 1000);
+        }
+        else{
+            this.setState({
+                showCards: false,
+                message: "Mission Complete!"
+            });
+        }
     }
 
     handleMatch(cardID, num){
@@ -347,10 +382,16 @@ class Main extends Component{
                 }
 
                 if(tempState.counter < 9){
-                    tempState.message = 'Made a match!';
+                    // tempState.message = 'Made a match!';
                 }
                 else{
-                    tempState.message = 'You won!';
+
+                    // if(this.state.bossState === 3){
+                    //     this.setState({
+                    //         message: "Mission Accomplished!"
+                    //     });
+                    // }
+                    // tempState.message = 'You won!';
                     this.handleBoardClear();
                 }
 
@@ -422,9 +463,10 @@ class Main extends Component{
         console.log(tempState);
     }
 
-    reset(tempPlayer){
+    reset(tempPlayer, callback){
 
-        // console.log('reset tempPlayer: ', tempPlayer);
+        console.log('reset tempPlayer: ', tempPlayer);
+        console.log('reset callback: ', callback);
 
         if(!this.state.resetFlag){
             console.log('resetting');
@@ -447,7 +489,7 @@ class Main extends Component{
                 cards: deck,
                 firstCard: null,
                 secondCard: null,
-                message: "",
+                message: "Loading Next Stage",
                 clickable: true,
                 counter: 0,
                 failedAttempts: 0,
@@ -458,6 +500,11 @@ class Main extends Component{
             },()=>{
 
                 setTimeout(()=>{
+
+                    if(callback !== undefined){
+                        callback();
+                    }
+
                     this.setState({
                         resetFlag: false
                     });
@@ -469,19 +516,24 @@ class Main extends Component{
     }
 
     render(){
-        const {message, playerStats, failedAttempts, showCards, bossState} = this.state;
+        const {message, playerStats, failedAttempts, showCards, bossState, showInfo} = this.state;
 
         let cardStyle = null;
+        let uiStyle = {};
 
         if(showCards){
             cardStyle = {
                 transform: ''
             };
+
+            uiStyle.transform = 'translateZ(5px)';
         }
         else{
             cardStyle = {
                 transform: 'translateZ(-55px)'
-            }
+            };
+
+            uiStyle.transform = '';
         }
 
         return(
@@ -491,11 +543,12 @@ class Main extends Component{
                 <div className="console">
                     <div className="left_front"></div>
                     <div className="left"></div>
-                    <Player stats={playerStats} start={this.handleStartClicked} reset={this.reset} soundToggle={this.handleSoundToggle} cardState={showCards} />
+                    <Player stats={playerStats} start={this.handleStartClicked} reset={this.reset} soundToggle={this.handleSoundToggle} info={this.handleInfoClicked} cardState={showCards} />
                     <div className="front"></div>
-                    <Menu showCards={showCards} start={this.handleStartClicked} mouseover={this.handlemouseover} />
+                    <Menu message={message} showCards={showCards} showInfo={showInfo} start={this.handleStartClicked} mouseover={this.handlemouseover} info={this.handleInfoClicked} />
                     <div draggable="false" className="cardDisplay" style={{...cardStyle}}>
                         {this.dealcards()}
+                        <div style={uiStyle} className="uiBar">Test</div>
                     </div>
                     <div className="right_front"></div>
                     <div className="right"></div>
