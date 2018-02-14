@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import ocelot from '../assets/images/ocelotcard.png';
+import volgin from '../assets/images/volgincard.png';
+import theboss from '../assets/images/thebosscard.png';
 
 class Boss extends Component{
     constructor(props) {
@@ -10,7 +12,8 @@ class Boss extends Component{
             attempts: props.attempts,
             maxAttempts: 10,
             bossState: props.bossState,
-            bossInfo: null
+            bossInfo: null,
+            bossImg: ocelot
         }
     }
 
@@ -32,25 +35,30 @@ class Boss extends Component{
 
         if(nextProps.bossState !== this.state.bossState){
             let bossInfo = {};
+            let srcImg = null;
 
             switch(nextProps.bossState){
                 case 1:
                     bossInfo.name = 'Ocelot';
                     bossInfo.maxAttempts = 10;
+                    srcImg = ocelot;
                     break;
                 case 2:
                     bossInfo.name = 'Volgin';
                     bossInfo.maxAttempts = 8;
+                    srcImg = volgin;
                     break;
                 case 3:
                     bossInfo.name = 'The Boss';
                     bossInfo.maxAttempts = 6;
+                    srcImg = theboss;
                     break;
             }
 
             this.setState({
                 bossState: nextProps.bossState,
-                bossInfo: bossInfo
+                bossInfo: bossInfo,
+                bossImg: srcImg
             });
         }
     }
@@ -60,6 +68,7 @@ class Boss extends Component{
         const attempts = this.state.attempts;
         const bossState = this.state.bossState;
         const bossInfo = this.state.bossInfo;
+        const bossImg = this.state.bossImg;
 
         let bossStyle = {};
 
@@ -76,9 +85,9 @@ class Boss extends Component{
                     <p className="mgsfont">{bossInfo !== null ? bossInfo.name : ""}</p>
                     <div>
                         <div className="bossScanlines"></div>
-                        <img className="bossImage" src={ocelot}/>
+                        <img className="bossImage" src={bossImg}/>
                     </div>
-                    <p>Turns until attack: {this.state.maxAttempts-attempts}</p>
+                    <p>Turns until attack: {(bossInfo !== null ? bossInfo.maxAttempts : 0)-attempts}</p>
                 </div>
             </div>
         );
