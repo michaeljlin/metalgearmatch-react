@@ -401,13 +401,19 @@
     color: white;
 
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: column wrap;
     justify-content: center;
     align-content: center;
 }
 
 .info>p{
     font-size: 30px;
+}
+
+.instructions{
+    text-align: center;
+    width: 75%;
+    margin: auto;
 }
 
 .transitionMenu{
