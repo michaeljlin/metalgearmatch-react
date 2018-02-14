@@ -35,7 +35,8 @@ class Main extends Component{
             timeoutTracker: null,
             resetFlag: false,
             showCards: false,
-            bossState: null
+            bossState: null,
+            showInfo: false
         };
 
         this.dealcards = this.dealcards.bind(this);
@@ -52,6 +53,7 @@ class Main extends Component{
         this.handleBossAttack = this.handleBossAttack.bind(this);
         this.handlemouseover = this.handlemouseover.bind(this);
         this.handleBoardClear = this.handleBoardClear.bind(this);
+        this.handleInfoClicked = this.handleInfoClicked.bind(this);
     }
 
     componentDidMount(){
@@ -132,7 +134,16 @@ class Main extends Component{
         });
     }
 
-    handleAlert(){
+    handleInfoClicked(){
+        console.log('info button clicked!');
+
+        let currentInfoState = this.state.showInfo;
+        let currentCardState = this.state.showCards;
+
+        this.setState({
+            showInfo: !currentInfoState,
+            showCards: !currentCardState
+        });
 
     }
 
@@ -505,19 +516,24 @@ class Main extends Component{
     }
 
     render(){
-        const {message, playerStats, failedAttempts, showCards, bossState} = this.state;
+        const {message, playerStats, failedAttempts, showCards, bossState, showInfo} = this.state;
 
         let cardStyle = null;
+        let uiStyle = {};
 
         if(showCards){
             cardStyle = {
                 transform: ''
             };
+
+            uiStyle.transform = 'translateZ(5px)';
         }
         else{
             cardStyle = {
                 transform: 'translateZ(-55px)'
-            }
+            };
+
+            uiStyle.transform = '';
         }
 
         return(
@@ -527,11 +543,12 @@ class Main extends Component{
                 <div className="console">
                     <div className="left_front"></div>
                     <div className="left"></div>
-                    <Player stats={playerStats} start={this.handleStartClicked} reset={this.reset} soundToggle={this.handleSoundToggle} cardState={showCards} />
+                    <Player stats={playerStats} start={this.handleStartClicked} reset={this.reset} soundToggle={this.handleSoundToggle} info={this.handleInfoClicked} cardState={showCards} />
                     <div className="front"></div>
-                    <Menu message={message} showCards={showCards} start={this.handleStartClicked} mouseover={this.handlemouseover} />
+                    <Menu message={message} showCards={showCards} showInfo={showInfo} start={this.handleStartClicked} mouseover={this.handlemouseover} info={this.handleInfoClicked} />
                     <div draggable="false" className="cardDisplay" style={{...cardStyle}}>
                         {this.dealcards()}
+                        <div style={uiStyle} className="uiBar">Test</div>
                     </div>
                     <div className="right_front"></div>
                     <div className="right"></div>
