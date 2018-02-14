@@ -72,7 +72,7 @@ class Boss extends Component{
 
         let bossStyle = {};
 
-        if(bossState !== null){
+        if(bossState !== null && bossState !== 0){
             bossStyle.opacity = 1;
         }
         else{

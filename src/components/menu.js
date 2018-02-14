@@ -6,7 +6,8 @@ class Menu extends Component{
         this.state = {
             showCards: this.props.showCards,
             start: this.props.start,
-            mouseover: this.props.mouseover
+            mouseover: this.props.mouseover,
+            message: props.message
         };
     }
 
@@ -16,10 +17,17 @@ class Menu extends Component{
                 showCards: nextProps.showCards
             });
         }
+
+        if(this.state.message !== nextProps.message){
+            this.setState({
+                message: nextProps.message
+            });
+        }
     }
 
     render(){
         const showCards = this.state.showCards;
+        const message = this.state.message;
 
         let pointerStyle = null;
         let clearStyle = null;
@@ -47,7 +55,7 @@ class Menu extends Component{
             <div className="menu" style={pointerStyle}>
                 <div className="scanlines"></div>
                 <div className="select">
-                    <h1 className="titleWords" style={clearStyle}>$ METAL GEAR SO$LID MEMORY MATCH</h1>
+                    <h1 className="titleWords" style={clearStyle}>{message !== "" ? message : '$ METAL GEAR SO$LID MEMORY MATCH'}</h1>
                     <p style={clearStyle} className="startClick" onMouseOver={this.props.mouseover} onClick={this.props.start}>Click Here to Start</p>
                 </div>
                 <div className="backgroundMenu" style={clearStyle}></div>
