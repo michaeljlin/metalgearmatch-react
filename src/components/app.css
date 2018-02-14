@@ -251,6 +251,14 @@
         top: 30px;
     }
 
+    .titleWords{
+        font-size: 80px;
+    }
+
+    .startClick{
+        font-size: 40px;
+    }
+
     .front{
         /*transform: rotateX(-48deg) translateZ(528px) translateY(523px);*/
         transform: rotateX(-90deg) translateZ(656px) translateY(53px);
@@ -263,6 +271,14 @@
     .mainBoard{
         width: 1200px;
         height: 500px;
+    }
+
+    .titleWords{
+        font-size: 50px;
+    }
+
+    .startClick{
+        font-size: 25px;
     }
 
     .front{
@@ -284,6 +300,16 @@
         transform: rotateX(-90deg) translateZ(268px) translateY(21px);
     }
 
+}
+
+@media screen and (max-width: 479px){
+    .titleWords{
+        font-size: 20px;
+    }
+
+    .startClick{
+        font-size: 10px;
+    }
 }
 
 .menu, .front, .scanlines{
@@ -352,8 +378,8 @@
     transition: opacity 1s;
 }
 
-h1{
-    font-size: 80px;
+.titleWords{
+    /*font-size: 10px;*/
     /*text-shadow: -3px -3px #777777bd;*/
     animation: wave 4s ease-in-out infinite;
     transition: opacity 1s;
@@ -403,7 +429,7 @@ h1{
 .startClick{
     display: inline-block;
     width: 30%;
-    font-size: 40px;
+    /*font-size: 40px;*/
     text-align: center;
     transition: opacity 1s;
 }
