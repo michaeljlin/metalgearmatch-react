@@ -34,7 +34,7 @@ class Card extends Component{
                 srcImg = theFear;
                 break;
             case 4:
-                srcImg = eva;
+                srcImg = theSorrow;
                 break;
             case 5:
                 srcImg = sigint;
@@ -46,16 +46,25 @@ class Card extends Component{
                 srcImg = sokolov;
                 break;
             case 8:
-                srcImg = theSorrow;
+                srcImg = eva;
                 break;
             default:
                 srcImg = paramedic;
         }
 
+        let backgroundColor = null;
+
+        if(this.props.num >= 5){
+            backgroundColor = 'blue';
+        }
+        else{
+            backgroundColor = 'red'
+        }
+
         this.state = {
             num: this.props.num,
             backStyle: {
-                'backgroundColor': 'blue',
+                'backgroundColor': backgroundColor,
                 transform: 'rotateY(180deg)'
             },
             frontStyle: {
@@ -94,7 +103,7 @@ class Card extends Component{
                     srcImg = theFear;
                     break;
                 case 4:
-                    srcImg = eva;
+                    srcImg = theSorrow;
                     break;
                 case 5:
                     srcImg = sigint;
@@ -106,11 +115,22 @@ class Card extends Component{
                     srcImg = sokolov;
                     break;
                 case 8:
-                    srcImg = theSorrow;
+                    srcImg = eva;
                     break;
                 default:
                     srcImg = paramedic;
             }
+
+            let backgroundColor = null;
+
+            if(tempState.num >= 5){
+                backgroundColor = 'blue';
+            }
+            else{
+                backgroundColor = 'red'
+            }
+
+            tempState.backStyle.backgroundColor = backgroundColor;
 
             tempState.srcImg = srcImg;
 
@@ -178,10 +198,10 @@ class Card extends Component{
         const {frontStyle, backStyle, flipStyle, srcImg} = this.state;
 
         return(
-            <div className={`cardContainer`} style={{...flipStyle}} onClick={this.handleClick}>
+            <div draggable="false" className={`cardContainer`} style={{...flipStyle}} onClick={this.handleClick}>
                 <div className="card"  >
-                    <img src={srcImg} style={{...backStyle}}/>
-                    <img src={backImg} style={{...frontStyle}}/>
+                    <img draggable="false" src={srcImg} style={{...backStyle}}/>
+                    <img draggable="false" src={backImg} style={{...frontStyle}}/>
                 </div>
             </div>
         );

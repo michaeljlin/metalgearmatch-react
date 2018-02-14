@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Health from './healthbar';
+import snake from '../assets/images/snakecard.png'
 
 class Player extends Component{
     constructor(props) {
@@ -7,7 +8,8 @@ class Player extends Component{
         // console.log('player props is: ',props.stats);
         this.state = {
             health: props.stats.health,
-            maxHealth: props.stats.maxHealth
+            maxHealth: props.stats.maxHealth,
+            cardState: false
         };
     }
 
@@ -19,22 +21,49 @@ class Player extends Component{
                 health: nextProps.stats.health,
                 maxHealth: nextProps.stats.maxHealth
             };
-            this.setState(tempState);
+            this.setState({
+                health: tempState.health,
+                maxHealth: tempState.maxHealth
+            });
+        }
+
+        if(this.state.cardState !== nextProps.cardState){
+            this.setState({
+                cardState: nextProps.cardState
+            });
         }
     }
 
     render(){
-        const {health, maxHealth} = this.state;
+        const {health, maxHealth, cardState} = this.state;
+
+        let showStyle = {};
+
+        if(cardState){
+            showStyle.opacity = 1;
+        }
+        else{
+            showStyle.opacity = 0;
+        }
+
         return(
             <div className="player">
-                <Health HP={health} maxHP={maxHealth}/>
-                <p>Player Profile</p>
+                <div style={showStyle} className="playerBox">
+                    <Health HP={health} maxHP={maxHealth}/>
+                    <p>Snake</p>
 
-                {/*<button onClick={this.props.start}>Start Game</button>*/}
+                    <div>
+                        <div className="bossScanlines"></div>
+                        <img className="bossImage" src={snake}/>
+                    </div>
 
-                <button onClick={this.props.reset}>Reset</button>
 
-                <button onClick={this.props.soundToggle}>Toggle Sound</button>
+                    {/*<button onClick={this.props.start}>Start Game</button>*/}
+
+                    <button onClick={this.props.reset}>Reset</button>
+
+                    <button onClick={this.props.soundToggle}>Toggle Sound</button>
+                </div>
             </div>
         );
     }

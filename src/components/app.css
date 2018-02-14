@@ -28,6 +28,12 @@
     height: 5vh;
 }
 
+.bossImage{
+    width: 100%;
+    border: 1px solid black;
+    background-color: ghostwhite;
+}
+
 .container{
     padding: 3%;
     box-sizing: border-box;
@@ -242,6 +248,15 @@
     .mainBoard{
         width: 1600px;
         height: 750px;
+        top: 30px;
+    }
+
+    .titleWords{
+        font-size: 80px;
+    }
+
+    .startClick{
+        font-size: 40px;
     }
 
     .front{
@@ -256,6 +271,14 @@
     .mainBoard{
         width: 1200px;
         height: 500px;
+    }
+
+    .titleWords{
+        font-size: 50px;
+    }
+
+    .startClick{
+        font-size: 25px;
     }
 
     .front{
@@ -277,6 +300,16 @@
         transform: rotateX(-90deg) translateZ(268px) translateY(21px);
     }
 
+}
+
+@media screen and (max-width: 479px){
+    .titleWords{
+        font-size: 20px;
+    }
+
+    .startClick{
+        font-size: 10px;
+    }
 }
 
 .menu, .front, .scanlines{
@@ -309,6 +342,15 @@
 
 }
 
+.bossScanlines{
+    z-index: 0;
+    position: absolute;
+    width: 15%;
+    height: 41%;
+    background-image: url("../assets/images/scan_lines.png");
+    opacity: 0.05;
+}
+
 .scanlines{
     z-index: 0;
     position: absolute;
@@ -336,8 +378,8 @@
     transition: opacity 1s;
 }
 
-h1{
-    font-size: 80px;
+.titleWords{
+    /*font-size: 10px;*/
     /*text-shadow: -3px -3px #777777bd;*/
     animation: wave 4s ease-in-out infinite;
     transition: opacity 1s;
@@ -371,6 +413,11 @@ h1{
     }
 }
 
+.mgsfont{
+    font-family: MGS2;
+    font-size: 30px;
+}
+
 .select{
     font-family: MGS2;
     color: white;
@@ -382,7 +429,7 @@ h1{
 .startClick{
     display: inline-block;
     width: 30%;
-    font-size: 40px;
+    /*font-size: 40px;*/
     text-align: center;
     transition: opacity 1s;
 }
@@ -408,6 +455,11 @@ h1{
     /*background-color: #575757;*/
     background-color: #cccdd0;
     font-family: "Istok";
+    transiation: opacity 1s;
+}
+
+.playerBox, .bossBox{
+    transition: opacity 1s;
 }
 
 .boss{
@@ -438,6 +490,7 @@ h1{
 .health{
     height: 100%;
     background: linear-gradient(to bottom right, dodgerblue, mediumspringgreen);
+    transition: width 1s;
 }
 
 .lifeText{

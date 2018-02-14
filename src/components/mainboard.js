@@ -34,7 +34,8 @@ class Main extends Component{
             alerts: [{}],
             timeoutTracker: null,
             resetFlag: false,
-            showCards: false
+            showCards: false,
+            bossState: null
         };
 
         this.dealcards = this.dealcards.bind(this);
@@ -49,6 +50,8 @@ class Main extends Component{
         this.handleSoundToggle = this.handleSoundToggle.bind(this);
         this.handleStartClicked = this.handleStartClicked.bind(this);
         this.handleBossAttack = this.handleBossAttack.bind(this);
+        this.handlemouseover = this.handlemouseover.bind(this);
+        this.handleBoardClear = this.handleBoardClear.bind(this);
     }
 
     componentDidMount(){
@@ -64,7 +67,8 @@ class Main extends Component{
     handleStartClicked(){
         soundHandler.play('start');
         this.setState({
-            showCards: true
+            showCards: true,
+            bossState: 1
         });
     }
 
@@ -73,20 +77,20 @@ class Main extends Component{
             {num:1, flipped:false, fade: false, type:'enemy'},
             {num:2, flipped:false, fade: false, type:'enemy'},
             {num:3, flipped:false, fade: false, type:'enemy'},
-            {num:4, flipped:false, fade: false, type: 'ally'},
+            {num:4, flipped:false, fade: false, type: 'enemy'},
             {num:5, flipped:false, fade: false, type: 'ally'},
             {num:6, flipped:false, fade: false, type: 'ally'},
             {num:7, flipped:false, fade: false, type: 'ally'},
-            {num:8, flipped:false, fade: false, type: 'enemy'},
+            {num:8, flipped:false, fade: false, type: 'ally'},
             {num:9, flipped:false, fade: false, type: 'ally'},
             {num:1, flipped:false, fade: false, type:'enemy'},
             {num:2, flipped:false, fade: false, type:'enemy'},
             {num:3, flipped:false, fade: false, type:'enemy'},
-            {num:4, flipped:false, fade: false, type: 'ally'},
+            {num:4, flipped:false, fade: false, type: 'enemy'},
             {num:5, flipped:false, fade: false, type: 'ally'},
             {num:6, flipped:false, fade: false, type: 'ally'},
             {num:7, flipped:false, fade: false, type: 'ally'},
-            {num:8, flipped:false, fade: false, type: 'enemy'},
+            {num:8, flipped:false, fade: false, type: 'ally'},
             {num:9, flipped:false, fade: false, type: 'ally'}
         ];
 
@@ -132,6 +136,7 @@ class Main extends Component{
                 message: "GAME OVER",
                 clickable: false,
                 showCards: false,
+                bossState: null,
                 alerts: [{}]
             });
             return;
@@ -179,6 +184,10 @@ class Main extends Component{
             tempPlayer.health+=1;
             this.setState({playerStats: tempPlayer});
         }
+    }
+
+    handlemouseover() {
+        soundHandler.play('option');
     }
 
     handleSoundToggle(){
@@ -244,6 +253,7 @@ class Main extends Component{
                 message: "GAME OVER",
                 clickable: false,
                 showCards: false,
+                bossState: null,
                 alerts: [{}]
             });
 
@@ -263,6 +273,31 @@ class Main extends Component{
 
         // soundHandler.play('shot');
         // this.reset(tempPlayer);
+    }
+
+    handleBoardClear(){
+        console.log('Board successfully cleared on boss stage: ', this.state.bossState);
+
+        this.setState({
+            showCards: false
+        });
+
+        setTimeout(()=>{
+
+            let currentBossState = this.state.bossState;
+
+            this.setState({
+                bossState: currentBossState+1
+            },()=>{
+                this.reset();
+                this.setState({
+                    showCards: true
+                },()=>{
+                    console.log('finished reset of state: ', this.state);
+                });
+            });
+
+        }, 1000);
     }
 
     handleMatch(cardID, num){
@@ -316,6 +351,7 @@ class Main extends Component{
                 }
                 else{
                     tempState.message = 'You won!';
+                    this.handleBoardClear();
                 }
 
                 tempState.cards[tempState.firstCard.id] = {num: tempState.firstCard.num, flipped: true, fade: true, type: tempState.cards[tempState.firstCard.id].type};
@@ -401,7 +437,7 @@ class Main extends Component{
 
             soundHandler.stop('all');
 
-            if(tempPlayer.hasOwnProperty('health')){
+            if(tempPlayer!== undefined && tempPlayer.hasOwnProperty('health')){
                 soundHandler.play('boss');
             }
 
@@ -415,7 +451,7 @@ class Main extends Component{
                 clickable: true,
                 counter: 0,
                 failedAttempts: 0,
-                playerStats: tempPlayer.hasOwnProperty('health') ? tempPlayer : {health: 5, accuracy: 0, maxHealth: 5} ,
+                playerStats: tempPlayer!== undefined && tempPlayer.hasOwnProperty('health') ? tempPlayer : {health: 5, accuracy: 0, maxHealth: 5} ,
                 alerts: [{}],
                 timeoutTracker: null,
                 resetFlag: true
@@ -433,7 +469,7 @@ class Main extends Component{
     }
 
     render(){
-        const {message, playerStats, failedAttempts, showCards} = this.state;
+        const {message, playerStats, failedAttempts, showCards, bossState} = this.state;
 
         let cardStyle = null;
 
@@ -450,21 +486,20 @@ class Main extends Component{
 
         return(
             <div className="mainBoard">
-                {/*<div className="message">{message}</div>*/}
-                <Message message={message}/>
+                {/*<Message message={message}/>*/}
 
                 <div className="console">
                     <div className="left_front"></div>
                     <div className="left"></div>
-                    <Player stats={playerStats} start={this.handleStartClicked} reset={this.reset} soundToggle={this.handleSoundToggle} />
+                    <Player stats={playerStats} start={this.handleStartClicked} reset={this.reset} soundToggle={this.handleSoundToggle} cardState={showCards} />
                     <div className="front"></div>
-                    <Menu showCards={showCards} start={this.handleStartClicked} />
-                    <div className="cardDisplay" style={{...cardStyle}}>
+                    <Menu showCards={showCards} start={this.handleStartClicked} mouseover={this.handlemouseover} />
+                    <div draggable="false" className="cardDisplay" style={{...cardStyle}}>
                         {this.dealcards()}
                     </div>
                     <div className="right_front"></div>
                     <div className="right"></div>
-                    <Boss attempts={failedAttempts} attack={this.handleBossAttack} />
+                    <Boss attempts={failedAttempts} attack={this.handleBossAttack} bossState={bossState} />
                 </div>
                 {/*<button onClick={this.reset}>Reset</button>*/}
             </div>
