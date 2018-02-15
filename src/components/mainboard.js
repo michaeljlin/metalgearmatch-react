@@ -115,12 +115,12 @@ class Main extends Component{
             {num:9, flipped:false, fade: false, type: 'ally'}
         ];
 
-        // for(let count  = 0; count < deck.length; count++){
-        //     let random = Math.floor(Math.random()*deck.length);
-        //     let temp = deck[count];
-        //     deck[count] = deck[random];
-        //     deck[random] = temp;
-        // }
+        for(let count  = 0; count < deck.length; count++){
+            let random = Math.floor(Math.random()*deck.length);
+            let temp = deck[count];
+            deck[count] = deck[random];
+            deck[random] = temp;
+        }
 
         console.log(`deck: `,deck);
 
