@@ -296,6 +296,10 @@
     opacity: 0.05;
 }
 
+.playerScreen{
+    margin-top: 35px;
+}
+
 .scanlines{
     z-index: 1;
     position: absolute;

@@ -91,12 +91,12 @@ class Boss extends Component{
         return(
             <div className="boss">
                 <div className="bossBox" style={bossStyle}>
-                    <p className="mgsfont">{bossInfo !== null ? bossInfo.name : ""}</p>
+                    <p className="mgsfont">Turns until attack: {(bossInfo !== null ? bossInfo.maxAttempts : 0)-attempts}</p>
                     <div>
                         <div className="bossScanlines"></div>
                         <img className="bossImage" src={bossImg}/>
                     </div>
-                    <p>Turns until attack: {(bossInfo !== null ? bossInfo.maxAttempts : 0)-attempts}</p>
+                    <p className="mgsfont">{bossInfo !== null ? bossInfo.name : ""}</p>
                 </div>
             </div>
         );

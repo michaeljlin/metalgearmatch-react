@@ -555,8 +555,6 @@ class Main extends Component{
 
         return(
             <div className="mainBoard">
-                {/*<Message message={message}/>*/}
-
                 <div className="console">
                     <div className="left_front"></div>
                     <div className="left"></div>
@@ -578,7 +576,6 @@ class Main extends Component{
                     <div className="right"></div>
                     <Boss attempts={failedAttempts} attack={this.handleBossAttack} cardState={showCards} bossState={bossState} />
                 </div>
-                {/*<button onClick={this.reset}>Reset</button>*/}
             </div>
         );
     }
