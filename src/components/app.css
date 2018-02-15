@@ -167,6 +167,7 @@
     transform-style: preserve-3d;
     position: relative;
     margin: auto;
+    margin-top: 2.5%;
     width: 400px;
     height: 200px;
 }
@@ -188,93 +189,6 @@
 
     transform: rotateX(-48deg) translateZ(155px) translateY(116px);
 }
-
-@media screen and (min-width: 1601px){
-
-    .mainBoard{
-        width: 1600px;
-        height: 750px;
-        top: 30px;
-    }
-
-    .console{
-        width: 1600px;
-        height: 700px;
-    }
-
-    .titleWords{
-        font-size: 80px;
-    }
-
-    .startClick{
-        font-size: 40px;
-    }
-
-    .front{
-        transform: rotateX(-90deg) translateZ(626px) translateY(68px);
-    }
-
-}
-
-@media screen and (max-width: 1600px) and (min-width: 801px){
-
-    .mainBoard{
-        width: 1200px;
-        height: 500px;
-    }
-
-    .console {
-        width: 1200px;
-        height: 600px;
-    }
-
-    .titleWords{
-        font-size: 50px;
-    }
-
-    .startClick{
-        font-size: 25px;
-    }
-
-    .front{
-        /*transform: rotateX(-48deg) translateZ(399px) translateY(389px);*/
-        width: 1200px;
-        transform: rotateX(-90deg) translateZ(536px) translateY(59px);
-    }
-
-}
-
-@media screen and (max-width: 800px) and (min-width: 480px){
-
-    .mainBoard{
-        width: 600px;
-        height: 300px;
-    }
-
-    .console {
-        width: 600px;
-        height: 350px;
-    }
-
-    .front{
-        /*transform: rotateX(-48deg) translateZ(210px) translateY(187px);*/
-        width: 600px;
-        transform: rotateX(-90deg) translateZ(268px) translateY(21px);
-    }
-
-}
-
-@media screen and (max-width: 479px){
-
-    .titleWords{
-        font-size: 20px;
-    }
-
-    .startClick{
-        font-size: 10px;
-    }
-}
-
 .menu, .front, .scanlines{
     -webkit-user-drag: none;
     -khtml-user-drag: none;
@@ -292,9 +206,6 @@
 
 .menu{
     position: absolute;
-    /*width: 100%;*/
-    /*height: 100%;*/
-    /*background-image: url("../assets/images/mgsjungle.jpg");*/
     width: 70%;
     height: 100%;
     left: 15%;
@@ -568,4 +479,143 @@
 @font-face {
     font-family: 'MGS2';
     src: url("../assets/fonts/MGS2.ttf");
+}
+
+@media screen and (min-width: 1601px){
+
+    .mainBoard{
+        width: 1600px;
+        height: 750px;
+        top: 30px;
+    }
+
+    .console{
+        width: 1600px;
+        height: 700px;
+    }
+
+    .titleWords{
+        font-size: 80px;
+    }
+
+    .startClick{
+        font-size: 40px;
+    }
+
+    .front{
+        transform: rotateX(-90deg) translateZ(626px) translateY(68px);
+    }
+
+}
+
+@media screen and (max-width: 1600px) and (min-width: 801px){
+
+    .mainBoard{
+        width: 1200px;
+        height: 500px;
+    }
+
+    .console {
+        width: 1200px;
+        height: 600px;
+    }
+
+    .mgsfont{
+        font-size: 22px;
+    }
+
+    .titleWords{
+        font-size: 50px;
+    }
+
+    .startClick{
+        font-size: 25px;
+    }
+
+    .front{
+        width: 1200px;
+        transform: rotateX(-90deg) translateZ(536px) translateY(59px);
+    }
+
+}
+
+@media screen and (max-width: 800px) and (min-width: 480px){
+
+    .mainBoard{
+        width: 600px;
+        height: 300px;
+        margin-top: 5.5%;
+    }
+
+    .console {
+        transform: inherit;
+        width: 600px;
+        height: 350px;
+    }
+
+    .info>p{
+        font-size: 15px;
+    }
+
+    .lifeText{
+        font-size: 20px;
+        left: -20%;
+    }
+
+    .alertText{
+        font-size: 12px;
+    }
+
+    .mgsfont{
+        font-size: 18px;
+    }
+
+    .front{
+        display: none;
+    }
+
+}
+
+@media screen and (max-width: 479px){
+
+    .mainBoard{
+        width: 400px;
+        height: 300px;
+    }
+
+    .console {
+        transform: inherit;
+        width: 400px;
+        height: 300px;
+    }
+
+    .titleWords{
+        font-size: 20px;
+    }
+
+    .startClick{
+        font-size: 10px;
+    }
+
+    .mgsfont{
+        font-size: 14px;
+    }
+
+    .alertText{
+        font-size: 12px;
+    }
+
+    .lifeText{
+        font-size: 10px;
+        left: -35%;
+        top: -70%;
+    }
+
+    .info>p{
+        font-size: 12px;
+    }
+
+    .front{
+        display: none;
+    }
 }

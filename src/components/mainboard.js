@@ -537,6 +537,7 @@ class Main extends Component{
 
         let cardStyle = null;
         let uiStyle = {};
+        let width = window.innerWidth;
 
         if(showCards){
             cardStyle = {
@@ -565,10 +566,10 @@ class Main extends Component{
                         {this.dealcards()}
                         <div style={uiStyle} className="uiBar">
                             <div onClick={this.handleInfoClicked} className="icon">
-                                <FontAwesomeIcon icon={faQuestionCircle} size='2x'/>
+                                <FontAwesomeIcon icon={faQuestionCircle} size={width < 800 ? '1x' : '2x'}/>
                             </div>
                             <div onClick={this.handleSoundToggle} className="icon">
-                                <FontAwesomeIcon icon={faSoundOn} size='2x'/>
+                                <FontAwesomeIcon icon={faSoundOn} size={width < 800 ? '1x' : '2x'}/>
                             </div>
                         </div>
                     </div>
