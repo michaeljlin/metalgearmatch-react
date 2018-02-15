@@ -494,6 +494,7 @@
 
 .startClick:hover{
     /*text-shadow: -3px -3px #777777bd;*/
+    color: rgba(255, 255, 255, 0.65);
     animation: wave 4s ease-in-out infinite;
     cursor: pointer;
 }
