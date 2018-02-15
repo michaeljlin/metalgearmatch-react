@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import faPlayCircle from '@fortawesome/fontawesome-free-solid/faPlayCircle';
-import faQuestionCircle from '@fortawesome/fontawesome-free-solid/faQuestionCircle';
+
+import faSoundOn from '@fortawesome/fontawesome-free-solid/faVolumeUp';
+import faQuestionCircle from '@fortawesome/fontawesome-free-regular/faQuestionCircle';
 
 import Player from "./player";
 import Boss from "./boss";
 import Card from './card';
-import Message from './messages';
 import Menu from './menu';
 import AlertText from './alertText';
 
 import alertTracker from './alerts';
 import soundHandler from './soundboard';
-
-import backImg from '../assets/images/mgscard.svg';
 
 class Main extends Component{
     constructor(props){
@@ -536,6 +534,8 @@ class Main extends Component{
     render(){
         const {message, playerStats, failedAttempts, showCards, bossState, showInfo} = this.state;
 
+        const soundState = soundHandler.getSoundState();
+
         let cardStyle = null;
         let uiStyle = {};
 
@@ -571,7 +571,7 @@ class Main extends Component{
                                 <FontAwesomeIcon icon={faQuestionCircle} size='2x'/>
                             </div>
                             <div onClick={this.handleSoundToggle} className="icon">
-                                <FontAwesomeIcon icon={faPlayCircle} size='2x'/>
+                                <FontAwesomeIcon icon={faSoundOn} size='2x'/>
                             </div>
                         </div>
                     </div>

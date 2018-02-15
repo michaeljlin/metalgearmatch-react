@@ -34,7 +34,7 @@ class AlertText extends Component{
 
         return (
             <div style={{display: `${remainingTime === null ? 'none' : 'block'}`}} className={'alertText digitalText'}>{
-                remainingTime === null ? "" : `Card #: ${cardID} alert time: ${(remainingTime-remainingTime%1000)/1000}:${(remainingTime%1000)/10}`
+                remainingTime === null ? "" : `${(remainingTime-remainingTime%1000)/1000}:${(remainingTime%1000)/10}`
             }</div>
         );
     }
