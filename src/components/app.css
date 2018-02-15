@@ -173,9 +173,10 @@
 
 .front{
     background-color: #9f9fab;
-    width: 100%;
+    width: 1600px;
     position: absolute;
-    height: 15%;
+    height: 20%;
+    left: -5px;
 
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
@@ -196,6 +197,11 @@
         top: 30px;
     }
 
+    .console{
+        width: 1600px;
+        height: 700px;
+    }
+
     .titleWords{
         font-size: 80px;
     }
@@ -205,8 +211,7 @@
     }
 
     .front{
-        /*transform: rotateX(-48deg) translateZ(528px) translateY(523px);*/
-        transform: rotateX(-90deg) translateZ(656px) translateY(53px);
+        transform: rotateX(-90deg) translateZ(626px) translateY(68px);
     }
 
 }
@@ -216,6 +221,11 @@
     .mainBoard{
         width: 1200px;
         height: 500px;
+    }
+
+    .console {
+        width: 1200px;
+        height: 600px;
     }
 
     .titleWords{
@@ -228,7 +238,8 @@
 
     .front{
         /*transform: rotateX(-48deg) translateZ(399px) translateY(389px);*/
-        transform: rotateX(-90deg) translateZ(530px) translateY(43px);
+        width: 1200px;
+        transform: rotateX(-90deg) translateZ(536px) translateY(59px);
     }
 
 }
@@ -240,14 +251,21 @@
         height: 300px;
     }
 
+    .console {
+        width: 600px;
+        height: 350px;
+    }
+
     .front{
         /*transform: rotateX(-48deg) translateZ(210px) translateY(187px);*/
+        width: 600px;
         transform: rotateX(-90deg) translateZ(268px) translateY(21px);
     }
 
 }
 
 @media screen and (max-width: 479px){
+
     .titleWords{
         font-size: 20px;
     }
