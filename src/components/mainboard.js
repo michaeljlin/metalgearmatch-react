@@ -76,6 +76,7 @@ class Main extends Component{
         if(this.state.bossState === null){
             this.setState({
                 showCards: true,
+                message: 'Loading Next Stage',
                 bossState: 1
             });
         }
@@ -162,6 +163,8 @@ class Main extends Component{
         if(tempPlayer.health === 0){
 
             alertTracker.stop();
+
+            clearTimeout(this.state.timeoutTracker);
 
             this.setState({
                 playerStats: tempPlayer,
@@ -276,17 +279,22 @@ class Main extends Component{
 
         let tempPlayer = this.state.playerStats;
 
+        soundHandler.play('boss');
+
         if(tempPlayer.health === 1){
 
             tempPlayer.health = 0;
 
             alertTracker.stop();
 
+            clearTimeout(this.state.timeoutTracker);
+
             this.setState({
                 playerStats: {health: tempPlayer.health, maxHealth: tempPlayer.maxHealth, accuracy: 0},
                 message: "GAME OVER",
                 clickable: false,
                 showCards: false,
+                failedAttempts: 0,
                 bossState: 0,
                 alerts: [{}]
             });
@@ -381,6 +389,7 @@ class Main extends Component{
 
                 if(tempState.cards[cardID].type === 'enemy'){
                     alertTracker.stop();
+                    soundHandler.play('safe');
                     this.setState({
                         alerts: [{}]
                     });
@@ -400,6 +409,7 @@ class Main extends Component{
                     //     });
                     // }
                     // tempState.message = 'You won!';
+
                     this.handleBoardClear();
                 }
 
@@ -417,7 +427,7 @@ class Main extends Component{
 
                 tempState.failedAttempts++;
                 tempState.clickable = false;
-                tempState.message = 'Not a match!';
+                // tempState.message = 'Not a match!';
 
                 if(tempState.cards[cardID].type === 'enemy' && !alertTracker.searchForSameID(cardID)){
                     // alertTracker.add(cardID, num, ()=>{
@@ -439,7 +449,7 @@ class Main extends Component{
 
                     tempState.clickable = true;
 
-                    tempState.message = "";
+                    // tempState.message = "";
 
                     // this.setState({...tempState});
 
@@ -485,11 +495,11 @@ class Main extends Component{
 
             const deck = this.shufflecards();
 
-            soundHandler.stop('all');
+            // soundHandler.stop('all');
 
-            if(tempPlayer!== undefined && tempPlayer.hasOwnProperty('health')){
-                soundHandler.play('boss');
-            }
+            // if(tempPlayer!== undefined && tempPlayer.hasOwnProperty('health')){
+            //     soundHandler.play('boss');
+            // }
 
             soundHandler.play('sneak');
 
@@ -567,7 +577,7 @@ class Main extends Component{
                     </div>
                     <div className="right_front"></div>
                     <div className="right"></div>
-                    <Boss attempts={failedAttempts} attack={this.handleBossAttack} bossState={bossState} />
+                    <Boss attempts={failedAttempts} attack={this.handleBossAttack} cardState={showCards} bossState={bossState} />
                 </div>
                 {/*<button onClick={this.reset}>Reset</button>*/}
             </div>

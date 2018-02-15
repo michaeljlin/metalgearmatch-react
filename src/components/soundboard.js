@@ -24,9 +24,25 @@ function Soundboard(){
     this.menuOption = new Audio(menuOption);
     this.bossShot = new Audio(bossShot);
 
+    this.soundHolder = [];
+
     this.soundToggle = true;
 
     this.initialize = function(){
+        this.soundHolder = {
+            jungle: jungle,
+            found: found,
+            gun: gun,
+            safe: safe,
+            sneak: sneak,
+            allyheal: allyheal,
+            fail: fail,
+            menuStart: menuStart,
+            menuSelect: menuSelect,
+            menuOption: menuOption,
+            bossShot: bossShot
+        };
+
         this.found.loop = false;
         this.gun.loop = false;
         this.safe.loop = false;
@@ -49,39 +65,41 @@ function Soundboard(){
     };
 
     this.play = function(type){
-        console.log('playing sound: ', type);
 
         if(this.soundToggle){
+            let audioObj = null;
+
             switch(type){
                 case 'found':
-                    this.found.play();
+                    audioObj = new Audio(this.soundHolder.found);
                     break;
                 case 'shot':
-                    this.gun.play();
+                    audioObj = new Audio(this.soundHolder.gun);
                     break;
                 case 'safe':
-                    this.safe.play();
+                    audioObj = new Audio(this.soundHolder.safe);
                     break;
                 case 'ally':
-                    this.allyheal.play();
+                    audioObj = new Audio(this.soundHolder.allyheal);
                     break;
                 case 'fail':
-                    this.fail.play();
+                    audioObj = new Audio(this.soundHolder.fail);
                     break;
                 case 'boss':
-                    this.bossShot.play();
+                    audioObj = new Audio(this.soundHolder.bossShot);
+                    audioObj.currentTime = 0;
                     break;
                 case 'start':
-                    this.menuStart.play();
-                    this.menuStart.currentTime = 0.3;
+                    audioObj = new Audio(this.soundHolder.menuStart);
+                    audioObj.currentTime = 0.3;
                     break;
                 case 'select':
-                    this.menuSelect.play();
-                    this.menuSelect.currentTime = 0.3;
+                    audioObj = new Audio(this.soundHolder.menuSelect);
+                    audioObj.currentTime = 0.3;
                     break;
                 case 'option':
-                    this.menuOption.play();
-                    this.menuOption.currentTime = 0.95;
+                    audioObj = new Audio(this.soundHolder.menuOption);
+                    audioObj.currentTime = 0.95;
                     break;
                 case 'alert':
                     this.sneak.pause();
@@ -96,11 +114,69 @@ function Soundboard(){
                     }
                     break;
             }
-        }
 
+            if(audioObj !== null){
+                audioObj.play();
+            }
+        }
     };
 
+    // this.play = function(type){
+    //     console.log('playing sound: ', type);
+    //
+    //     if(this.soundToggle){
+    //         switch(type){
+    //             case 'found':
+    //                 this.found.play();
+    //                 break;
+    //             case 'shot':
+    //                 this.gun.play();
+    //                 break;
+    //             case 'safe':
+    //                 this.safe.play();
+    //                 break;
+    //             case 'ally':
+    //                 this.allyheal.play();
+    //                 break;
+    //             case 'fail':
+    //                 this.fail.play();
+    //                 break;
+    //             case 'boss':
+    //                 this.bossShot.play();
+    //                 this.bossShot.currentTime = 0;
+    //                 break;
+    //             case 'start':
+    //                 this.menuStart.play();
+    //                 this.menuStart.currentTime = 0.3;
+    //                 break;
+    //             case 'select':
+    //                 this.menuSelect.play();
+    //                 this.menuSelect.currentTime = 0.3;
+    //                 break;
+    //             case 'option':
+    //                 this.menuOption.play();
+    //                 this.menuOption.currentTime = 0.95;
+    //                 break;
+    //             case 'alert':
+    //                 this.sneak.pause();
+    //                 if(this.jungle.paused){
+    //                     this.jungle.play();
+    //                 }
+    //                 break;
+    //             case 'sneak':
+    //                 this.jungle.pause();
+    //                 if(this.sneak.paused){
+    //                     this.sneak.play();
+    //                 }
+    //                 break;
+    //         }
+    //     }
+    //
+    // };
+
     this.stop = function(type){
+        console.log('stopping type: ', type);
+
         switch(type){
             case 'alert':
                 this.jungle.pause();
@@ -112,27 +188,21 @@ function Soundboard(){
                 break;
             case 'all':
                 this.found.pause();
-                this.found.currentTime = 0;
                 this.gun.pause();
-                this.gun.currentTime = 0;
                 this.safe.pause();
-                this.safe.currentTime = 0;
                 this.bossShot.pause();
-                this.bossShot.currentTime = 0;
                 this.jungle.pause();
                 this.jungle.currentTime = 5;
                 this.sneak.pause();
                 this.sneak.currentTime = 0;
                 this.allyheal.pause();
-                this.allyheal.currentTime = 0;
                 this.fail.pause();
-                this.fail.currentTime = 0;
                 this.menuStart.pause();
                 this.menuStart.currentTime = 0.3;
                 this.menuSelect.pause();
-                this.menuSelect.currentTime = 0;
+                this.menuSelect.currentTime = 0.3;
                 this.menuOption.pause();
-                this.menuOption.currentTime = 0;
+                this.menuOption.currentTime = 0.95;
                 break;
         }
     };

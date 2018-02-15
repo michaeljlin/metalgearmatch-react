@@ -13,7 +13,8 @@ class Boss extends Component{
             maxAttempts: 10,
             bossState: props.bossState,
             bossInfo: null,
-            bossImg: ocelot
+            bossImg: ocelot,
+            cardState: props.cardState
         }
     }
 
@@ -25,11 +26,18 @@ class Boss extends Component{
             if(nextProps.attempts === this.state.maxAttempts){
                 console.log('triggering boss attack');
                 this.state.attack();
+
                 return;
             }
 
             this.setState({
                 attempts: nextProps.attempts
+            });
+        }
+
+        if(nextProps.showCards !== this.state.cardState){
+            this.setState({
+                cardState: nextProps.cardState
             });
         }
 
@@ -64,15 +72,16 @@ class Boss extends Component{
     }
 
     render(){
-        // console.log('boss alerts state: ', this.state.alerts);
+        // console.log('boss state: ', this.state);
         const attempts = this.state.attempts;
         const bossState = this.state.bossState;
         const bossInfo = this.state.bossInfo;
         const bossImg = this.state.bossImg;
+        const cardState = this.state.cardState;
 
         let bossStyle = {};
 
-        if(bossState !== null && bossState !== 0){
+        if(bossState !== null && bossState !== 0 && cardState){
             bossStyle.opacity = 1;
         }
         else{
