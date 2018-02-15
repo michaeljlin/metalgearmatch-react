@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import faPlayCircle from '@fortawesome/fontawesome-free-solid/faPlayCircle';
-import faQuestionCircle from '@fortawesome/fontawesome-free-solid/faQuestionCircle';
+
+import faSoundOn from '@fortawesome/fontawesome-free-solid/faVolumeUp';
+import faQuestionCircle from '@fortawesome/fontawesome-free-regular/faQuestionCircle';
 
 import Player from "./player";
 import Boss from "./boss";
 import Card from './card';
-import Message from './messages';
 import Menu from './menu';
 import AlertText from './alertText';
 
 import alertTracker from './alerts';
 import soundHandler from './soundboard';
-
-import backImg from '../assets/images/mgscard.svg';
 
 class Main extends Component{
     constructor(props){
@@ -72,6 +70,7 @@ class Main extends Component{
 
     handleStartClicked(){
         soundHandler.play('start');
+        soundHandler.play('sneak');
 
         if(this.state.bossState === null){
             this.setState({
@@ -544,11 +543,11 @@ class Main extends Component{
                 transform: ''
             };
 
-            uiStyle.transform = 'translateZ(5px)';
+            uiStyle.transform = 'translateZ(10px)';
         }
         else{
             cardStyle = {
-                transform: 'translateZ(-55px)'
+                transform: 'translateZ(-115px)'
             };
 
             uiStyle.transform = '';
@@ -556,8 +555,6 @@ class Main extends Component{
 
         return(
             <div className="mainBoard">
-                {/*<Message message={message}/>*/}
-
                 <div className="console">
                     <div className="left_front"></div>
                     <div className="left"></div>
@@ -571,7 +568,7 @@ class Main extends Component{
                                 <FontAwesomeIcon icon={faQuestionCircle} size='2x'/>
                             </div>
                             <div onClick={this.handleSoundToggle} className="icon">
-                                <FontAwesomeIcon icon={faPlayCircle} size='2x'/>
+                                <FontAwesomeIcon icon={faSoundOn} size='2x'/>
                             </div>
                         </div>
                     </div>
@@ -579,7 +576,6 @@ class Main extends Component{
                     <div className="right"></div>
                     <Boss attempts={failedAttempts} attack={this.handleBossAttack} cardState={showCards} bossState={bossState} />
                 </div>
-                {/*<button onClick={this.reset}>Reset</button>*/}
             </div>
         );
     }

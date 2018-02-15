@@ -50,21 +50,11 @@ class Player extends Component{
             <div className="player">
                 <div style={showStyle} className="playerBox">
                     <Health HP={health} maxHP={maxHealth}/>
-                    <p>Snake</p>
-
-                    <div>
+                    <div className="playerScreen">
                         <div className="bossScanlines"></div>
                         <img className="bossImage" src={snake}/>
                     </div>
-
-
-                    {/*<button onClick={this.props.start}>Start Game</button>*/}
-
-                    {/*<button onClick={this.props.reset}>Reset</button>*/}
-
-                    {/*<button onClick={this.props.soundToggle}>Toggle Sound</button>*/}
-
-                    {/*<button onClick={this.props.info}>Toggle Instructions</button>*/}
+                    <p className="mgsfont">Snake</p>
                 </div>
             </div>
         );
