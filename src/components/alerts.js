@@ -73,7 +73,7 @@ function AlertHandler(){
         //     return this.alerts.getID() === cardID;
         // });
 
-        console.log(`Removing alert on ${cardID}`);
+        // console.log(`Removing alert on ${cardID}`);
 
         let alertIndex = this.alerts.findIndex((alert)=>{
             return alert.getID() === cardID;

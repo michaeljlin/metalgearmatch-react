@@ -115,12 +115,12 @@ class Main extends Component{
             {num:9, flipped:false, fade: false, type: 'ally'}
         ];
 
-        for(let count  = 0; count < deck.length; count++){
-            let random = Math.floor(Math.random()*deck.length);
-            let temp = deck[count];
-            deck[count] = deck[random];
-            deck[random] = temp;
-        }
+        // for(let count  = 0; count < deck.length; count++){
+        //     let random = Math.floor(Math.random()*deck.length);
+        //     let temp = deck[count];
+        //     deck[count] = deck[random];
+        //     deck[random] = temp;
+        // }
 
         console.log(`deck: `,deck);
 
@@ -139,7 +139,7 @@ class Main extends Component{
     }
 
     handleInfoClicked(){
-        console.log('info button clicked!');
+        // console.log('info button clicked!');
 
         soundHandler.play('select');
 
@@ -180,14 +180,14 @@ class Main extends Component{
             return alerts.cardID === cardID;
         });
 
-        console.log('alertIndex is: ', alertIndex);
+        // console.log('alertIndex is: ', alertIndex);
 
         let newAlertState = this.state.alerts;
         newAlertState.splice(alertIndex, 1);
 
         delete newAlertState[0][cardID];
 
-        console.log('new alert state is: ', newAlertState);
+        // console.log('new alert state is: ', newAlertState);
 
         this.setState({
             playerStats: tempPlayer,
@@ -230,7 +230,7 @@ class Main extends Component{
         soundHandler.soundSwitch();
 
         if(soundHandler.getSoundState()){
-            console.log('in sound switch state: ', this.state);
+            // console.log('in sound switch state: ', this.state);
             if(this.state.alerts.length > 1){
                 soundHandler.play('alert');
             }
@@ -265,11 +265,11 @@ class Main extends Component{
             alerts: tempAlerts
         });
 
-        console.log(`state alerts is: `, this.state.alerts);
+        // console.log(`state alerts is: `, this.state.alerts);
     }
 
     handleAlertTrigger(cardID, num){
-        console.log(`triggering alert on cardID: ${cardID} and number: ${num}!`);
+        // console.log(`triggering alert on cardID: ${cardID} and number: ${num}!`);
         alertTracker.remove(cardID);
         this.handleDamage(cardID);
     }
@@ -336,9 +336,15 @@ class Main extends Component{
             }, 1000);
         }
         else{
+            console.log('Mission completed');
+
+            clearTimeout(this.state.timeoutTracker);
+
             this.setState({
                 showCards: false,
-                message: "Mission Complete!"
+                message: "Mission Accomplished!"
+            }, ()=>{
+                console.log('final message: ', this.state.message);
             });
         }
     }
@@ -395,11 +401,11 @@ class Main extends Component{
                 }
                 else{
 
-                    // if(this.state.bossState === 3){
-                    //     this.setState({
-                    //         message: "Mission Accomplished!"
-                    //     });
-                    // }
+                    if(this.state.bossState === 3){
+                        this.setState({
+                            message: ""
+                        });
+                    }
                     // tempState.message = 'You won!';
 
                     this.handleBoardClear();
@@ -457,11 +463,12 @@ class Main extends Component{
             }
         }
 
+
+
         this.setState({
             cards: tempState.cards,
             firstCard: tempState.firstCard,
             secondCard: tempState.secondCard,
-            message: tempState.message,
             clickable: tempState.clickable,
             counter: tempState.counter,
             timeoutTracker: tempState.timeoutTracker,

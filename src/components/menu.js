@@ -105,7 +105,7 @@ class Menu extends Component{
                 </div>
                 <div className="select">
                     <h1 className="titleWords" style={clearStyle}>{message !== "" ? message : '$ METAL GEAR SO$LID MEMORY MATCH'}</h1>
-                    <p style={clearStyle} className="startClick" onMouseOver={this.props.mouseover} onClick={this.props.start}>{message !== "" && message !== "GAME OVER" ? "" : 'Click Here to Start'}</p>
+                    <p style={clearStyle} className="startClick" onMouseOver={this.props.mouseover} onClick={this.props.start}>{message !== "" && message !== "GAME OVER" && message !== "Mission Accomplished!" ? "" : 'Click Here to Start New Game'}</p>
                 </div>
                 <div className="backgroundMenu" style={clearStyle}></div>
                 <div className="transitionMenu" ></div>
