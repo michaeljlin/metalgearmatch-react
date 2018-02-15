@@ -534,8 +534,6 @@ class Main extends Component{
     render(){
         const {message, playerStats, failedAttempts, showCards, bossState, showInfo} = this.state;
 
-        const soundState = soundHandler.getSoundState();
-
         let cardStyle = null;
         let uiStyle = {};
 
@@ -544,11 +542,11 @@ class Main extends Component{
                 transform: ''
             };
 
-            uiStyle.transform = 'translateZ(5px)';
+            uiStyle.transform = 'translateZ(50px)';
         }
         else{
             cardStyle = {
-                transform: 'translateZ(-55px)'
+                transform: 'translateZ(-115px)'
             };
 
             uiStyle.transform = '';
