@@ -70,6 +70,7 @@ class Main extends Component{
 
     handleStartClicked(){
         soundHandler.play('start');
+        soundHandler.play('sneak');
 
         if(this.state.bossState === null){
             this.setState({
@@ -542,7 +543,7 @@ class Main extends Component{
                 transform: ''
             };
 
-            uiStyle.transform = 'translateZ(50px)';
+            uiStyle.transform = 'translateZ(10px)';
         }
         else{
             cardStyle = {
