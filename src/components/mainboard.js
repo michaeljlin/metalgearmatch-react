@@ -132,7 +132,7 @@ class Main extends Component{
             return (
                 <div key={'cardContainer'+index} className={`container`}>
                     {/*<div className={'alertText'}>Test</div>*/}
-                        <AlertText key={'alert'+index} cardID={index} alerts={this.state.alerts} />
+                        <AlertText key={'alert'+index} cardID={index} alerts={this.state.alerts} cardState={this.state.showCards} />
                         <Card key={'card'+index} id={index} reset={this.state.resetFlag} handleMatch={this.handleMatch} num={this.state.cards[index].num} flipped={this.state.cards[index].flipped} fade={this.state.cards[index].fade}/>
                 </div>);
         });
@@ -307,13 +307,6 @@ class Main extends Component{
         }
 
         console.log(`new player stats: `, tempPlayer);
-
-        // this.setState({
-        //     playerStats: tempPlayer
-        // });
-
-        // soundHandler.play('shot');
-        // this.reset(tempPlayer);
     }
 
     handleBoardClear(){

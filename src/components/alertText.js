@@ -6,7 +6,8 @@ class AlertText extends Component{
 
         this.state = {
             cardID: this.props.cardID,
-            remainingTime: null
+            remainingTime: null,
+            cardState: this.props.cardState
         };
     }
 
@@ -27,13 +28,19 @@ class AlertText extends Component{
                 remainingTime: null
             });
         }
+
+        if(nextProps.cardState !== this.state.cardState){
+            this.setState({
+                cardState: nextProps.cardState
+            });
+        }
     }
 
     render(){
-        const {cardID, remainingTime} = this.state;
+        const {remainingTime, cardState} = this.state;
 
         return (
-            <div style={{display: `${remainingTime === null ? 'none' : 'block'}`}} className={'alertText digitalText'}>{
+            <div style={{display: `${remainingTime === null || !cardState ? 'none' : 'block'}`}} className={'alertText digitalText'}>{
                 remainingTime === null ? "" : `${(remainingTime-remainingTime%1000)/1000}:${(remainingTime%1000)/10}`
             }</div>
         );
