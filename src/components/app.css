@@ -356,6 +356,10 @@
     font-size: 30px;
 }
 
+.attackText{
+    transition: transform 1s;
+}
+
 .select{
     font-family: MGS2;
     color: white;
