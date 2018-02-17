@@ -66,7 +66,8 @@ class Boss extends Component{
             this.setState({
                 bossState: nextProps.bossState,
                 bossInfo: bossInfo,
-                bossImg: srcImg
+                bossImg: srcImg,
+                maxAttempts: bossInfo.maxAttempts
             });
         }
     }
