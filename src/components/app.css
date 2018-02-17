@@ -360,6 +360,25 @@
     transition: transform 1s;
 }
 
+.warning{
+    position: absolute;
+    opacity: 0;
+    bottom: -18.5%;
+    width: 100%;
+    transform: translateZ(1px);
+}
+
+.warning>img{
+    width: 100%;
+    clip-path: polygon(0 88%, 100% 88%, 100% 100%, 0% 100%);
+}
+
+@keyframes caution {
+    0%{ opacity: 0; }
+    50%{ opacity: 0.9; }
+    100%{ opacity: 0; }
+}
+
 .select{
     font-family: MGS2;
     color: white;

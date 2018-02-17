@@ -9,6 +9,7 @@ import Boss from "./boss";
 import Card from './card';
 import Menu from './menu';
 import AlertText from './alertText';
+import Warning from './warning';
 
 import alertTracker from './alerts';
 import soundHandler from './soundboard';
@@ -572,6 +573,7 @@ class Main extends Component{
                                 <FontAwesomeIcon icon={faSoundOn} size={width < 800 ? '1x' : '2x'}/>
                             </div>
                         </div>
+                        <Warning bossState={bossState} attempts={failedAttempts} />
                     </div>
                     <div className="right_front"></div>
                     <div className="right"></div>

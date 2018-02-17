@@ -102,7 +102,6 @@ class Boss extends Component{
             }
         }
 
-
         return(
             <div className="boss">
                 <div className="bossBox" style={bossStyle}>
