@@ -604,7 +604,7 @@
 
 }
 
-@media screen and (max-width: 1600px) and (min-width: 801px){
+@media screen and (max-width: 1600px) and (min-width: 1281px){
 
     .mainBoard{
         width: 1200px;
@@ -647,6 +647,49 @@
         transform: rotateX(-90deg) translateZ(536px) translateY(59px);
     }
 
+}
+
+@media screen and (max-width: 1280px) and (min-width: 801px){
+    .mainBoard{
+        width: 1000px;
+        height: 500px;
+
+        transform-style: preserve-3d;
+        transform: rotateX(25deg);
+
+        -webkit-transform-style: preserve-3d;
+        -webkit-transform: rotateX(25deg);
+    }
+
+    .console {
+        width: 1000px;
+        height: 500px;
+    }
+
+    .warning{
+        top: -14%;
+    }
+
+    .warningNum{
+        font-size: 30px;
+    }
+
+    .mgsfont{
+        font-size: 22px;
+    }
+
+    .titleWords{
+        font-size: 50px;
+    }
+
+    .startClick{
+        font-size: 25px;
+    }
+
+    .front{
+        width: 1000px;
+        transform: rotateX(-90deg) translateZ(446px) translateY(48px);
+    }
 }
 
 @media screen and (max-width: 800px) and (min-width: 480px){
