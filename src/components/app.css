@@ -185,12 +185,12 @@
 }
 
 .mainBoard{
-    transform-style: preserve-3d;
-    transform: rotateX(25deg);
+    /*transform-style: preserve-3d;*/
+    /*transform: rotateX(25deg);*/
 
-    -webkit-transform-style: preserve-3d;
+    /*-webkit-transform-style: preserve-3d;*/
 
-    -webkit-transform: rotateX(25deg);
+    /*-webkit-transform: rotateX(25deg);*/
     position: relative;
     margin: auto;
     margin-top: 2.5%;
@@ -569,6 +569,12 @@
         width: 1600px;
         height: 750px;
         top: 30px;
+
+        transform-style: preserve-3d;
+        transform: rotateX(25deg);
+
+        -webkit-transform-style: preserve-3d;
+        -webkit-transform: rotateX(25deg);
     }
 
     .console{
@@ -603,6 +609,12 @@
     .mainBoard{
         width: 1200px;
         height: 500px;
+
+        transform-style: preserve-3d;
+        transform: rotateX(25deg);
+
+        -webkit-transform-style: preserve-3d;
+        -webkit-transform: rotateX(25deg);
     }
 
     .console {
@@ -643,10 +655,10 @@
         width: 600px;
         height: 300px;
         margin-top: 5.5%;
+        transform: inherit;
     }
 
     .console {
-        transform: inherit;
         width: 600px;
         height: 350px;
     }
@@ -688,10 +700,10 @@
         margin-top: 5.5%;
         width: 400px;
         height: 300px;
+        transform: inherit;
     }
 
     .console {
-        transform: inherit;
         width: 400px;
         height: 300px;
     }
