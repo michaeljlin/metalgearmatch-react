@@ -19,8 +19,6 @@ class Boss extends Component{
     }
 
     componentWillReceiveProps(nextProps){
-        // console.log(`boss received new props: `, nextProps);
-
         if(nextProps.attempts!== this.state.attempts){
 
             if(nextProps.attempts === this.state.maxAttempts){
@@ -81,6 +79,8 @@ class Boss extends Component{
         const cardState = this.state.cardState;
 
         let bossStyle = {};
+        let attemptStyle = {};
+        let countStyle = {};
 
         if(bossState !== null && bossState !== 0 && cardState){
             bossStyle.opacity = 1;
@@ -89,10 +89,21 @@ class Boss extends Component{
             bossStyle.opacity = 0;
         }
 
+        if(bossInfo !== null){
+            if(bossInfo.maxAttempts - attempts <= 2){
+                countStyle.color = 'red';
+                // countStyle.animation = 'numCaution 4s ease-in-out infinite';
+            }
+            else if(bossInfo.maxAttempts - attempts <= 4){
+                countStyle.color = 'yellow';
+                // countStyle.animation = 'numCaution 4s ease-in-out infinite';
+            }
+        }
+
         return(
             <div className="boss">
                 <div className="bossBox" style={bossStyle}>
-                    <p className="mgsfont">Turns until attack: {(bossInfo !== null ? bossInfo.maxAttempts : 0)-attempts}</p>
+                    <p className="mgsfont attackText" style={attemptStyle}>Attacking in <span className="warningNum" style={countStyle}>{(bossInfo !== null ? bossInfo.maxAttempts : 0)-attempts}</span> missed match{(bossInfo !== null && bossInfo.maxAttempts - attempts > 1) ? 'es' : ''}!</p>
                     <div>
                         <div className="bossScanlines"></div>
                         <img className="bossImage" src={bossImg}/>

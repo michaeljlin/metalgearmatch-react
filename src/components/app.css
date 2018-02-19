@@ -356,6 +356,44 @@
     font-size: 30px;
 }
 
+.attackText{
+    transition: transform 1s;
+}
+
+.warning{
+    position: absolute;
+    opacity: 1;
+    top: -16%;
+    width: 100%;
+    transition: transform 1s;
+    transform: rotateX(73deg);
+    transform-origin: 50% bottom;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.warning>img{
+    width: 100%;
+    /*clip-path: polygon(0 88%, 100% 88%, 100% 100%, 0% 100%);*/
+}
+
+.warningNum{
+    /*transform: scale(1);*/
+    /*display: block;*/
+}
+
+/*@keyframes numCaution {*/
+    /*0%{ transform: scale(1) }*/
+    /*50%{ transform: scale(2) }*/
+    /*100%{ transform: scale(1) }*/
+/*}*/
+
+@keyframes caution {
+    0%{ opacity: 0; }
+    50%{ opacity: 0.9; }
+    100%{ opacity: 0; }
+}
+
 .select{
     font-family: MGS2;
     color: white;
@@ -494,6 +532,14 @@
         height: 700px;
     }
 
+    .warning{
+        top: -16%;
+    }
+
+    .warningNum{
+        font-size: 45px;
+    }
+
     .titleWords{
         font-size: 80px;
     }
@@ -518,6 +564,14 @@
     .console {
         width: 1200px;
         height: 600px;
+    }
+
+    .warning{
+        top: -14%;
+    }
+
+    .warningNum{
+        font-size: 30px;
     }
 
     .mgsfont{
@@ -566,6 +620,14 @@
         font-size: 12px;
     }
 
+    .warning{
+        top: -13%;
+    }
+
+    .warningNum{
+        font-size: 22px;
+    }
+
     .mgsfont{
         font-size: 18px;
     }
@@ -579,6 +641,7 @@
 @media screen and (max-width: 479px){
 
     .mainBoard{
+        margin-top: 5.5%;
         width: 400px;
         height: 300px;
     }
@@ -595,6 +658,14 @@
 
     .startClick{
         font-size: 10px;
+    }
+
+    .warning{
+        top: -10%;
+    }
+
+    .warningNum{
+        font-size: 18px;
     }
 
     .mgsfont{
