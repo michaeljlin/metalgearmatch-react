@@ -72,6 +72,11 @@
     transition: transform .75s;
     transform-style: preserve-3d;
     transform: translateZ(25px);
+
+    -moz-perspective: 800px;
+    -moz-transition: transform .75s;
+    -moz-transform: translateZ(25px);
+    -moz-transform-style: preserve-3d;
 }
 
 .fadeout{
@@ -114,6 +119,8 @@
     position: relative;
     transform-style: preserve-3d;
     transition: transform 1s;
+    -moz-transform-style: preserve-3d;
+    -moz-transition: transform 1s;
 }
 
 .card img{
@@ -124,6 +131,8 @@
     -webkit-backface-visibility: hidden;
     border-radius: 8px;
     border: 2px solid black;
+
+    left: 0;
 
     transition: .2s ease-in-out;
     /*transform: scale(0.95);*/
@@ -139,6 +148,9 @@
     -moz-user-select: none;
     -webkit-user-select: none;
     user-select: none;
+
+    -moz-transition: .2s ease-in-out;
+    -moz-backface-visibility: hidden;
 }
 
 .card img:hover{
@@ -161,10 +173,24 @@
     position: absolute;
 }
 
-
-.mainBoard{
+.app{
     perspective: 1000px;
     transform-style: preserve-3d;
+
+    -moz-perspective: 1000px;
+    -moz-transform-style: preserve-3d;
+
+    -webkit-perspective: 1000px;
+    -webkit-transform-style: preserve-3d;
+}
+
+.mainBoard{
+    transform-style: preserve-3d;
+    transform: rotateX(25deg);
+
+    -webkit-transform-style: preserve-3d;
+
+    -webkit-transform: rotateX(25deg);
     position: relative;
     margin: auto;
     margin-top: 2.5%;
@@ -259,10 +285,15 @@
 
     width: 50%;
     margin: auto;
+    -webkit-justify-content: space-around;
 
     transform-style: preserve-3d;
     perspective: 800px;
 
+    -webkit-transform-style: preserve-3d;
+    -webkit-perspective: 800px;
+
+    -webkit-transition: transform 1s;
     transition: transform 1s;
 }
 
@@ -419,7 +450,7 @@
 
 .console{
     display: flex;
-    transform: rotateX(25deg);
+    /*transform: rotateX(25deg);*/
     transform-style: preserve-3d;
 
     border: thick solid black;
@@ -708,6 +739,7 @@
     .portraitWarning{
         display: flex;
         height: 100vh;
+        text-align: center;
     }
 
     .mainBoard{
