@@ -99,8 +99,16 @@ class Menu extends Component{
             <div className="menu" style={pointerStyle}>
                 <div className="scanlines"></div>
                 <div draggable="false" style={ infoStyle } className="info">
-                    <p className="instructions">Metal Gear Solid Memory Match is a tactical game that will test your speed and skill. Revealing any enemy will start a countdown timer that can be removed if any enemy pair is matched. If the countdown timer runs out then Snake will take damage and lose 1 HP. Every countdown timer runs independently of each other and it's possible to instantly lose all of your health.</p>
-                    <p className="instructions">It's a good thing then that matching allies will restore 1 health to Snake. You can't just keep clicking though since you have a limited number of missed matches. Make enough wrong matches and the current boss will reduce Snake to 1 HP AND remove 1 maximum HP. If Snake loses all his health then it's game over!</p>
+                    <h2 className="instructions">Instructions</h2>
+                    <ul>
+                        <li>Revealed enemy cards start independent alarm timers.</li>
+                        <li>Running out of time on any alarm will deal 1 damage to Snake.</li>
+                        <li>Matching any enemy card pair will clear all alarms.</li>
+                        <li>Matching any ally card will restore 1 health to Snake.</li>
+                        <li>Making wrong matches will increment the boss countdown.</li>
+                        <li>When the boss turns have run out Snake will lose 1 maximum HP. The current card set will also be shuffled and reset</li>
+                        <li>Clearing all cards will defeat the current boss</li>
+                    </ul>
                     <p className="startClick" onMouseOver={this.props.mouseover} onClick={this.props.info} >Return to Game</p>
                 </div>
                 <div className="select">
