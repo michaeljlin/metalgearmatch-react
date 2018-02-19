@@ -92,20 +92,18 @@ class Boss extends Component{
         if(bossInfo !== null){
             if(bossInfo.maxAttempts - attempts <= 2){
                 countStyle.color = 'red';
-                attemptStyle.animation = 'wave 4s ease-in-out infinite';
-                attemptStyle.transform = 'translateZ(5px)';
+                // countStyle.animation = 'numCaution 4s ease-in-out infinite';
             }
             else if(bossInfo.maxAttempts - attempts <= 4){
                 countStyle.color = 'yellow';
-                attemptStyle.animation = 'wave 4s ease-in-out infinite';
-                attemptStyle.transform = 'translateZ(5px)';
+                // countStyle.animation = 'numCaution 4s ease-in-out infinite';
             }
         }
 
         return(
             <div className="boss">
                 <div className="bossBox" style={bossStyle}>
-                    <p className="mgsfont attackText" style={attemptStyle}>Attacking in <span style={countStyle}>{(bossInfo !== null ? bossInfo.maxAttempts : 0)-attempts}</span> missed match{(bossInfo !== null && bossInfo.maxAttempts - attempts > 1) ? 'es' : ''}!</p>
+                    <p className="mgsfont attackText" style={attemptStyle}>Attacking in <span className="warningNum" style={countStyle}>{(bossInfo !== null ? bossInfo.maxAttempts : 0)-attempts}</span> missed match{(bossInfo !== null && bossInfo.maxAttempts - attempts > 1) ? 'es' : ''}!</p>
                     <div>
                         <div className="bossScanlines"></div>
                         <img className="bossImage" src={bossImg}/>
