@@ -21,6 +21,7 @@
     "@fortawesome/react-fontawesome": "0.0.17",
     "babel-polyfill": "^6.26.0",
     "react": "^15.6.1",
+    "react-browser-detection": "^1.0.5",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2"

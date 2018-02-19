@@ -521,6 +521,20 @@
     text-shadow: 2px 2px 0 black;
 }
 
+.browserWarning{
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: MGS2;
+    font-size: 1.5rem;
+}
+
+.browserWarning>img{
+    /*width: 50vw;*/
+    max-height: 50vh;
+}
+
 .digitalText{
     font-family: 'Digital-7';
 }
