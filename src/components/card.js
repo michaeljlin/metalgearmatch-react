@@ -65,13 +65,15 @@ class Card extends Component{
             num: this.props.num,
             backStyle: {
                 'backgroundColor': backgroundColor,
-                transform: 'rotateY(180deg)'
+                transform: 'rotateY(180deg)',
+                MozTransform: 'rotateY(180deg)'
             },
             frontStyle: {
                 'backgroundColor': 'red'
             },
             flipStyle:{
-                transform: ""
+                transform: "",
+                MozTransform: ""
             },
             fadeout: false,
             srcImg: srcImg,
