@@ -304,7 +304,10 @@ class Main extends Component{
         }
         else if(tempPlayer.health > 1){
             tempPlayer.maxHealth -= 1;
-            tempPlayer.health = 1;
+
+            if(tempPlayer.health > tempPlayer.maxHealth){
+                tempPlayer.health = tempPlayer.maxHealth;
+            }
             // soundHandler.play('shot');
             this.reset(tempPlayer);
         }

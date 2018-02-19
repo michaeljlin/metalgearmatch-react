@@ -3,7 +3,7 @@ import soundHandler from "./soundboard";
 function AlertObj(cardID, num, callback, stateUpdater){
     this.cardID = cardID;
     this.num = num;
-    this.maxTime = 10000;
+    this.maxTime = 15000;
     this.remainingTime = this.maxTime;
     this.drainRate = 10;
 

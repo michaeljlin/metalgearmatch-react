@@ -324,8 +324,17 @@
 .instructions{
     text-align: center;
     width: 75%;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
+
+/*.info>h2{*/
+    /*font-size: 60px;*/
+/*}*/
+
+/*.info>ul{*/
+    /*font-size: 30px;*/
+/*}*/
 
 .transitionMenu{
     position: absolute;
@@ -602,9 +611,17 @@
         transform: rotateX(-90deg) translateZ(626px) translateY(68px);
     }
 
+    .info>h2{
+        font-size: 60px;
+    }
+
+    .info>ul{
+        font-size: 30px;
+    }
+
 }
 
-@media screen and (max-width: 1600px) and (min-width: 801px){
+@media screen and (max-width: 1600px) and (min-width: 1281px){
 
     .mainBoard{
         width: 1200px;
@@ -647,6 +664,65 @@
         transform: rotateX(-90deg) translateZ(536px) translateY(59px);
     }
 
+    .info>h2{
+        font-size: 40px;
+    }
+
+    .info>ul{
+        font-size: 25px;
+    }
+
+}
+
+@media screen and (max-width: 1280px) and (min-width: 801px){
+    .mainBoard{
+        width: 1000px;
+        height: 500px;
+
+        transform-style: preserve-3d;
+        transform: rotateX(25deg);
+
+        -webkit-transform-style: preserve-3d;
+        -webkit-transform: rotateX(25deg);
+    }
+
+    .console {
+        width: 1000px;
+        height: 500px;
+    }
+
+    .warning{
+        top: -14%;
+    }
+
+    .warningNum{
+        font-size: 30px;
+    }
+
+    .mgsfont{
+        font-size: 22px;
+    }
+
+    .titleWords{
+        font-size: 50px;
+    }
+
+    .startClick{
+        font-size: 25px;
+    }
+
+    .front{
+        width: 1000px;
+        transform: rotateX(-90deg) translateZ(446px) translateY(48px);
+    }
+
+    .info>h2{
+        font-size: 30px;
+    }
+
+    .info>ul{
+        font-size: 25px;
+    }
 }
 
 @media screen and (max-width: 800px) and (min-width: 480px){
@@ -744,6 +820,14 @@
 
     .front{
         display: none;
+    }
+
+    .info>h2{
+        font-size: 18px;
+    }
+
+    .info>ul{
+        font-size: 12px;
     }
 }
 
