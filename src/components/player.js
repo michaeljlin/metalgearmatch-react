@@ -27,6 +27,18 @@ class Player extends Component{
             });
         }
 
+        if(this.state.maxHealth !== nextProps.stats.maxHealth){
+            // console.log('changing player health to: ',nextProps);
+            const tempState = {
+                health: nextProps.stats.health,
+                maxHealth: nextProps.stats.maxHealth
+            };
+            this.setState({
+                health: tempState.health,
+                maxHealth: tempState.maxHealth
+            });
+        }
+
         if(this.state.cardState !== nextProps.cardState){
             this.setState({
                 cardState: nextProps.cardState
