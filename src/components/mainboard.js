@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 
-import pazPortrait from '../assets/images/paz.png';
-
 import faSoundOn from '@fortawesome/fontawesome-free-solid/faVolumeUp';
 import faQuestionCircle from '@fortawesome/fontawesome-free-regular/faQuestionCircle';
 
