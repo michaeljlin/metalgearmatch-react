@@ -103,7 +103,9 @@ class Boss extends Component{
         return(
             <div className="boss">
                 <div className="bossBox" style={bossStyle}>
-                    <p className="mgsfont attackText" style={attemptStyle}>Attacking in <span className="warningNum" style={countStyle}>{(bossInfo !== null ? bossInfo.maxAttempts : 0)-attempts}</span> missed match{(bossInfo !== null && bossInfo.maxAttempts - attempts > 1) ? 'es' : ''}!</p>
+                    <p className="mgsfont attackText" style={attemptStyle}>Attacking in <span className="warningNum" style={countStyle}>
+                        {((bossInfo !== null && bossInfo.maxAttempts !== undefined ? bossInfo.maxAttempts : 0)-attempts)}
+                        </span> missed match{(bossInfo !== null && bossInfo.maxAttempts - attempts > 1) ? 'es' : ''}!</p>
                     <div>
                         <div className="bossScanlines"></div>
                         <img className="bossImage" src={bossImg}/>
