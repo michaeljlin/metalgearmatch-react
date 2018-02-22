@@ -281,7 +281,7 @@ class Main extends Component{
 
         soundHandler.play('boss');
 
-        if(tempPlayer.health === 1){
+        if(tempPlayer.maxHealth === 1){
 
             tempPlayer.health = 0;
 
@@ -300,7 +300,7 @@ class Main extends Component{
             });
 
         }
-        else if(tempPlayer.health > 1){
+        else if(tempPlayer.maxHealth > 1){
             tempPlayer.maxHealth -= 1;
 
             if(tempPlayer.health > tempPlayer.maxHealth){
