@@ -257,9 +257,9 @@ class Main extends Component{
         tempAlerts.push({
             cardID: cardID,
             num: num,
-            maxTime: 500,
-            remainingTime: 500,
-            drainRate: 100
+            maxTime: 15,
+            remainingTime: 15,
+            drainRate: 1
         });
 
         this.setState({

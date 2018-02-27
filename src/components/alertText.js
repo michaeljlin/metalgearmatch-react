@@ -35,14 +35,21 @@ class AlertText extends Component{
             });
         }
     }
-
+    
     render(){
         const {remainingTime, cardState} = this.state;
+        
+        if(remainingTime!== null && cardState ){
+            console.log('remaining time is: ', remainingTime);
+        }
 
         return (
-            <div style={{display: `${remainingTime === null || !cardState ? 'none' : 'block'}`}} className={'alertText digitalText'}>{
-                remainingTime === null ? "" : `${(remainingTime-remainingTime%1000)/1000}:${(remainingTime%1000)/10}`
-            }</div>
+            <div style={{display: `${remainingTime === null || !cardState ? 'none' : 'block'}`}} className={'alertText digitalText'}>
+            {
+                remainingTime === null ? "" : `${(remainingTime-remainingTime%100)/100}:${(remainingTime%100)/10}0`
+                /* `${(remainingTime-remainingTime%1000)/1000}:${(remainingTime%1000)/10}` */
+            }
+            </div>
         );
     }
 }
