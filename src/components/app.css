@@ -206,7 +206,6 @@
     z-index: 0;
     position: absolute;
     width: 15%;
-    height: 41%;
     background-image: url("../assets/images/scan_lines.png");
     opacity: 0.05;
 }
@@ -523,6 +522,10 @@
         -webkit-transform: rotateX(25deg);
     }
 
+    .bossScanlines{
+        height: 39%;
+    }
+
     .console{
         width: 1600px;
         height: 700px;
@@ -569,6 +572,10 @@
 
         -webkit-transform-style: preserve-3d;
         -webkit-transform: rotateX(25deg);
+    }
+
+    .bossScanlines{
+        height: 34%;
     }
 
     .console {
@@ -623,6 +630,10 @@
         -webkit-transform: rotateX(25deg);
     }
 
+    .bossScanlines{
+        height: 34%;
+    }
+
     .console {
         width: 1000px;
         height: 500px;
@@ -671,6 +682,10 @@
         transform: inherit;
     }
 
+    .bossScanlines{
+        height: 30%;
+    }
+
     .console {
         width: 600px;
         height: 350px;
@@ -714,6 +729,10 @@
         width: 400px;
         height: 300px;
         transform: inherit;
+    }
+
+    .bossScanlines{
+        height: 23%;
     }
 
     .console {
