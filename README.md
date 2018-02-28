@@ -1,7 +1,7 @@
 # Metal Gear Solid Memory Match
 
-Live Link: www.michaeljameslin.com/metalgearsolid
-Github Page: www.michaeljlin.github.io/metalgearmatch-react
+- Live Link: www.michaeljameslin.com/metalgearsolid
+- Github Page: www.michaeljlin.github.io/metalgearmatch-react
 
 ## Summary
 > A Metal Gear Solid inspired Memory Match game built in React using HTML5 & CSS powered 3D animations
