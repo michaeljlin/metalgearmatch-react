@@ -1,18 +1,18 @@
 {
-  "name": "react_starter",
+  "name": "Metal_Gear_Solid_Memory_Match",
   "version": "1.0.0",
-  "description": "Starting setup for react redux project",
+  "description": "Metal Gear Solid inspired Memory Match",
   "main": "index.js",
   "scripts": {
     "start": "node dev_server.js",
     "bundle": "node_modules/.bin/webpack --config webpack.deploy.config.js --progress --colors",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Scott Bowler",
+  "author": "Michael Lin",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Learning-Fuze/react_starter.git"
+    "url": "https://github.com/michaeljlin/metalgearmatch-react.git"
   },
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.3",
