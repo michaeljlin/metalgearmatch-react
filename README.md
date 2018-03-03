@@ -23,7 +23,7 @@ Unfortunately, some browser compatibility is lost due to how different rendering
 
 This repo contains a docs folder containing a deployable version of the app built through webpack. If you'd like to run a copy of the app on a local or external server, serving the contents of the docs folder in your desired file structure location is the only requirement for getting the app up and running.
 
-```package.json``` and ```webpack.config.js``` files are also included for setting up a local development environment. To use them, ensure that Node.js is installed in your working directory and then run ```npm install``` to install the required modules. Use the command ```npm start``` to start a local server that can be accessed in any browser at the address ```localhost:3000```.
+```package.json```, ```webpack.config.js```, and ```eslint.json``` files are also included for setting up a local development environment. To use them, ensure that Node.js is installed in your working directory and then run ```npm install``` to install the required modules. Use the command ```npm start``` to start a local server that can be accessed in any browser at the address ```localhost:3000```.  Use the command ```npm run bundle``` to compile a deployable version of the app in the local docs folder.
 
 If you would like to report a bug or add a change to this repo, please feel free to make a fork of this project and submit a pull request. I can also be contacted directly at mjameslin@gmail.com
 
