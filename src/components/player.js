@@ -5,7 +5,6 @@ import snake from '../assets/images/snakecard.png'
 class Player extends Component{
     constructor(props) {
         super(props);
-        // console.log('player props is: ',props.stats);
         this.state = {
             health: props.stats.health,
             maxHealth: props.stats.maxHealth,
@@ -16,7 +15,6 @@ class Player extends Component{
     componentWillReceiveProps(nextProps){
 
         if(this.state.health !== nextProps.stats.health){
-            // console.log('changing player health to: ',nextProps);
             const tempState = {
                 health: nextProps.stats.health,
                 maxHealth: nextProps.stats.maxHealth
@@ -28,7 +26,6 @@ class Player extends Component{
         }
 
         if(this.state.maxHealth !== nextProps.stats.maxHealth){
-            // console.log('changing player health to: ',nextProps);
             const tempState = {
                 health: nextProps.stats.health,
                 maxHealth: nextProps.stats.maxHealth

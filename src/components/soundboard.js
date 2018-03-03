@@ -121,61 +121,7 @@ function Soundboard(){
         }
     };
 
-    // this.play = function(type){
-    //     console.log('playing sound: ', type);
-    //
-    //     if(this.soundToggle){
-    //         switch(type){
-    //             case 'found':
-    //                 this.found.play();
-    //                 break;
-    //             case 'shot':
-    //                 this.gun.play();
-    //                 break;
-    //             case 'safe':
-    //                 this.safe.play();
-    //                 break;
-    //             case 'ally':
-    //                 this.allyheal.play();
-    //                 break;
-    //             case 'fail':
-    //                 this.fail.play();
-    //                 break;
-    //             case 'boss':
-    //                 this.bossShot.play();
-    //                 this.bossShot.currentTime = 0;
-    //                 break;
-    //             case 'start':
-    //                 this.menuStart.play();
-    //                 this.menuStart.currentTime = 0.3;
-    //                 break;
-    //             case 'select':
-    //                 this.menuSelect.play();
-    //                 this.menuSelect.currentTime = 0.3;
-    //                 break;
-    //             case 'option':
-    //                 this.menuOption.play();
-    //                 this.menuOption.currentTime = 0.95;
-    //                 break;
-    //             case 'alert':
-    //                 this.sneak.pause();
-    //                 if(this.jungle.paused){
-    //                     this.jungle.play();
-    //                 }
-    //                 break;
-    //             case 'sneak':
-    //                 this.jungle.pause();
-    //                 if(this.sneak.paused){
-    //                     this.sneak.play();
-    //                 }
-    //                 break;
-    //         }
-    //     }
-    //
-    // };
-
     this.stop = function(type){
-        console.log('stopping type: ', type);
 
         switch(type){
             case 'alert':

@@ -15,7 +15,6 @@ class Deck extends Component{
 
     componentWillReceiveProps(nextProps){
         if(nextProps.reset === true){
-            console.log('received reset notification');
             this.setState({
                 display: true
             });

@@ -22,7 +22,6 @@ class Boss extends Component{
         if(nextProps.attempts!== this.state.attempts){
 
             if(nextProps.attempts === this.state.maxAttempts){
-                console.log('triggering boss attack');
                 this.state.attack();
 
                 return;
@@ -71,7 +70,6 @@ class Boss extends Component{
     }
 
     render(){
-        // console.log('boss state: ', this.state);
         const attempts = this.state.attempts;
         const bossState = this.state.bossState;
         const bossInfo = this.state.bossInfo;
@@ -92,11 +90,9 @@ class Boss extends Component{
         if(bossInfo !== null){
             if(bossInfo.maxAttempts - attempts <= 2){
                 countStyle.color = 'red';
-                // countStyle.animation = 'numCaution 4s ease-in-out infinite';
             }
             else if(bossInfo.maxAttempts - attempts <= 4){
                 countStyle.color = 'yellow';
-                // countStyle.animation = 'numCaution 4s ease-in-out infinite';
             }
         }
 

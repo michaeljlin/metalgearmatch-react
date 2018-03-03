@@ -8,7 +8,6 @@ function AlertObj(cardID, num, callback, stateUpdater){
     this.drainRate = 10;
 
     this.alert = setInterval(function(){
-        // console.log(`Remaining time for alert on cardID ${this.cardID}: ${this.remainingTime}`);
         stateUpdater(this.remainingTime, this.cardID);
         this.remainingTime -= this.drainRate;
         if(this.remainingTime <= 0){
@@ -69,11 +68,6 @@ function AlertHandler(){
 
     // Called when time runs out to remove individual alert object
     this.remove = function(cardID){
-        // let alertToDelete = this.alerts.find((cardID)=>{
-        //     return this.alerts.getID() === cardID;
-        // });
-
-        // console.log(`Removing alert on ${cardID}`);
 
         let alertIndex = this.alerts.findIndex((alert)=>{
             return alert.getID() === cardID;
@@ -96,7 +90,6 @@ function AlertHandler(){
         for(let count = 0; count < this.alerts.length; count++){
             this.alerts[count].stop();
         }
-        // soundHandler.play('safe');
         soundHandler.play('sneak');
         soundHandler.stop('alert');
         this.alerts = [];

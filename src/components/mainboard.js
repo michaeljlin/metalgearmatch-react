@@ -83,8 +83,6 @@ class Main extends Component{
         else {
             this.reset({health: 5, accuracy: 0, maxHealth: 5}, ()=>{
 
-                console.log('state at reset before showCards: ', this.state);
-
                 this.setState({
                     showCards: true,
                     bossState: 1,
@@ -123,8 +121,6 @@ class Main extends Component{
             deck[random] = temp;
         }
 
-        console.log(`deck: `,deck);
-
         return deck;
     };
 
@@ -140,7 +136,6 @@ class Main extends Component{
     }
 
     handleInfoClicked(){
-        // console.log('info button clicked!');
 
         soundHandler.play('select');
 
@@ -181,14 +176,10 @@ class Main extends Component{
             return alerts.cardID === cardID;
         });
 
-        // console.log('alertIndex is: ', alertIndex);
-
         let newAlertState = this.state.alerts;
         newAlertState.splice(alertIndex, 1);
 
         delete newAlertState[0][cardID];
-
-        // console.log('new alert state is: ', newAlertState);
 
         this.setState({
             playerStats: tempPlayer,
@@ -231,7 +222,6 @@ class Main extends Component{
         soundHandler.soundSwitch();
 
         if(soundHandler.getSoundState()){
-            // console.log('in sound switch state: ', this.state);
             if(this.state.alerts.length > 1){
                 soundHandler.play('alert');
             }
@@ -245,7 +235,6 @@ class Main extends Component{
     }
 
     handleNewAlert(cardID, num){
-        console.log(`adding new alert for ${cardID} and num ${num}`);
 
         soundHandler.play('found');
         soundHandler.play('alert');
@@ -265,12 +254,9 @@ class Main extends Component{
         this.setState({
             alerts: tempAlerts
         });
-
-        // console.log(`state alerts is: `, this.state.alerts);
     }
 
     handleAlertTrigger(cardID, num){
-        // console.log(`triggering alert on cardID: ${cardID} and number: ${num}!`);
         alertTracker.remove(cardID);
         this.handleDamage(cardID);
     }
@@ -310,11 +296,9 @@ class Main extends Component{
             this.reset(tempPlayer);
         }
 
-        console.log(`new player stats: `, tempPlayer);
     }
 
     handleBoardClear(){
-        console.log('Board successfully cleared on boss stage: ', this.state.bossState);
 
         if(this.state.bossState !== 3){
             this.setState({
@@ -333,14 +317,13 @@ class Main extends Component{
                     this.setState({
                         showCards: true
                     },()=>{
-                        console.log('finished reset of state: ', this.state);
+                        // console.log('finished reset of state: ', this.state);
                     });
                 });
 
             }, 1000);
         }
         else{
-            console.log('Mission completed');
 
             clearTimeout(this.state.timeoutTracker);
 
@@ -348,13 +331,12 @@ class Main extends Component{
                 showCards: false,
                 message: "Mission Accomplished!"
             }, ()=>{
-                console.log('final message: ', this.state.message);
+                // console.log('final message: ', this.state.message);
             });
         }
     }
 
     handleMatch(cardID, num){
-        console.log('game state before matching: ', this.state);
         const tempState = {...this.state};
 
         if(this.state.clickable === false || this.state.cards[cardID].flipped){
@@ -362,7 +344,6 @@ class Main extends Component{
         }
 
         if(tempState.firstCard === null){
-            console.log(`storing first card click from card ID: ${cardID}, card num: ${num}`);
             tempState.firstCard = {num: num, flipped: true, id: cardID};
             tempState.cards[cardID] = {num: num, flipped: true, fade: false, type: tempState.cards[cardID].type};
 
@@ -374,11 +355,9 @@ class Main extends Component{
         else if(tempState.secondCard === null){
 
             if(tempState.firstCard.id === cardID){
-                console.log(`cannot match own card! returning!`);
                 return;
             }
 
-            console.log(`storing second card click from card ID: ${cardID}, card num: ${num}`);
             tempState.secondCard = {num: num, flipped: true, id: cardID};
             tempState.cards[cardID] = {num: num, flipped: true, fade: false, type: tempState.cards[cardID].type};
         }
@@ -386,7 +365,6 @@ class Main extends Component{
         if(tempState.secondCard !== null){
 
             if(tempState.firstCard.num === tempState.secondCard.num){
-                console.log(`A match has been made!`);
                 tempState.counter++;
 
                 if(tempState.cards[cardID].type === 'enemy'){
@@ -423,8 +401,6 @@ class Main extends Component{
 
             }
             else{
-                console.log(`Not a match, resetting cards!`);
-
                 soundHandler.play('fail');
 
                 tempState.failedAttempts++;
@@ -432,17 +408,11 @@ class Main extends Component{
                 // tempState.message = 'Not a match!';
 
                 if(tempState.cards[cardID].type === 'enemy' && !alertTracker.searchForSameID(cardID)){
-                    // alertTracker.add(cardID, num, ()=>{
-                    //     console.log(`triggering alert on cardID: ${cardID} and number: ${num}!`);
-                    //     alertTracker.remove(cardID);
-                    //     this.handleDamage();
-                    // });
                     this.handleNewAlert(cardID, num);
                     alertTracker.add(cardID, num, this.handleAlertTrigger, this.handleAlertUpdate);
                 }
 
                 tempState.timeoutTracker = setTimeout(function(){
-                    console.log('timeout executed');
                     tempState.cards[tempState.firstCard.id] = {num: tempState.firstCard.num, flipped: false, fade: false, type: tempState.cards[tempState.firstCard.id].type};
                     tempState.cards[tempState.secondCard.id] = {num: tempState.secondCard.num, flipped: false, fade: false, type: tempState.cards[tempState.secondCard.id].type};
 
@@ -479,18 +449,11 @@ class Main extends Component{
             failedAttempts: tempState.failedAttempts
         });
 
-        // this.setState({...tempState});
-
-        console.log(tempState);
     }
 
     reset(tempPlayer, callback){
 
-        console.log('reset tempPlayer: ', tempPlayer);
-        console.log('reset callback: ', callback);
-
         if(!this.state.resetFlag){
-            console.log('resetting');
 
             alertTracker.stop();
 
@@ -530,7 +493,6 @@ class Main extends Component{
                         resetFlag: false
                     });
                 }, 1500);
-                // console.log("deck after reset set state: ", this.state.cards);
             });
 
         }

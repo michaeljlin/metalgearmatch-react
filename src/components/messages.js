@@ -18,15 +18,6 @@ class Messages extends Component{
             const tempState = {...this.state};
             tempState.message = nextProps.message;
 
-            // console.log('message state: ', tempState);
-
-            // setTimeout(function(){
-            //     tempState.message = "";
-            //
-            //     this.setState({...tempState});
-            //
-            // }.bind(this), 2500);
-
             this.setState(tempState);
         }
     }

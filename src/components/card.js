@@ -84,7 +84,6 @@ class Card extends Component{
     }
 
     componentWillReceiveProps(nextProps){
-        // console.log('got message');
         const tempState = {...this.state};
 
         if(nextProps.reset){
@@ -156,19 +155,15 @@ class Card extends Component{
 
         if(this.props.flipped !== nextProps.flipped) {
             if (nextProps.flipped === true) {
-                // console.log(`flipping card ${tempState.num} up!`);
-                // console.log(`state of flipped card: `, this.state);
                 tempState.flipStyle.transform = 'translateZ(50px) rotateY(180deg)';
 
                 this.setState({flipStyle: tempState.flipStyle});
             }
             else if (nextProps.flipped === false) {
-                // console.log(`flipping card ${tempState.num} down!`);
                 tempState.flipStyle.transform = "";
 
                 this.setState({flipStyle: tempState.flipStyle});
             }
-            // console.log(this.state);
         }
 
         if(nextProps.fade){
@@ -192,7 +187,6 @@ class Card extends Component{
     }
 
     handleClick(){
-        console.log(`you got ${this.state.num}!`);
         this.props.handleMatch(this.props.id, this.props.num);
     }
 

@@ -26,8 +26,6 @@ class Menu extends Component{
         }
 
         if(this.state.showInfo !== nextProps.showInfo){
-
-            console.log('showinfo is: ', nextProps.showInfo);
             this.setState({
                 showInfo: nextProps.showInfo
             });
