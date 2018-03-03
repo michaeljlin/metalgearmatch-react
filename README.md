@@ -27,6 +27,13 @@ This repo contains a docs folder containing a deployable version of the app buil
 
 If you would like to report a bug or add a change to this repo, please feel free to make a fork of this project and submit a pull request. I can also be contacted directly at mjameslin@gmail.com
 
+### Key Technologies Utilized:
+- React & JSX
+- HTML5
+- CSS3
+- Node.js & npm
+- Webpack
+
 ### Credits: 
 - Sound Effects, Music, Images, and Renders from the Metal Gear Solid series by Konami
 - [FontAwesome 5.0 Icons](https://github.com/FortAwesome/Font-Awesome)
