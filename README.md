@@ -10,7 +10,7 @@ The 3D effects in this app were implemented through a combination of React in-li
 
 Unfortunately, some browser compatibility is lost due to how different rendering engines may have wildly differing interpretations on transformation transitions. The app disallows running on browsers other than Chrome/Chromium and Safari due to this. I hope to resolve such compatibility issues on a future update or when more consistent 3D CSS rendering standards are established.
 
-## Instructions & Mechanics
+## Play Instructions & Mechanics
 - Enemy cards trigger individual alarm countdowns on reveal. Match the same two enemy cards to clear all alarm countdowns!
 - Alarms not cleared will deal 1 HP damage each when time runs out.
 - Allies will restore 1 HP when matched.
@@ -18,6 +18,14 @@ Unfortunately, some browser compatibility is lost due to how different rendering
 - If Snake loses all his health then it's Game Over!
 - Press the '?' icon at any time to view the instructions.
 - Press the volume icon at any time to turn on/off the sound.
+
+### Contributing & Deploying
+
+This repo contains a docs folder containing a deployable version of the app built through webpack. If you'd like to run a copy of the app on a local or external server, serving the contents of the docs folder in your desired file structure location is the only requirement for getting the app up and running.
+
+```package.json``` and ```webpack.config.js``` files are also included for setting up a local development environment. To use them, ensure that Node.js is installed in your working directory and then run ```npm install``` to install the required modules. Use the command ```npm start``` to start a local server that can be accessed in any browser at the address ```localhost:3000```.
+
+
 
 ### Credits: 
 - Sound Effects, Music, Images, and Renders from the Metal Gear Solid series by Konami
